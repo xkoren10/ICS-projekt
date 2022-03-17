@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace RideShare_DAL
+namespace RideShare.DAL
 {
-	public class User : MainEntity
+	public record UserEntity : IMainEntity
 	{
+		public Guid Id { get; }
 		public string Name { get; set; }
 		public string Surname { get; set; }
-		public string Image_path { get; set; }
+		public string ImagePath { get; set; }
 		public string Contact { get; set; }
-        public Car Cars { get; set; }
-		public Ride Rides { get; set; }
+        public ICollection<CarEntity> Cars { get; set; }
+		public ICollection<RideEntity> Rides { get; set; }
 
 	}
 }

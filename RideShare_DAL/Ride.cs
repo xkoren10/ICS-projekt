@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace RideShare_DAL
+namespace RideShare.DAL
 {
-	public class Ride : MainEntity
+	public record RideEntity : IMainEntity
 	{
-		public string Start_location { get; set; }
+		public Guid Id { get; }
+		public string StartLocation { get; set; }
 		public string Destination { get; set; }
-		public string Start_time { get; set; }
-		public string Est_end_time { get; set; }
+		public DateTime StartTime { get; set; }
+		public DateTime EstEndTime { get; set; }
 		public int Occupancy { get; set; }
-		public User Passengers { get; set; }
-		public User Driver { get; set; }
-		public Car Car { get; set; }
+		public ICollection<UserEntity> Passengers { get; set; }
+		public UserEntity Driver { get; set; }
+		public CarEntity Car { get; set; }
 	}
 }

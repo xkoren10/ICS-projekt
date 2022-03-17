@@ -1,15 +1,16 @@
 ﻿using System;
 
-namespace RideShare_DAL
+namespace RideShare.DAL
 {
-	public class Car : MainEntity
+	public record CarEntity : IMainEntity
 	{
-		public string Reg_date { get; set; }
+		public Guid Id { get; }
+		public DateTime RegDate { get; set; }
 		public string Brand { get; set; }
 		public string Type { get; set; }
-		public string Image_path_ { get; set; }
+		public string ImagePath { get; set; }
 		public int Seats { get; set; }
-		public User Owner { get; set; }
+		public UserEntity Owner { get; set; }
 
 	}
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace RideShare_DAL
+namespace RideShare.DAL
 {
-	public class MainEntity
+	public interface IMainEntity
 	{
-		int Id { get; }
+		public Guid Id { get; }
 
 	}
 }
