@@ -1,0 +1,5 @@
+C:\Users\makor\Source\Repos\ICS_projekt\RideShare_DAL\obj\Debug\net5.0\RideShare_DAL.csproj.AssemblyReference.cache
+C:\Users\makor\Source\Repos\ICS_projekt\RideShare_DAL\obj\Debug\net5.0\RideShare_DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\makor\Source\Repos\ICS_projekt\RideShare_DAL\obj\Debug\net5.0\RideShare_DAL.AssemblyInfoInputs.cache
+C:\Users\makor\Source\Repos\ICS_projekt\RideShare_DAL\obj\Debug\net5.0\RideShare_DAL.AssemblyInfo.cs
+C:\Users\makor\Source\Repos\ICS_projekt\RideShare_DAL\obj\Debug\net5.0\RideShare_DAL.csproj.CoreCompileInputs.cache
