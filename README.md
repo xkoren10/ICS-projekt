@@ -16,7 +16,7 @@ Tématem letošního projektu bude vytvoření aplikace umožňující jejím u�
 
 ---
 ## Data
-V rámci dat, se kterými se bude pracovat budeme požadovat minimálně následující data.
+V rámci dát, se kterými se bude pracovat budeme požadovat minimálně následující data.
 
 ### Uživatel
 - Jméno
