@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RideShare.DAL.Entities
 {
@@ -8,11 +9,12 @@ namespace RideShare.DAL.Entities
         string Brand,
         string Type,
         string ImagePath,
-        int Seats
+        int Seats,
+        Guid UserId
         ) : IMainEntity
 	{
 		
-		public UserEntity Owner { get; init; }
-
-	}
+		public UserEntity User { get; init; }
+        public ICollection<RideEntity> Rides { get; init; } = new List<RideEntity>();
+    }
 }

@@ -13,6 +13,7 @@ namespace RideShare.DAL.Entities
     {
 
         public ICollection<CarEntity> Cars { get; init; } = new List<CarEntity>();
+        public ICollection<RideUserEntity> RideUsers { get; init; } = new List<RideUserEntity>();
         public ICollection<RideEntity> Rides { get; init; } = new List<RideEntity>();
 
     }

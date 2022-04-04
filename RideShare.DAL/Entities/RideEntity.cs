@@ -9,11 +9,13 @@ namespace RideShare.DAL.Entities
         string Destination,
         DateTime StartTime,
         DateTime EstEndTime,
-        int Occupancy
+        int Occupancy,
+        Guid UserId,
+        Guid CarId
         ) : IMainEntity
     {
-        public ICollection<UserEntity> Passengers { get; init; } = new List<UserEntity>();
-		public UserEntity Driver { get; init; }
+        public ICollection<RideUserEntity> RideUsers { get; init; } = new List<RideUserEntity>();
+		public UserEntity User { get; init; }
 		public CarEntity Car { get; init; }
 	}
 }
