@@ -31,12 +31,12 @@ namespace RideShare.DAL
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Cars)
                 .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<RideUserEntity>()
                 .HasOne(i => i.User)
@@ -51,7 +51,7 @@ namespace RideShare.DAL
             modelBuilder.Entity<CarEntity>()
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.Car)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             if (_seedDemoData)
             {
