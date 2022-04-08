@@ -1,5 +1,5 @@
 ﻿using RideShare.Common.Tests.Seeds;
-using RideShare.DAL
+using RideShare.DAL;
 using Microsoft.EntityFrameworkCore;
 
 namespace RideShare.Common.Tests

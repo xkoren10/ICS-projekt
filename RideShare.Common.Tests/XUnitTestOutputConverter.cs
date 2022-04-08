@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Xunit.Abstractions;
 
-namespace RideShare.Common.Tests
+namespace CookBook.Common.Tests
 {
     public class XUnitTestOutputConverter : TextWriter
     {

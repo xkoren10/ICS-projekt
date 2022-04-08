@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using RideShare.BL.Facades;
-//using RideShare.Common.Tests;
-//using RideShare.Common.Tests.Seeds;
+using RideShare.Common.Tests;
+using RideShare.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
@@ -35,20 +35,20 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
-        public async Task GetAll_Single_SeededWater()
+        public async Task GetAll_Single_SeededDriver()
         {
             var cars = await _carFacadeSUT.GetAsync();
-            var car = cars.Single(i => i.Id == CarSeeds.Water.Id);
+            var car = cars.Single(i => i.Id == CarSeeds.Driver.Id);
 
-            DeepAssert.Equal(Mapper.Map<IngredientListModel>(CarSeeds.Water), car);
+            DeepAssert.Equal(Mapper.Map<CarListModel>(CarSeeds.Driver), car);
         }
 
         [Fact]
-        public async Task GetById_SeededWater()
+        public async Task GetById_SeededDriver()
         {
             var car = await _carFacadeSUT.GetAsync(CarSeeds.Water.Id);
 
-            DeepAssert.Equal(Mapper.Map<CarDetailModel>(CarSeeds.Water), car);
+            DeepAssert.Equal(Mapper.Map<CarDetailModel>(CarSeeds.Driver), car);
         }
 
         [Fact]

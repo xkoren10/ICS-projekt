@@ -1,14 +1,15 @@
 ﻿using Xunit.Sdk;
 
-namespace RideShare.Common.Tests;
-
-public class ObjectEqualException : AssertActualExpectedException
+namespace RideShare.Common.Tests
 {
-    public ObjectEqualException(object? expected, object? actual, string message)
-        : base(expected, actual, "Assert.Equal() Failure")
+    public class ObjectEqualException : AssertActualExpectedException
     {
-        Message = message;
-    }
+        public ObjectEqualException(object expected, object actual, string message)
+            : base(expected, actual, "Assert.Equal() Failure")
+        {
+            Message = message;
+        }
 
-    public override string Message { get; }
+        public override string Message { get; }
+    }
 }

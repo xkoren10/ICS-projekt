@@ -1,10 +1,12 @@
 ﻿using KellermanSoftware.CompareNetObjects;
+using System;
+using System.Collections.Generic;
 
 namespace RideShare.Common.Tests
 {
     public static class DeepAssert
     {
-        public static void Equal<T>(T? expected, T? actual, params string[] propertiesToIgnore)
+        public static void Equal<T>(T expected, T actual, params string[] propertiesToIgnore)
         {
             CompareLogic compareLogic = new()
             {
