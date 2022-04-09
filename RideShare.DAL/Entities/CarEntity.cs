@@ -8,13 +8,13 @@ namespace RideShare.DAL.Entities
         DateTime RegDate,
         string Brand,
         string Type,
-        string ImagePath,
+        string? ImagePath,
         int Seats,
-        Guid UserId
+        Guid? UserId
         ) : IMainEntity
 	{
 		
-		public UserEntity User { get; init; }
+		public UserEntity? User { get; init; }
         public ICollection<RideEntity> Rides { get; init; } = new List<RideEntity>();
     }
 }

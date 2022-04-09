@@ -11,13 +11,13 @@ namespace RideShare.BL.Models
     public record UserDetailModel(
         string Name,
         string Surname,
-        string ImagePath,
+        string? ImagePath,
         string Contact
     ) : ModelBase
     {
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;
-        public string ImagePath { get; set; } = ImagePath;
+        public string? ImagePath { get; set; } = ImagePath;
         public string Contact { get; set; } = Contact;
         public List<CarDetailModel> Cars { get; init; } = new();
         public List<RideDetailModel> Rides { get; init; } = new();

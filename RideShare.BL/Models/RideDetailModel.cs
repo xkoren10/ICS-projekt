@@ -14,8 +14,8 @@ namespace RideShare.BL.Models
         DateTime StartTime,
         DateTime EstEndTime,
         int Occupancy,
-        Guid UserId,
-        Guid CarId
+        Guid? UserId,
+        Guid? CarId
     ) : ModelBase
     {
         public string StartLocation { get; set; } = StartLocation;
@@ -23,8 +23,8 @@ namespace RideShare.BL.Models
         public DateTime StartTime { get; set; } = StartTime;
         public DateTime EstEndTime { get; set; } = EstEndTime;
         public int Occupancy { get; set; } = Occupancy;
-        public Guid UserId { get; set; } = UserId;
-        public Guid CarId { get; set; } = CarId;
+        public Guid? UserId { get; set; } = UserId;
+        public Guid? CarId { get; set; } = CarId;
         public class MapperProfile : Profile
         {
             public MapperProfile()

@@ -7,7 +7,7 @@ namespace RideShare.DAL.Entities
         Guid Id,
         string Name,
         string Surname,
-        string ImagePath,
+        string? ImagePath,
         string Contact
         ) : IMainEntity
     {

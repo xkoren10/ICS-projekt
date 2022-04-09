@@ -8,12 +8,12 @@ namespace RideShare.DAL.Entities
 {
     public record RideUserEntity(
         Guid Id,
-        Guid UserId,
-        Guid RideId
+        Guid? UserId,
+        Guid? RideId
     ) : IMainEntity
     {
-        public UserEntity User { get; init; }
-        public RideEntity Ride { get; init; }
+        public UserEntity? User { get; init; }
+        public RideEntity? Ride { get; init; }
     }
 }
 

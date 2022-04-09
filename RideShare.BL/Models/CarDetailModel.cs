@@ -11,17 +11,17 @@ namespace RideShare.BL.Models
     public record CarDetailModel(DateTime RegDate,
         string Brand,
         string Type,
-        string ImagePath,
+        string? ImagePath,
         int Seats,
-        Guid UserId
+        Guid? UserId
         ) : ModelBase
     {
         public DateTime RegDate { get; set; } = RegDate;
         public string Brand { get; set; } = Brand;
         public string Type { get; set; } = Type;
-        public string ImagePath { get; set; } = ImagePath;
+        public string? ImagePath { get; set; } = ImagePath;
         public int Seats { get; set; } = Seats;
-        public Guid UserId { get; set; } = UserId;
+        public Guid? UserId { get; set; } = UserId;
         public List<RideDetailModel> Rides { get; init; } = new();
 
         public class MapperProfile : Profile

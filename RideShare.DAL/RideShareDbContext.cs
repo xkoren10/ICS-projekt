@@ -33,27 +33,29 @@ namespace RideShare.DAL
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Cars)
                 .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<RideUserEntity>()
                 .HasOne(i => i.User)
                 .WithMany(i => i.RideUsers)
-                .HasForeignKey(i => i.UserId);
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<RideUserEntity>()
                 .HasOne(i => i.Ride)
                 .WithMany(i => i.RideUsers)
-                .HasForeignKey(i => i.RideId);
+                .HasForeignKey(i => i.RideId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<CarEntity>()
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.Car)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             if (_seedDemoData)
             {

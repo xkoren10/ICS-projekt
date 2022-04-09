@@ -29,7 +29,7 @@ namespace RideShare.BL.Tests
                 Type: "sedan",
                 ImagePath: "",
                 Seats: 2,
-                UserId: System.Guid.NewGuid()
+                UserId: UserSeeds.Driver.Id
             ) ;
 
             var _ = await _carFacadeSUT.SaveAsync(model);
@@ -47,9 +47,10 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task GetById_SeededDriver()
         {
-            var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
+            var model = Mapper.Map<CarDetailModel>(CarSeeds.Car1);
+            var car = await _carFacadeSUT.GetAsync(model.Id);
 
-            DeepAssert.Equal(Mapper.Map<CarDetailModel>(CarSeeds.Car1), car);
+            DeepAssert.Equal(model.Id, car.Id);
         }
 
         [Fact]
@@ -78,9 +79,9 @@ namespace RideShare.BL.Tests
                 RegDate: System.Convert.ToDateTime("3/6/2019"),
                 Brand: "Audi",
                 Type: "sedan",
-                ImagePath: "",
+                ImagePath: null,
                 Seats: 5,
-                UserId: System.Guid.NewGuid()
+                UserId: UserSeeds.UserEntity1.Id
             );
 
             //Act
@@ -88,7 +89,7 @@ namespace RideShare.BL.Tests
 
             //Assert
             await using var dbxAssert = DbContextFactory.CreateDbContext();
-            var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.UserId);
+            var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.Id);
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
         }
 
@@ -116,7 +117,7 @@ namespace RideShare.BL.Tests
 
             //Assert
             await using var dbxAssert = DbContextFactory.CreateDbContext();
-            var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.UserId);
+            var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.Id);
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
         }
     }

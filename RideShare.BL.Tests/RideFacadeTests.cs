@@ -22,16 +22,14 @@ namespace RideShare.BL.Tests
         public async Task Create_WithNonExistingItem_DoesNotThrow()
         {
             var model = new RideDetailModel(
-                //Id: System.Guid.NewGuid(),
                 StartLocation: "Brno",
                 Destination: "Nitra",
                 StartTime: System.Convert.ToDateTime("10/4/2022 12:00"),
                 EstEndTime: System.Convert.ToDateTime("10/4/2022 14:30"),
                 Occupancy: 0, 
-                UserId: System.Guid.NewGuid(),
-                CarId: System.Guid.NewGuid()
+                UserId: UserSeeds.Driver.Id,
+                CarId: CarSeeds.Car1.Id
                 );
-            // check the IDs ?
             var _ = await _rideFacadeSUT.SaveAsync(model);
         }
         [Fact]
