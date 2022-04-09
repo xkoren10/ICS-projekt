@@ -19,7 +19,7 @@ namespace RideShare.BL.Tests
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
         [Fact]
-        public async Task Create_WithNonExistingItem_DoesNotThrow()
+        public async Task CreateRide_DoesNotThrow()
         {
             var model = new RideDetailModel(
                 StartLocation: "Brno",
@@ -32,27 +32,73 @@ namespace RideShare.BL.Tests
                 );
             var _ = await _rideFacadeSUT.SaveAsync(model);
         }
+
         [Fact]
         public async Task GetById_NonExistent()
         {
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.EmptyRideEntity.Id);
             Assert.Null(ride);
         }
+
         [Fact]
         public async Task GetById_Existing()
         {
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
             Assert.NotNull(ride);
         }
+
         [Fact]
         public async Task GetAll_Single_SeededDriver()
         {   
-            // idk what this does
-            var Rides = await _rideFacadeSUT.GetAsync();
-            var Ride = Rides.Single(i => i.Id == RideSeeds.RideEntity.Id);
+            var rides = await _rideFacadeSUT.GetAsync();
+            var ride = rides.Single(i => i.Id == RideSeeds.RideEntity.Id);
 
-            DeepAssert.Equal(Mapper.Map<RideListModel>(RideSeeds.RideEntity), Ride);
+            DeepAssert.Equal(Mapper.Map<RideListModel>(RideSeeds.RideEntity), ride);
         }
 
+        [Fact]
+        public async Task SeededRide__InsertOrUpdate_RideModified()
+        {
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            ride.StartTime = System.DateTime.Parse("1/4/2022 01:30:00 AM", System.Globalization.CultureInfo.InvariantCulture);
+            ride.Destination = "Bratislava";
+
+            await _rideFacadeSUT.SaveAsync(ride);
+
+            await using var dbxAssert = DbContextFactory.CreateDbContext();
+            var rideFromDb = await dbxAssert.RideEntities.SingleAsync(i => i.Id == ride.Id);
+            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
+        }
+
+        [Fact]
+        public async Task SeededRide_Occupancy_EqualsZero()
+        {
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            Assert.Equal(0, ride.Occupancy);
+        }
+
+        [Fact]
+        public async Task SeededRide_AddPassenger_RideModified()
+        {
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            ride.Occupancy++;
+            await _rideFacadeSUT.SaveAsync(ride);
+
+            await using var dbxAssert = DbContextFactory.CreateDbContext();
+            var rideFromDb = await dbxAssert.RideEntities.SingleAsync(i => i.Id == ride.Id);
+            DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
+        }
+
+        [Fact]
+        public async Task SeededRide_DeleteById()
+        {
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            await using var dbxAssert = DbContextFactory.CreateDbContext();
+            Assert.False(await dbxAssert.CarEntities.AnyAsync(i => i.Id == RideSeeds.RideEntity.Id));
+        }
     }
 }

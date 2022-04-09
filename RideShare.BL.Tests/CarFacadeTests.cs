@@ -20,7 +20,7 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
-        public async Task Create_WithNonExistingItem_DoesNotThrow()
+        public async Task Create_WithExistingDriver_DoesNotThrow()
         {
             var model = new CarDetailModel
             (
@@ -30,9 +30,28 @@ namespace RideShare.BL.Tests
                 ImagePath: "",
                 Seats: 2,
                 UserId: UserSeeds.Driver.Id
-            ) ;
+            );
 
             var _ = await _carFacadeSUT.SaveAsync(model);
+        }
+        // add Create_WithNonExistingDriver_DoesNotThrow ???
+
+        [Fact]
+        public async Task Create_WithNonExistingDriver_DoesThrow()
+        {
+            var model = new CarDetailModel(
+                RegDate: System.Convert.ToDateTime("4/6/2004"),
+                Brand: "Bugatti",
+                Type: "sedan",
+                ImagePath: "",
+                Seats: 2,
+                UserId: null
+                );
+            try
+            {
+                await _carFacadeSUT.SaveAsync(model);
+            }
+            catch (DbUpdateException) {};
         }
 
         [Fact]
@@ -50,6 +69,7 @@ namespace RideShare.BL.Tests
             var model = Mapper.Map<CarDetailModel>(CarSeeds.Car1);
             var car = await _carFacadeSUT.GetAsync(model.Id);
 
+            // i guess, might be wrong
             DeepAssert.Equal(model.Id, car.Id);
         }
 
@@ -94,7 +114,7 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
-        public async Task SeededWater_InsertOrUpdate_IngredientUpdated()
+        public async Task ExistingCar_InsertOrUpdate_CarModified()
         {
             //Arrange
             var car = new CarDetailModel
