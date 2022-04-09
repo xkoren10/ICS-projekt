@@ -114,7 +114,7 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
-        public async Task ExistingCar_InsertOrUpdate_CarModified()
+        public async Task SeededCar_InsertOrUpdate_CarUpdated()
         {
             //Arrange
             var car = new CarDetailModel
