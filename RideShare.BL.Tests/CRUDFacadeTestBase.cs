@@ -5,6 +5,7 @@ using AutoMapper.EquivalencyExpression;
 using RideShare.Common.Tests;
 using RideShare.Common.Tests.Factories;
 using RideShare.DAL;
+using RideShare.DAL.Seeds;
 using RideShare.DAL.Factories;
 using RideShare.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using Xunit.Abstractions;
 
 namespace RideShare.BL.Tests
 {
+
     public class CRUDFacadeTestsBase : IAsyncLifetime
     {
         protected CRUDFacadeTestsBase(ITestOutputHelper output)
@@ -21,8 +23,8 @@ namespace RideShare.BL.Tests
             Console.SetOut(converter);
 
             // DbContextFactory = new DbContextTestingInMemoryFactory(GetType().Name, seedTestingData: true);
-            // DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
-            DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, seedTestingData: true);
+            DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
+            //DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, seedTestingData: true);
 
             UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
 

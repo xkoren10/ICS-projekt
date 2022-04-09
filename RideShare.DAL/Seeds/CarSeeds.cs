@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace RideShare.Common.Tests.Seeds
+namespace RideShare.DAL.Seeds
 {
     public static class CarSeeds
     {
@@ -33,7 +33,7 @@ namespace RideShare.Common.Tests.Seeds
         };
 
         public static readonly CarEntity Car2 = new(
-            Id: Guid.Parse(input: "0d4asd50-ad80-7476-a511-41234567ec5e"),
+            Id: Guid.Parse(input: "0d4aad50-ad80-7476-a511-41234567ec5e"),
             RegDate: DateTime.Parse("8/9/2003", System.Globalization.CultureInfo.InvariantCulture),
             Brand: "Volkswagen",
             Type: "Passat 1.9 TDi",

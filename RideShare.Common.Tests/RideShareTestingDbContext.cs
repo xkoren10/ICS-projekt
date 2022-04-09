@@ -1,4 +1,4 @@
-﻿using RideShare.Common.Tests.Seeds;
+﻿using RideShare.DAL.Seeds;
 using RideShare.DAL;
 using Microsoft.EntityFrameworkCore;
 

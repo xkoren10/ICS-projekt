@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace RideShare.Common.Tests.Seeds
+namespace RideShare.DAL.Seeds
 {
 
     public static class RideSeeds
@@ -21,8 +21,8 @@ namespace RideShare.Common.Tests.Seeds
             Id: Guid.Parse(input: "fabde0cd-eefe-443f-baf6-3d96cc2cbf2e"),
             StartLocation: "Brno, Purkyňova 93,",
             Destination: "Lehota, Stará Hora 99",
-            StartTime: DateTime.Parse("15/4/2022 02:30 AM", System.Globalization.CultureInfo.InvariantCulture),
-            EstEndTime: DateTime.Parse("15/4/2022 05:00 AM", System.Globalization.CultureInfo.InvariantCulture),
+            StartTime: DateTime.Parse("1/4/2022 02:30:00 AM", System.Globalization.CultureInfo.InvariantCulture),
+            EstEndTime: DateTime.Parse("1/4/2022 05:00:00 AM", System.Globalization.CultureInfo.InvariantCulture),
             Occupancy: 0,
             UserId: UserSeeds.UserEntity1.Id,
             CarId: CarSeeds.Car1.Id);

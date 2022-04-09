@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace RideShare.Common.Tests.Seeds
+namespace RideShare.DAL.Seeds
 {
 
     public static class UserSeeds
