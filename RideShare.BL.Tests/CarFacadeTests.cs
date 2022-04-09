@@ -24,12 +24,13 @@ namespace RideShare.BL.Tests
         {
             var model = new CarDetailModel
             (
-                Brand = "Bugatti"
-                Type = "sedan"
-                ImagePath = ""
-                Seats = 2
-                UserId = ""
-            );
+                RegDate: System.Convert.ToDateTime("4/6/2004"),
+                Brand: "Bugatti",
+                Type: "sedan",
+                ImagePath: "",
+                Seats: 2,
+                UserId: System.Guid.NewGuid()
+            ) ;
 
             var _ = await _carFacadeSUT.SaveAsync(model);
         }
@@ -38,56 +39,57 @@ namespace RideShare.BL.Tests
         public async Task GetAll_Single_SeededDriver()
         {
             var cars = await _carFacadeSUT.GetAsync();
-            var car = cars.Single(i => i.Id == CarSeeds.Driver.Id);
+            var car = cars.Single(i => i.Id == CarSeeds.Car1.Id);
 
-            DeepAssert.Equal(Mapper.Map<CarListModel>(CarSeeds.Driver), car);
+            DeepAssert.Equal(Mapper.Map<CarListModel>(CarSeeds.Car1), car);
         }
 
         [Fact]
         public async Task GetById_SeededDriver()
         {
-            var car = await _carFacadeSUT.GetAsync(CarSeeds.Water.Id);
+            var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
 
-            DeepAssert.Equal(Mapper.Map<CarDetailModel>(CarSeeds.Driver), car);
+            DeepAssert.Equal(Mapper.Map<CarDetailModel>(CarSeeds.Car1), car);
         }
 
         [Fact]
         public async Task GetById_NonExistent()
         {
-            var car = await _carFacadeSUT.GetAsync(CarSeeds.EmptyIngredient.Id);
+            var car = await _carFacadeSUT.GetAsync(CarSeeds.EmptyCar.Id);
 
-            Assert.Null(ingredient);
+            Assert.Null(car);
         }
 
         [Fact]
-        public async Task SeededWater_DeleteById_Deleted()
+        public async Task SeededCar_DeleteById_Deleted()
         {
-            await _carFacadeSUT.DeleteAsync(CarSeeds.Water.Id);
+            await _carFacadeSUT.DeleteAsync(CarSeeds.Car1.Id);
 
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            Assert.False(await dbxAssert.Cars.AnyAsync(i => i.Id == CarSeeds.Water.Id));
+            await using var dbxAssert = DbContextFactory.CreateDbContext();
+            Assert.False(await dbxAssert.CarEntities.AnyAsync(i => i.Id == CarSeeds.Car1.Id));
         }
 
 
         [Fact]
-        public async Task NewIngredient_InsertOrUpdate_IngredientAdded()
+        public async Task NewCar_InsertOrUpdate_CarAdded()
         {
             //Arrange
             var car = new CarDetailModel(
-                Brand = "Audi"
-                Type = "sedan"
-                ImagePath = ""
-                Seats = 5
-                UserId = ""
+                RegDate: System.Convert.ToDateTime("3/6/2019"),
+                Brand: "Audi",
+                Type: "sedan",
+                ImagePath: "",
+                Seats: 5,
+                UserId: System.Guid.NewGuid()
             );
 
             //Act
             car = await _carFacadeSUT.SaveAsync(car);
 
             //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var carFromDb = await dbxAssert.Cars.SingleAsync(i => i.Id == car.UserId);
-            DeepAssert.Equal(car, Mapper.Map<ICarDetailModel>(carFromDb));
+            await using var dbxAssert = DbContextFactory.CreateDbContext();
+            var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.UserId);
+            DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
         }
 
         [Fact]
@@ -96,21 +98,25 @@ namespace RideShare.BL.Tests
             //Arrange
             var car = new CarDetailModel
             (
-                Name: CarSeeds.Water.Name,
-                Description: IngredientSeeds.Water.Description
+                RegDate: CarSeeds.Car1.RegDate,
+                Brand: CarSeeds.Car1.Brand,
+                Type: CarSeeds.Car1.Type,
+                ImagePath: CarSeeds.Car1.ImagePath,
+                Seats: CarSeeds.Car1.Seats,
+                UserId: CarSeeds.Car1.UserId
             )
             {
-                Id = IngredientSeeds.Water.Id
+                Id = CarSeeds.Car1.Id
             };
-            car.Name += "updated";
-            car.Description += "updated";
+            car.Brand += "updated";
+            car.Type += "updated";
 
             //Act
             await _carFacadeSUT.SaveAsync(car);
 
             //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var carFromDb = await dbxAssert.Cars.SingleAsync(i => i.Id == car.UserId);
+            await using var dbxAssert = DbContextFactory.CreateDbContext();
+            var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.UserId);
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
         }
     }

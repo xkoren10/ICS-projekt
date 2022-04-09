@@ -18,7 +18,7 @@ namespace RideShare.Common.Tests.Seeds
             User = default,
             Rides = default
         };
-
+        //rename car1? 
         public static readonly CarEntity Car1 = new(
             Id: Guid.Parse(input: "0d4fa150-ad80-4d46-a511-4c666166ec5e"),
             RegDate: DateTime.Parse("5/1/2008", System.Globalization.CultureInfo.InvariantCulture),
@@ -46,8 +46,8 @@ namespace RideShare.Common.Tests.Seeds
         };
 
         //To ensure that no tests reuse these clones for non-idempotent operations
-        public static readonly CarEntity CarEntityUpdate = Car1 with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674"), Rides = null, User = null, UserId = UserSeeds.UserEntityUpdate.Id };
-        public static readonly CarEntity CarEntityDelete = Car1 with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279"), User = null, Rides = null, UserId = UserSeeds.UserEntityDelete.Id };
+        public static readonly CarEntity CarEntityUpdate = Car1 with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674"), Rides = null, User = null, UserId = UserSeeds.DriverUpdate.Id };
+        public static readonly CarEntity CarEntityDelete = Car1 with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279"), User = null, Rides = null, UserId = UserSeeds.DriverDelete.Id };
 
         public static void Seed(this ModelBuilder modelBuilder)
         {

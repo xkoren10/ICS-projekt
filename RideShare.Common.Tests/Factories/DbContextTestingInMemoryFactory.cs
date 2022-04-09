@@ -2,9 +2,10 @@
 using RideShare.DAL;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace RideShare.Common.Tests.Factories
 {
-    public class DbContextTestingInMemoryFactory: IDbContextFactory<CookBookDbContext>
+    public class DbContextTestingInMemoryFactory: IDbContextFactory<RideShareDbContext>
     {
         private readonly string _databaseName;
         private readonly bool _seedTestingData;
@@ -15,15 +16,15 @@ namespace RideShare.Common.Tests.Factories
             _seedTestingData = seedTestingData;
         }
 
-        public CookBookDbContext CreateDbContext()
+        public RideShareDbContext CreateDbContext()
         {
-            DbContextOptionsBuilder<CookBookDbContext> contextOptionsBuilder = new();
+            DbContextOptionsBuilder<RideShareDbContext> contextOptionsBuilder = new();
             contextOptionsBuilder.UseInMemoryDatabase(_databaseName);
             
             // contextOptionsBuilder.LogTo(System.Console.WriteLine); //Enable in case you want to see tests details, enabled may cause some inconsistencies in tests
             // builder.EnableSensitiveDataLogging();
             
-            return new CookBookTestingDbContext(contextOptionsBuilder.Options, _seedTestingData);
+            return new RideShareTestingDbContext(contextOptionsBuilder.Options, _seedTestingData);
         }
     }
 }
