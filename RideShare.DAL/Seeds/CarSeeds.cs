@@ -28,7 +28,7 @@ namespace RideShare.DAL.Seeds
             Seats: 5,
             UserId: UserSeeds.UserEntity1.Id)
         {
-            Rides = null, //add Ride to list 
+            //Rides = add Ride to list 
             User = UserSeeds.UserEntity1
         };
 
@@ -41,19 +41,28 @@ namespace RideShare.DAL.Seeds
             Seats: 5,
             UserId: UserSeeds.UserEntity2.Id)
         {
-            Rides = null, //add Ride to list 
+            //Rides = add Ride to list 
             User = UserSeeds.UserEntity2
         };
 
+
         //To ensure that no tests reuse these clones for non-idempotent operations
-        public static readonly CarEntity CarEntityUpdate = Car1 with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674"), Rides = null, User = null, UserId = UserSeeds.DriverUpdate.Id };
-        public static readonly CarEntity CarEntityDelete = Car1 with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279"), User = null, Rides = null, UserId = UserSeeds.DriverDelete.Id };
+        public static readonly CarEntity CarEntityUpdate = Car1 with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674"), Rides = Array.Empty<RideEntity>(), User = null, UserId = UserSeeds.DriverUpdate.Id };
+        public static readonly CarEntity CarEntityDelete = Car1 with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279"), User = null, Rides = Array.Empty<RideEntity>(), UserId = UserSeeds.DriverDelete.Id };
+
+
+        static CarSeeds()
+        {
+            Car2.Rides.Add(RideSeeds.RideEntity);
+            Car1.Rides.Add(null);
+        }
+
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CarEntity>().HasData(
-                Car1 with { User = null, Rides = null },
-                Car2 with { User = null, Rides = null },
+                Car1 with { User = null, Rides = Array.Empty<RideEntity>() },
+                Car2 with { User = null, Rides = Array.Empty<RideEntity>() },
                 CarEntityUpdate,
                 CarEntityDelete
             );

@@ -35,11 +35,20 @@ namespace RideShare.DAL.Seeds
         public static readonly RideEntity RideWithPassengersUpdate = RideEntity with { Id = Guid.Parse("4FD824C0-A7D1-48BA-8E7C-4F136CF8BF31"), RideUsers = Array.Empty<RideUserEntity>() };
         public static readonly RideEntity RideWithPassengersDelete = RideEntity with { Id = Guid.Parse("F78ED923-E094-4016-9045-3F5BB7F2EB88"), RideUsers = Array.Empty<RideUserEntity>() };
 
+        public static RideUserEntity RideUser1 = new(
+            Id: Guid.Parse(input: "faaaa0cd-eefe-443f-baf6-3d96cc2cbf2e"),
+            UserId: UserSeeds.UserEntity2.Id,
+            RideId: RideEntity.Id);
+
+        public static RideUserEntity RideUser2 = new(
+            Id: Guid.Parse(input: "faaaa0cd-eefe-443f-baf6-3d96cc555f2e"),
+            UserId: UserSeeds.UserEntity3.Id,
+            RideId: RideEntity.Id);
 
         static RideSeeds()
         {
-            RideEntity.RideUsers.Add(null); // add rideuser1
-            RideEntity.RideUsers.Add(null); // add rideuser1
+            RideEntity.RideUsers.Add(RideUser1);
+            RideEntity.RideUsers.Add(RideUser2);
         }
 
         public static void Seed(this ModelBuilder modelBuilder)

@@ -66,7 +66,7 @@ namespace RideShare.DAL.Migrations
                         column: x => x.CarId,
                         principalTable: "CarEntities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_RideEntities_UserEntities_UserId",
                         column: x => x.UserId,
