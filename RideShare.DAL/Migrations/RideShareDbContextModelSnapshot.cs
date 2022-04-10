@@ -152,7 +152,7 @@ namespace RideShare.DAL.Migrations
                     b.HasOne("RideShare.DAL.Entities.CarEntity", "Car")
                         .WithMany("Rides")
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("RideShare.DAL.Entities.UserEntity", "User")
                         .WithMany("Rides")

@@ -39,6 +39,15 @@ namespace RideShare.Common.Tests.Seeds
             Contact: "xpyczl00@studfit.vutbr.cz",
             ImagePath: null);
 
+        public static UserEntity UserEntity3 = new(
+            Id: Guid.Parse(input: "23b3902d-7d4f-1234-9cf0-112348f56238"),
+            Name: "Michal",
+            Surname: "Hroššo",
+            Contact: "xhrosso00@studfit.vutbr.cz",
+            ImagePath: null);
+
+
+
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserEntity>().HasData(

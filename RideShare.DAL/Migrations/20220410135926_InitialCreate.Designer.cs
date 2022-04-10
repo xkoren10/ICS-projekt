@@ -10,7 +10,7 @@ using RideShare.DAL;
 namespace RideShare.DAL.Migrations
 {
     [DbContext(typeof(RideShareDbContext))]
-    [Migration("20220409203840_InitialCreate")]
+    [Migration("20220410135926_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,7 +154,7 @@ namespace RideShare.DAL.Migrations
                     b.HasOne("RideShare.DAL.Entities.CarEntity", "Car")
                         .WithMany("Rides")
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("RideShare.DAL.Entities.UserEntity", "User")
                         .WithMany("Rides")
