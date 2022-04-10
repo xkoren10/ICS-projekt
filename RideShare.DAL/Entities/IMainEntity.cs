@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RideShare.DAL
+namespace RideShare.DAL.Entities
 {
 	public interface IMainEntity
 	{
