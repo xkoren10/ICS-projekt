@@ -13,10 +13,14 @@ namespace RideShare.BL.Tests
     public sealed class CarFacadeTests : CRUDFacadeTestsBase
     {
         private readonly CarFacade _carFacadeSUT;
+        private readonly UserFacade _userFacadeSUT;
+        private readonly RideFacade _rideFacadeSUT;
 
         public CarFacadeTests(ITestOutputHelper output) : base(output)
         {
             _carFacadeSUT = new CarFacade(UnitOfWorkFactory, Mapper);
+            _userFacadeSUT = new UserFacade(UnitOfWorkFactory, Mapper);
+            _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
 
         [Fact]
@@ -34,7 +38,6 @@ namespace RideShare.BL.Tests
 
             var _ = await _carFacadeSUT.SaveAsync(model);
         }
-        // add Create_WithNonExistingDriver_DoesNotThrow ???
 
         [Fact]
         public async Task Create_WithNonExistingDriver_DoesThrow()
@@ -55,7 +58,7 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
-        public async Task GetAll_Single_SeededDriver()
+        public async Task GetAll_Single_Seeded()
         {
             var cars = await _carFacadeSUT.GetAsync();
             var car = cars.Single(i => i.Id == CarSeeds.Car1.Id);
@@ -94,7 +97,6 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task NewCar_InsertOrUpdate_CarAdded()
         {
-            //Arrange
             var car = new CarDetailModel(
                 RegDate: System.Convert.ToDateTime("3/6/2019"),
                 Brand: "Audi",
@@ -104,10 +106,8 @@ namespace RideShare.BL.Tests
                 UserId: UserSeeds.UserEntity1.Id
             );
 
-            //Act
             car = await _carFacadeSUT.SaveAsync(car);
 
-            //Assert
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.Id);
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
@@ -116,7 +116,6 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task SeededCar_InsertOrUpdate_CarUpdated()
         {
-            //Arrange
             var car = new CarDetailModel
             (
                 RegDate: CarSeeds.Car1.RegDate,
@@ -132,13 +131,30 @@ namespace RideShare.BL.Tests
             car.Brand += "updated";
             car.Type += "updated";
 
-            //Act
             await _carFacadeSUT.SaveAsync(car);
 
-            //Assert
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             var carFromDb = await dbxAssert.CarEntities.SingleAsync(i => i.Id == car.Id);
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
+        }
+
+        [Fact]
+        public async Task SeededCar_GetUserOwner()
+        {
+            var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
+            var driver = await _userFacadeSUT.GetAsync(car.UserId);
+
+            DeepAssert.Equal(UserSeeds.UserEntity1.Id, driver.Id);
+        }
+
+        [Fact]
+        public async Task SeededCar_GetRide()
+        {
+            var detailModel = Mapper.Map<CarDetailModel>(CarSeeds.Car1);
+            var car = await _carFacadeSUT.GetAsync(detailModel.Id);
+            var ride = car.Rides.Single(i => i.Id == RideSeeds.RideEntity.Id);
+
+            DeepAssert.Equal(RideSeeds.RideEntity.Id, ride.Id);
         }
     }
 }

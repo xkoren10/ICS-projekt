@@ -53,8 +53,8 @@ namespace RideShare.Common.Tests.Seeds
 
         static CarSeeds()
         {
-            Car2.Rides.Add(RideSeeds.RideEntity);
-            Car1.Rides.Add(null);
+            Car1.Rides.Add(RideSeeds.RideEntity);
+            Car2.Rides.Add(null);
         }
 
 
@@ -66,6 +66,8 @@ namespace RideShare.Common.Tests.Seeds
                 CarEntityUpdate,
                 CarEntityDelete
             );
+            Car1.Rides.Add(RideSeeds.RideEntity);
+            Car2.Rides.Add(null);
         }
     }
 }

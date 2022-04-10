@@ -34,7 +34,7 @@ namespace RideShare.BL.Facades
             await uow.CommitAsync().ConfigureAwait(false);
         }
 
-        public async Task<TDetailModel?> GetAsync(Guid id)
+        public async Task<TDetailModel?> GetAsync(Guid? id)
         {
             await using var uow = _unitOfWorkFactory.Create();
             var query = uow

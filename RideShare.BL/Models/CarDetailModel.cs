@@ -29,6 +29,7 @@ namespace RideShare.BL.Models
             public MapperProfile()
             {
                 CreateMap<CarEntity, CarDetailModel>()
+                    .ForMember(dst => dst.Rides, opt => opt.MapFrom(src => src.Rides))
                     .ReverseMap();
             }
         }

@@ -19,7 +19,7 @@ namespace RideShare.BL.Tests
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
         [Fact]
-        public async Task CreateRide_DoesNotThrow()
+        public async Task CreateRide_ChecksZeroOcuppancy_DoesNotThrow()
         {
             var model = new RideDetailModel(
                 StartLocation: "Brno",
@@ -57,7 +57,7 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
-        public async Task SeededRide__InsertOrUpdate_RideModified()
+        public async Task SeededRide_InsertOrUpdate_RideModified()
         {
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
@@ -72,17 +72,10 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
-        public async Task SeededRide_Occupancy_EqualsZero()
-        {
-            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
-
-            Assert.Equal(0, ride.Occupancy);
-        }
-
-        [Fact]
         public async Task SeededRide_AddPassenger_RideModified()
         {
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+            var passengers = ride.UserId;
 
             ride.Occupancy++;
             await _rideFacadeSUT.SaveAsync(ride);
