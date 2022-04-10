@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RideShare.BL.Facades;
 using RideShare.Common.Tests;
-using RideShare.DAL.Seeds;
+using RideShare.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
@@ -53,13 +53,10 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task GetById_FromSeeded_DoesNotThrowAndEqualsSeeded()
         {
-            //Arrange
             var detailModel = Mapper.Map<UserDetailModel>(UserSeeds.Driver);
 
-            //Act
             var returnedModel = await _userFacadeSUT.GetAsync(detailModel.Id);
 
-            //Assert
             DeepAssert.Equal(detailModel, returnedModel);
         }
 
@@ -75,7 +72,6 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task NewUser_InsertOrUpdate_UserAdded()
         {
-            //Arrange
             var user = new UserDetailModel(
                 Name: "Matej",
                 Surname: "Hložek",
@@ -83,10 +79,8 @@ namespace RideShare.BL.Tests
                 ImagePath: null
             );
 
-            //Act
             user = await _userFacadeSUT.SaveAsync(user);
 
-            //Assert
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             var userFromDb = await dbxAssert.UserEntities.SingleAsync(i => i.Id == user.Id);
             DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
@@ -95,20 +89,16 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task GetAll_FromSeeded_DoesNotThrowAndContainsSeeded()
         {
-            //Arrange
             var listModel = Mapper.Map<UserListModel>(UserSeeds.Driver);
             
-            //Act
             var returnedModel = await _userFacadeSUT.GetAsync();
 
-            //Assert
             Assert.Contains(listModel, returnedModel);
         }
 
         [Fact]
         public async Task SeededUser_InsertOrUpdate_UserUpdated()
         {
-            //Arrange
             var user = new UserDetailModel
             (
                 Name: UserSeeds.Driver.Name,
@@ -122,10 +112,8 @@ namespace RideShare.BL.Tests
             user.Name += "Updated";
             user.Contact += "i";
 
-            //Act
             await _userFacadeSUT.SaveAsync(user);
 
-            //Assert
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             var userFromDb = await dbxAssert.UserEntities.SingleAsync(i => i.Id == user.Id);
             DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));

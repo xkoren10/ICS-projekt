@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RideShare.DAL.Entities;
-using RideShare.DAL.Seeds;
-
 
 namespace RideShare.DAL
 {
@@ -55,13 +53,11 @@ namespace RideShare.DAL
             modelBuilder.Entity<CarEntity>()
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.Car)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             if (_seedDemoData)
             {
-                CarSeeds.Seed(modelBuilder);
-                UserSeeds.Seed(modelBuilder);
-                RideSeeds.Seed(modelBuilder);
+                // pass
             }
         }
     }

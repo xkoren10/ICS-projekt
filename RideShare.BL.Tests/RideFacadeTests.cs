@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RideShare.BL.Facades;
 using RideShare.Common.Tests;
-using RideShare.DAL.Seeds;
+using RideShare.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
