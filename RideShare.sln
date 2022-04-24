@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.DAL", "RideShare.DAL\RideShare.DAL.csproj", "{FD0E059B-8F9F-41AC-8C8D-9BF1A01A8F1F}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.Common.Tests", "RideShare.Common.Tests\RideShare.Common.Tests.csproj", "{219E4F09-56D4-44BE-B854-E49DAA11EAD2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.BL.Tests", "RideShare.BL.Tests\RideShare.BL.Tests.csproj", "{ED7CA08E-6020-411B-B5E0-40228F838A1E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RideShare.App", "RideShare.App\RideShare.App.csproj", "{9449E4F5-7741-42DB-85DF-AF31FC21F74F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{ED7CA08E-6020-411B-B5E0-40228F838A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED7CA08E-6020-411B-B5E0-40228F838A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED7CA08E-6020-411B-B5E0-40228F838A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9449E4F5-7741-42DB-85DF-AF31FC21F74F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9449E4F5-7741-42DB-85DF-AF31FC21F74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9449E4F5-7741-42DB-85DF-AF31FC21F74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9449E4F5-7741-42DB-85DF-AF31FC21F74F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
