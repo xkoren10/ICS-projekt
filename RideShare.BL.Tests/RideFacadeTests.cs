@@ -7,13 +7,16 @@ using RideShare.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
+using System;
 
 namespace RideShare.BL.Tests
 {
     public sealed class RideFacadeTests : CRUDFacadeTestsBase
     {
+        private readonly CarFacade _carFacadeSUT;
+        private readonly UserFacade _userFacadeSUT;
         private readonly RideFacade _rideFacadeSUT;
-        
+
         public RideFacadeTests(ITestOutputHelper output) : base(output)
         {
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
@@ -22,6 +25,7 @@ namespace RideShare.BL.Tests
         public async Task CreateRide_ChecksZeroOcuppancy_DoesNotThrow()
         {
             var model = new RideDetailModel(
+                Id: Guid.Parse(input: "fabdf0cd-eefe-4f3f-baf6-3d96cc2cbf2e"),
                 StartLocation: "Brno",
                 Destination: "Nitra",
                 StartTime: System.Convert.ToDateTime("10/4/2022 12:00"),
@@ -31,6 +35,9 @@ namespace RideShare.BL.Tests
                 CarId: CarSeeds.Car1.Id
                 );
             var _ = await _rideFacadeSUT.SaveAsync(model);
+           
+            var ride = await _rideFacadeSUT.GetAsync(model.Id);
+            DeepAssert.Equal(Mapper.Map<RideDetailModel>(model), ride);
         }
 
         [Fact]
@@ -78,11 +85,24 @@ namespace RideShare.BL.Tests
             var passengers = ride.UserId;
 
             ride.Occupancy++;
+            // doot doot
+            var passenger = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity2.Id);
+
+            var rideUserModel = new RideUserModel(
+                Id: Guid.NewGuid(),
+                UserId: UserSeeds.UserEntity2.Id,
+                RideId: ride.Id
+                );
+            ride.RideUsers.Add(rideUserModel);
             await _rideFacadeSUT.SaveAsync(ride);
 
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             var rideFromDb = await dbxAssert.RideEntities.SingleAsync(i => i.Id == ride.Id);
             DeepAssert.Equal(ride, Mapper.Map<RideDetailModel>(rideFromDb));
+
+            var passengerFromDbId = Mapper.Map<RideDetailModel>(rideFromDb).RideUsers[0].UserId;
+            var passengerFromDb = _userFacadeSUT.GetAsync(passengerFromDbId);
+            DeepAssert.Equal(Mapper.Map<UserDetailModel>(passengerFromDb), passenger);
         }
 
         [Fact]
@@ -93,5 +113,6 @@ namespace RideShare.BL.Tests
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             Assert.False(await dbxAssert.CarEntities.AnyAsync(i => i.Id == RideSeeds.RideEntity.Id));
         }
+
     }
 }

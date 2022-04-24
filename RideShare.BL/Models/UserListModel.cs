@@ -9,12 +9,14 @@ using AutoMapper;
 namespace RideShare.BL.Models
 {
     public record UserListModel(
+        Guid Id,
         string Name,
         string Surname,
-        string ImagePath,
+        string? ImagePath,
         string Contact
     ) : ModelBase
     {
+        public Guid Id { get; set; } = Id;
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;
         public string ImagePath { get; set; } = ImagePath;
