@@ -141,6 +141,17 @@ namespace RideShare.BL.Tests
         }
 
         [Fact]
+        public async Task CarFromDb_InsertOrUpdate_CarUpdate()
+        {
+            var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
+            car.Seats--;
+            car.Type += " ultra turbo";
+            await _carFacadeSUT.SaveAsync(car);
+            var carFromDb = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
+            DeepAssert.Equal(car, carFromDb);
+        }
+
+        [Fact]
         public async Task SeededCar_GetUserOwner()
         {
             var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);

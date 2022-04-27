@@ -16,10 +16,13 @@ namespace RideShare.BL.Tests
         private readonly CarFacade _carFacadeSUT;
         private readonly UserFacade _userFacadeSUT;
         private readonly RideFacade _rideFacadeSUT;
+        private readonly RideUserFacade _rideUserFacadeSUT;
 
         public RideFacadeTests(ITestOutputHelper output) : base(output)
         {
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
+            _userFacadeSUT = new UserFacade(UnitOfWorkFactory, Mapper);
+            _rideUserFacadeSUT = new RideUserFacade(UnitOfWorkFactory, Mapper);
         }
         [Fact]
         public async Task CreateRide_ChecksZeroOcuppancy_DoesNotThrow()
@@ -82,17 +85,19 @@ namespace RideShare.BL.Tests
         public async Task SeededRide_AddPassenger_RideModified()
         {
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
-            var passengers = ride.UserId;
-
+            
             ride.Occupancy++;
             // doot doot
-            var passenger = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity2.Id);
+            var passenger = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity3.Id);
 
             var rideUserModel = new RideUserModel(
                 Id: Guid.NewGuid(),
-                UserId: UserSeeds.UserEntity2.Id,
-                RideId: ride.Id
+                UserId: passenger.Id,
+                RideId: null
                 );
+
+            await _rideUserFacadeSUT.SaveAsync(rideUserModel);
+
             ride.RideUsers.Add(rideUserModel);
             await _rideFacadeSUT.SaveAsync(ride);
 

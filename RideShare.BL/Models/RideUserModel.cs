@@ -16,13 +16,17 @@ namespace RideShare.BL.Models
     {
         public Guid? UserId { get; set; } = UserId;
         public Guid? RideId { get; set; } = RideId;
-    }
-    public class MapperProfile : Profile
-    {
-        public MapperProfile()
+
+        public class MapperProfile : Profile
         {
-            CreateMap<RideUserEntity, RideUserModel>()
-                .ReverseMap();
+            public MapperProfile()
+            {
+                CreateMap<RideUserEntity, RideUserModel>()
+                    .ReverseMap();
+            }
         }
+
+        public static RideUserModel Empty => new(default, default, default);
     }
+    
 }
