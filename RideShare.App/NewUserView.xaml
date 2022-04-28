@@ -7,33 +7,28 @@
         mc:Ignorable="d"
         Title="NewUserView" Height="450" Width="800">
     <Grid x:Name="grid1">
-        <Button x:Name="ButtonFind" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/search_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Find a ride
-                </TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="ProfilePicture" HorizontalAlignment="Left" Height="173" Margin="504,13,0,0" VerticalAlignment="Top" Width="158" Source="Icons/user_icon.png"/>
+        <Button x:Name="ChangePictureButton" Content="Change Profile Picture" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="54" Width="150" Margin="508,0,0,0"/>
+        <Button x:Name="SaveChanges" HorizontalAlignment="Left" Margin="635,328,0,0" VerticalAlignment="Top" Height="98" Width="129">
+            <StackPanel x:Name="SaveButton" Orientation="Vertical" Height="94" Width="126">
+                <Image Source="Icons/save_icon.png" Height="80" Width="100" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Save"/></TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ButtonProfile" HorizontalAlignment="Left" Margin="66,229,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-            <Image Source="Icons/user_icon.png" Height="100" />
-            <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Profile
-            </TextBlock>
+        <Button x:Name="DiscardChanges"  HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Height="109" Width="129">
+            <StackPanel Orientation="Vertical" Height="94" Width="126">
+                <Image Source="Icons/remove_icon.png" Height="80" Width="100" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Cancel"/></TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ButtonCreate" HorizontalAlignment="Left" Margin="444,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/add_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Create
-                </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonRides"  HorizontalAlignment="Left" Margin="444,229,0,0" VerticalAlignment="Top" Height="153" Width="284" RenderTransformOrigin="0.5,0.545" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/list_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" Text=" Rides" TextAlignment="Center"/>
-            </StackPanel>
-        </Button>
-
+        <Label x:Name="Surname" Content="Surname:" HorizontalAlignment="Left" Margin="205,146,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <Label x:Name="Contact" Content="Contact:" HorizontalAlignment="Left" Margin="205,236,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <Label x:Name="Name" Content="Name:" HorizontalAlignment="Left" Margin="205,54,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="232,92,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31"/>
+        <TextBox x:Name="SurnameBox" HorizontalAlignment="Left" Margin="232,184,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31"/>
+        <TextBox x:Name="ContactBox" HorizontalAlignment="Left" Margin="232,274,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31"/>
     </Grid>
 </Window>

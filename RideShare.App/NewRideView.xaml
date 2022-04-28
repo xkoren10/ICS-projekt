@@ -6,34 +6,35 @@
         xmlns:local="clr-namespace:RideShare.App"
         mc:Ignorable="d"
         Title="NewRideView" Height="450" Width="800">
-    <Grid x:Name="grid1">
-        <Button x:Name="ButtonFind" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/search_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Find a ride
-                </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonProfile" HorizontalAlignment="Left" Margin="66,229,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-            <Image Source="Icons/user_icon.png" Height="100" />
-            <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Profile
-            </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonCreate" HorizontalAlignment="Left" Margin="444,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/add_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Create
-                </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonRides"  HorizontalAlignment="Left" Margin="444,229,0,0" VerticalAlignment="Top" Height="153" Width="284" RenderTransformOrigin="0.5,0.545" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/list_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" Text=" Rides" TextAlignment="Center"/>
-            </StackPanel>
-        </Button>
+    <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="371*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="512,20,0,0" VerticalAlignment="Top" Width="158" Source="Icons/car_icon.png" Grid.Column="1"/>
+        <Button x:Name="SelectCarButton" Content="Select Car" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="54" Width="150" Margin="516,197,0,0" Grid.Column="1"/>
+        <Button x:Name="SaveChanges" HorizontalAlignment="Left" Margin="577,328,0,0" VerticalAlignment="Top" Height="98" Width="129" Grid.Column="1">
+            <StackPanel x:Name="SaveButton" Orientation="Vertical" Height="94" Width="126">
+                <Image Source="Icons/save_icon.png" Height="80" Width="100" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Save"/></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="DiscardChanges"  HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Height="109" Width="129" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Vertical" Height="94" Width="126">
+                <Image Source="Icons/remove_icon.png" Height="80" Width="100" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Cancel"/></TextBlock>
+            </StackPanel>
+        </Button>
+        <Label x:Name="StartLocation" Content="From:" HorizontalAlignment="Left" Margin="183,33,0,0" VerticalAlignment="Top" Height="33" Width="186" FontSize="18" Grid.Column="1"/>
+        <TextBox x:Name="StartBox" HorizontalAlignment="Left" Margin="210,71,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31" Grid.Column="1"/>
+        <Label x:Name="Destination" Content="To:" HorizontalAlignment="Left" Margin="183,125,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18" Grid.Column="1"/>
+        <TextBox x:Name="DestBox" HorizontalAlignment="Left" Margin="210,163,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31" Grid.Column="1"/>
+        <Label x:Name="Type" Content="Departure:" HorizontalAlignment="Left" Margin="112,212,0,0" VerticalAlignment="Top" Height="34" Width="118" FontSize="18" Grid.Column="1"/>
+        <Label x:Name="Occupancy" Content="Occupancy:" HorizontalAlignment="Left" Margin="183,303,0,0" VerticalAlignment="Top" Height="32" Width="117" FontSize="18" Grid.Column="1"/>
+        <TextBox x:Name="OccupancyBox" HorizontalAlignment="Left" Margin="210,341,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="30" Grid.Column="1"/>
+        <DatePicker x:Name="DepartureDate" HorizontalAlignment="Left" Margin="88,245,0,0" VerticalAlignment="Top" Height="29" Width="154" Grid.Column="1"/>
+        <Label x:Name="Arrival" Content="Arrival:" HorizontalAlignment="Left" Margin="342,212,0,0" VerticalAlignment="Top" Height="34" Width="118" FontSize="18" Grid.Column="1"/>
+        <DatePicker x:Name="ArrivalDate" HorizontalAlignment="Left" Margin="290,245,0,0" VerticalAlignment="Top" Height="29" Width="170" Grid.Column="1"/>
     </Grid>
 </Window>

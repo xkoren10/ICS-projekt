@@ -7,33 +7,23 @@
         mc:Ignorable="d"
         Title="LogScreenView" Height="450" Width="800">
     <Grid x:Name="grid1">
-        <Button x:Name="ButtonFind" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
+        <Label x:Name="Title" Content="RIDE SHARE" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="56" Width="428" AutomationProperties.Name="Title" FontSize="36" FontFamily="Goudy Stout"/>
+        <Expander x:Name="ProfileList" HorizontalAlignment="Left" Height="100" Header="" Margin="300,217,0,0" VerticalAlignment="Top" Width="100">
+            <Grid Background="#FFE5E5E5"/>
+        </Expander>
+        <Button x:Name="ConfirmButton"  HorizontalAlignment="Left" Margin="452,217,0,0" VerticalAlignment="Top" Height="74" Width="90">
             <StackPanel Orientation="Vertical">
-                <Image Source="Icons/search_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Find a ride
+                <Image Source="Icons/tick_icon.png" Height="50" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Log In
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ButtonProfile" HorizontalAlignment="Left" Margin="66,229,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
+        <Button x:Name="NewUser" HorizontalAlignment="Left" Margin="673,329,0,0" VerticalAlignment="Top" Height="80" Width="102" VerticalContentAlignment="Bottom">
             <StackPanel Orientation="Vertical">
-            <Image Source="Icons/user_icon.png" Height="100" />
-            <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Profile
-            </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonCreate" HorizontalAlignment="Left" Margin="444,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/add_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Create
+                <Image Source="Icons/add_icon.png" Height="50" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Add User
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ButtonRides"  HorizontalAlignment="Left" Margin="444,229,0,0" VerticalAlignment="Top" Height="153" Width="284" RenderTransformOrigin="0.5,0.545" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="Icons/list_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" Text=" Rides" TextAlignment="Center"/>
-            </StackPanel>
-        </Button>
-
     </Grid>
 </Window>

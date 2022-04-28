@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace RideShare.App
 {
     /// <summary>
-    /// Interaction logic for NewRideView.xaml
+    /// Interaction logic for RidesListView.xaml
     /// </summary>
-    public partial class NewRideView : Window
+    public partial class RidesListView : Window
     {
-        public NewRideView()
+        public RidesListView()
         {
             InitializeComponent();
         }

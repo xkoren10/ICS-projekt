@@ -24,5 +24,6 @@ namespace RideShare.App
         {
             InitializeComponent();
         }
+
     }
 }
