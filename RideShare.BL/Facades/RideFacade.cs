@@ -33,6 +33,7 @@ namespace RideShare.BL.Facades
                 CarId: Car.Id
                 );
 
+            Driver.Rides.Add(newRide); //todo otestovat, mozno do DeleteRide pridat aj odobranie z listu usera, mozno by sa do listov mali pridavat list modely idk
             await SaveAsync(newRide);
         }
 
@@ -48,10 +49,10 @@ namespace RideShare.BL.Facades
         public async Task AddPassengerToRide(RideDetailModel Ride, UserDetailModel Passenger)
         {
             var Passengers = Ride.RideUsers;
-            if (Ride.Occupancy == Passengers.Count)
+            /*if (Ride.Occupancy == Passengers.Count) //todo zrejme chyba
             {
                 throw new Exception("Ride is full");
-            }
+            }*/
             var OtherRides = Passenger.RideUsers;
             foreach (var OtherRideUser in OtherRides)
             {

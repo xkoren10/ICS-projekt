@@ -26,6 +26,8 @@ namespace RideShare.BL.Facades
                 Seats: Seats,
                 ImagePath: ImagePath,
                 UserId: Owner.Id);
+
+            //todo pridat do zoznamu aut usera
             await SaveAsync(car);
         }
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RideShare.BL.Tests
 {
@@ -23,6 +24,7 @@ namespace RideShare.BL.Tests
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
             _userFacadeSUT = new UserFacade(UnitOfWorkFactory, Mapper);
             _rideUserFacadeSUT = new RideUserFacade(UnitOfWorkFactory, Mapper);
+            _carFacadeSUT = new CarFacade(UnitOfWorkFactory, Mapper);
         }
         [Fact]
         public async Task CreateRide_ChecksZeroOcuppancy_DoesNotThrow()
@@ -118,6 +120,46 @@ namespace RideShare.BL.Tests
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             Assert.False(await dbxAssert.CarEntities.AnyAsync(i => i.Id == RideSeeds.RideEntity.Id));
         }
+
+        [Fact]
+        public async Task CreateRideTest()
+        {
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
+            await _rideFacadeSUT.CreateRide(user, car, "Brno", "Praha_test",
+                System.Convert.ToDateTime("10/4/2022 12:00"), System.Convert.ToDateTime("10/4/2022 12:00"), 5);
+
+            var rides = await _rideFacadeSUT.GetAsync();
+            var SingleRide = rides.Single(i => i.Destination == "Praha_test");
+            var SingleRideDetail = await _rideFacadeSUT.GetAsync(SingleRide.Id);
+            Assert.Equal(user.Id, SingleRideDetail.UserId);
+        }
+
+        [Fact]
+        public async Task AddPassengerToRideTest()
+        {
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            bool isNotEmpty = ride.RideUsers.Any();
+            await _rideFacadeSUT.AddPassengerToRide(ride, user);
+
+            
+
+            var UpdatedRide = await _rideFacadeSUT.GetAsync(ride.Id);
+            bool test = false;
+            foreach (var rideuser in UpdatedRide.RideUsers)
+            {
+                if (rideuser.UserId == user.Id)
+                {
+                    test = true;
+                }
+            }
+
+            DeepAssert.Equal(false, isNotEmpty);
+            DeepAssert.Equal(true, test);
+        }
+
 
     }
 }
