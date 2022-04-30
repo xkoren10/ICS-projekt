@@ -13,48 +13,63 @@ namespace RideShare.BL.Facades
 {
     public class UserFacade : CRUDFacade<UserEntity, UserListModel, UserDetailModel>
     {
+       // private readonly RideFacade _rideFacadeSUT;
         public UserFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
         {
-             
+           // _rideFacadeSUT = new RideFacade(unitOfWorkFactory, mapper);
         }
 
-        public async Task CreateUser(string Name, string Surname, string Contact, string? ImagePath = null)
+        public async Task<Guid> CreateUser(string name, string surname, string contact, string? imagePath = null)
         {
             var newUser = new UserDetailModel(
                 Id: Guid.NewGuid(), 
-                Name: Name,
-                Surname: Surname,
-                ImagePath: ImagePath,
-                Contact: Contact
+                Name: name,
+                Surname: surname,
+                ImagePath: imagePath,
+                Contact: contact
                 );
 
             await SaveAsync(newUser);
+            return newUser.Id;
         }
 
-        public async Task UpdateUser(UserDetailModel User, string? Name = null, string? Surname = null,
-            string? Contact = null, string? ImagePath = null)
+        public async Task UpdateUser(UserDetailModel user, string? name = null, string? surname = null,
+            string? contact = null, string? imagePath = null)
         {
-            if (Name != null)
+            if (name != null)
             {
-                User.Name = Name;
+                user.Name = name;
             }
 
-            if (Surname != null)
+            if (surname != null)
             {
-                User.Surname = Surname;
+                user.Surname = surname;
             }
-            if (Contact != null)
+            if (contact != null)
             {
-                User.Contact = Contact;
+                user.Contact = contact;
             }
-            if (ImagePath != null)
+            if (imagePath != null)
             {
-                User.ImagePath = ImagePath;
+                user.ImagePath = imagePath;
             }
 
-            await SaveAsync(User);
+            await SaveAsync(user);
         }
 
-
+        //Returns list of passengers for specific ride
+        public async Task<List<UserDetailModel>> GetAllPassengers(RideDetailModel ride)
+        {
+            List<UserDetailModel> passengerList = new List<UserDetailModel>();
+            foreach (var rideUser in ride.RideUsers)
+            {
+                var user = await GetAsync(rideUser.UserId);
+                if (user != null)
+                {
+                    passengerList.Add(user);
+                }
+            }
+            return passengerList;
+        }
     }
 }

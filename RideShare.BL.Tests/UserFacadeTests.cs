@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using System;
+using System.Collections.Generic;
 
 namespace RideShare.BL.Tests
 {
     public sealed class UserFacadeTests : CRUDFacadeTestsBase
     {
         private readonly UserFacade _userFacadeSUT;
+        private readonly RideFacade _rideFacadeSUT;
 
         public UserFacadeTests(ITestOutputHelper output) : base(output)
         {
             _userFacadeSUT = new UserFacade(UnitOfWorkFactory, Mapper);
+            _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
 
 
@@ -123,6 +126,35 @@ namespace RideShare.BL.Tests
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             var userFromDb = await dbxAssert.UserEntities.SingleAsync(i => i.Id == user.Id);
             DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
+        }
+
+        [Fact]
+        public async Task GetAllPassengersTest()
+        {
+            var user1 = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var user2 = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity2.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            List<UserDetailModel> testList = new List<UserDetailModel>();
+            testList.Add(user1);
+            testList.Add(user2);
+
+            await _rideFacadeSUT.AddPassengerToRide(ride, user1);
+            await _rideFacadeSUT.AddPassengerToRide(ride, user2);
+
+            List<UserDetailModel> result = await _userFacadeSUT.GetAllPassengers(ride);
+
+            DeepAssert.Equal(testList[0].Id, result[0].Id);
+            DeepAssert.Equal(testList[1].Id, result[1].Id);
+        }
+
+        [Fact]
+        public async Task CreateUserTest()
+        {
+            var newUserId = await _userFacadeSUT.CreateUser("Jano", "Vesely", "test_contact");
+            var user = await _userFacadeSUT.GetAsync(newUserId);
+            DeepAssert.Equal(newUserId, user.Id);
+            DeepAssert.Equal("Jano", user.Name);
         }
     }
 }

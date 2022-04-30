@@ -169,5 +169,26 @@ namespace RideShare.BL.Tests
 
             DeepAssert.Equal(RideSeeds.RideEntity.Id, ride.Id);
         }
+
+        [Fact]
+        public async Task CreateCarTest()
+        {
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var carId = await _carFacadeSUT.CreateCar(user, System.Convert.ToDateTime("10/4/2022 12:00"), "testBrand", "testType", 5);
+
+            var car = await _carFacadeSUT.GetAsync(carId);
+            DeepAssert.Equal(user.Id, car.UserId);
+
+            var updatedUser = await _userFacadeSUT.GetAsync(user.Id);
+            bool test = false;
+            foreach (var c in updatedUser.Cars)
+            {
+                if (c.Id == carId)
+                {
+                    test = true;
+                }
+            }
+            DeepAssert.Equal(true, test);
+        }
     }
 }

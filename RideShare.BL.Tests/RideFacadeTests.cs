@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RideShare.BL.Tests
@@ -115,7 +116,7 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task SeededRide_DeleteById()
         {
-            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+            await _rideFacadeSUT.DeleteAsync(RideSeeds.RideEntity.Id);
 
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             Assert.False(await dbxAssert.CarEntities.AnyAsync(i => i.Id == RideSeeds.RideEntity.Id));
@@ -126,13 +127,22 @@ namespace RideShare.BL.Tests
         {
             var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
             var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
-            await _rideFacadeSUT.CreateRide(user, car, "Brno", "Praha_test",
+            var rideId = await _rideFacadeSUT.CreateRide(user, car, "Brno", "Praha",
                 System.Convert.ToDateTime("10/4/2022 12:00"), System.Convert.ToDateTime("10/4/2022 12:00"), 5);
 
-            var rides = await _rideFacadeSUT.GetAsync();
-            var SingleRide = rides.Single(i => i.Destination == "Praha_test");
-            var SingleRideDetail = await _rideFacadeSUT.GetAsync(SingleRide.Id);
-            Assert.Equal(user.Id, SingleRideDetail.UserId);
+            var ride = await _rideFacadeSUT.GetAsync(rideId);
+            DeepAssert.Equal(user.Id, ride.UserId);
+
+            var updatedUser = await _userFacadeSUT.GetAsync(user.Id);
+            bool test = false;
+            foreach (var r in updatedUser.Rides)
+            {
+                if (r.Id == rideId)
+                {
+                    test = true;
+                }
+            }
+            DeepAssert.Equal(true, test);
         }
 
         [Fact]
@@ -141,25 +151,84 @@ namespace RideShare.BL.Tests
             var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
-            bool isNotEmpty = ride.RideUsers.Any();
             await _rideFacadeSUT.AddPassengerToRide(ride, user);
 
-            
-
-            var UpdatedRide = await _rideFacadeSUT.GetAsync(ride.Id);
-            bool test = false;
-            foreach (var rideuser in UpdatedRide.RideUsers)
+            var updatedRide = await _rideFacadeSUT.GetAsync(ride.Id);
+            bool testPassenger = false;
+            foreach (RideUserModel rideUser in updatedRide.RideUsers)
             {
-                if (rideuser.UserId == user.Id)
+                if (rideUser.UserId == user.Id)
                 {
-                    test = true;
+                    testPassenger = true;
                 }
             }
+            DeepAssert.Equal(true, testPassenger);
 
-            DeepAssert.Equal(false, isNotEmpty);
-            DeepAssert.Equal(true, test);
+            var updatedPassenger = await _userFacadeSUT.GetAsync(user.Id);
+            bool testRide = false;
+            foreach (RideUserModel rideUser in updatedPassenger.RideUsers)
+            {
+                if (rideUser.RideId == ride.Id)
+                {
+                    testRide = true;
+                }
+            }
+            DeepAssert.Equal(true, testRide);
         }
 
+        [Fact]
+        public async Task GetPassengerRidesTest()
+        {
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
+            List<RideDetailModel> testList = new List<RideDetailModel>();
+            testList.Add(ride);
+
+            await _rideFacadeSUT.AddPassengerToRide(ride, user);
+
+            List<RideDetailModel> result = await _rideFacadeSUT.GetPassengerRides(user);
+
+            DeepAssert.Equal(testList[0].Id, result[0].Id);
+        }
+
+        [Fact]
+        public async Task DeleteRideTest()
+        {
+            
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
+            var rideId = await _rideFacadeSUT.CreateRide(user, car, "Brno", "Praha",
+                System.Convert.ToDateTime("10/4/2022 12:00"), System.Convert.ToDateTime("10/4/2022 12:00"), 5);
+            var ride = await _rideFacadeSUT.GetAsync(rideId);
+
+            await _rideFacadeSUT.AddPassengerToRide(ride, user);
+
+            await _rideFacadeSUT.DeleteRide(ride);
+
+            var testRide = await _rideFacadeSUT.GetAsync(ride.Id);
+            var testRideUsers = await _rideUserFacadeSUT.GetAsync();
+
+            DeepAssert.Equal(null, testRide);
+            DeepAssert.Equal(null,testRideUsers);
+        }
+
+        [Fact]
+        public async Task DeletePassengerFromRideTest()
+        {
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            await _rideFacadeSUT.AddPassengerToRide(ride, user);
+
+            var rideUsers = await _rideUserFacadeSUT.GetAsync();
+
+            await _rideFacadeSUT.DeletePassengerFromRide(rideUsers.ToList()[0]);
+
+            var rideUsersTest = await _rideUserFacadeSUT.GetAsync();
+            bool isNotEmpty = rideUsersTest.Any();
+
+            DeepAssert.Equal(false, isNotEmpty);
+        }
     }
 }

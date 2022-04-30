@@ -12,41 +12,47 @@ namespace RideShare.BL.Facades
 {
     public class CarFacade : CRUDFacade<CarEntity, CarListModel, CarDetailModel>
     {
+        private readonly UserFacade _userFacadeSUT;
         public CarFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
         {
+            _userFacadeSUT = new UserFacade(unitOfWorkFactory, mapper);
         }
 
-        public async Task CreateNewCar(UserDetailModel Owner, DateTime RegDate, string Brand, string Type, int Seats, string ImagePath = null)
+        //Creates new car and adds it to list of user's cars
+        //Returns new car's id
+        public async Task<Guid> CreateCar(UserDetailModel owner, DateTime regDate, string brand, string type, int seats, string? imagePath = null)
         {
-            var car = new CarDetailModel(
+            var newCar = new CarDetailModel(
                 Id: Guid.NewGuid(),
-                RegDate: DateTime.Now,
-                Brand: Brand,
-                Type: Type,
-                Seats: Seats,
-                ImagePath: ImagePath,
-                UserId: Owner.Id);
+                RegDate: regDate,
+                Brand: brand,
+                Type: type,
+                Seats: seats,
+                ImagePath: imagePath,
+                UserId: owner.Id);
 
-            //todo pridat do zoznamu aut usera
-            await SaveAsync(car);
+            await SaveAsync(newCar);
+            owner.Cars.Add(newCar);
+            await _userFacadeSUT.SaveAsync(owner);
+            return newCar.Id;
         }
 
-        public async Task EditCar(CarDetailModel Car, int Seats, string Brand = null, string Type = null, string ImagePath = null)
+        public async Task EditCar(CarDetailModel car, int seats, string? brand = null, string? type = null, string? imagePath = null)
         {
-            Car.Seats = Seats;
-            if (Brand != null)
+            car.Seats = seats;
+            if (brand != null)
             {
-                Car.Brand = Brand;
+                car.Brand = brand;
             }
-            if (Type != null)
+            if (type != null)
             {
-                Car.Type = Type;
+                car.Type = type;
             }
-            if (ImagePath != null)
+            if (imagePath != null)
             {
-                Car.ImagePath = ImagePath;
+                car.ImagePath = imagePath;
             }
-            await SaveAsync(Car);
+            await SaveAsync(car);
         }
     }
 }
