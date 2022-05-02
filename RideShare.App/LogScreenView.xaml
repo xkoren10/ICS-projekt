@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="LogScreenView" Height="450" Width="800">
     <Grid x:Name="grid1">
-        <Label x:Name="Title" Content="RIDE SHARE" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="56" Width="428" AutomationProperties.Name="Title" FontSize="36" FontFamily="Goudy Stout"/>
+        <Label x:Name="Title_Label" Content="RIDE SHARE" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="56" Width="428" AutomationProperties.Name="Title" FontSize="36" FontFamily="Goudy Stout"/>
         <Expander x:Name="ProfileList" HorizontalAlignment="Left" Height="100" Header="" Margin="300,217,0,0" VerticalAlignment="Top" Width="100">
             <Grid Background="#FFE5E5E5"/>
         </Expander>

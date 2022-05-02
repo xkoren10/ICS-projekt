@@ -26,7 +26,7 @@
         </Button>
         <Label x:Name="Surname" Content="Surname:" HorizontalAlignment="Left" Margin="205,146,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
         <Label x:Name="Contact" Content="Contact:" HorizontalAlignment="Left" Margin="205,236,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
-        <Label x:Name="Name" Content="Name:" HorizontalAlignment="Left" Margin="205,54,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <Label x:Name="Name_Label" Content="Name:" HorizontalAlignment="Left" Margin="205,54,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
         <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="232,92,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31"/>
         <TextBox x:Name="SurnameBox" HorizontalAlignment="Left" Margin="232,184,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31"/>
         <TextBox x:Name="ContactBox" HorizontalAlignment="Left" Margin="232,274,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="31"/>
