@@ -7,4 +7,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\RideShare.BL\RideShare.BL.csproj" />
+		<ProjectReference Include="..\RideShare.DAL\RideShare.DAL.csproj" />
+	</ItemGroup>
+	
 </Project>

@@ -1,0 +1,43 @@
+﻿<Window x:Class="RideShare.App.Views.MyRidesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RideShare.App"
+        mc:Ignorable="d"
+        Title="My Rides" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="ButtonBack"  HorizontalAlignment="Left" Height="73" Margin="16,10,0,0" VerticalAlignment="Top" Width="103">
+            <Image Source="Icons/back_icon.png">
+            </Image>
+        </Button>
+
+
+        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="128,88,24,49"  >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="538">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Width="50" Source="Icons/user_icon.png"/>
+                        <Label Grid.Column="1" Content="Driver:" Margin="0,12,0,12" />
+                        <Label Grid.Column="2" Content="Date: " Margin="0,12,0,12" />
+                        <Label Grid.Column="3" Content="From->To: " Margin="0,12,0,12" />
+                        <Label Grid.Column="4" Content="Car: " Margin="0,12,0,12" />
+                        <Image Grid.Column="5" Source="/Icons/car_icon.png" Height="50" />
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+        </ListBox>
+    </Grid>
+</Window>

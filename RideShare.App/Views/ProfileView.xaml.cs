@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RideShare.App
+namespace RideShare.App.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProfileView : Window
     {
-        public MainWindow()
+        public ProfileView()
         {
             InitializeComponent();
         }

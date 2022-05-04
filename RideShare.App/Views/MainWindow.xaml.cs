@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RideShare.App
+namespace RideShare.App.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LogScreenView : Window
+    public partial class MainWindow : Window
     {
-        public LogScreenView()
+        public MainWindow()
         {
             InitializeComponent();
         }
-
     }
 }

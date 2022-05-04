@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RideShare.App
+namespace RideShare.App.Views
 {
     /// <summary>
-    /// Interaction logic for NewRideView.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class NewRideView : Window
+    public partial class CarListView : Window
     {
-        public NewRideView()
+        public CarListView()
         {
             InitializeComponent();
         }

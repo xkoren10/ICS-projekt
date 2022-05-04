@@ -1,0 +1,54 @@
+﻿<Window x:Class="RideShare.App.Views.RidesListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RideShare.App"
+        mc:Ignorable="d"
+        Title="Rides List" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="31*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=5}" Width="571" Margin="140,129,89,49" Grid.ColumnSpan="2"  >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="538">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Width="50" Source="Icons/user_icon.png"/>
+                        <Label Grid.Column="1" Content="Driver" Margin="0,12,0,12" />
+                        <Label Grid.Column="2" Content="Dep. time: " Margin="0,12,0,12" />
+                        <Label Grid.Column="3" Content="Seats: " Margin="0,12,0,12" />
+                        <Label Grid.Column="4" Content="Car: " Margin="0,12,0,12" />
+                        <Image Grid.Column="5" Source="/Icons/car_icon.png" Height="50" />
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+        </ListBox>
+        <TextBox HorizontalAlignment="Left" Text="SampleFrom" TextAlignment="Center" Margin="126,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="42"/>
+        <DatePicker HorizontalAlignment="Left" Margin="25,48,0,0" VerticalAlignment="Top" Height="42" Width="126" Grid.Column="1"/>
+        <Button HorizontalAlignment="Left" Margin="165,14,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <StackPanel Orientation="Vertical" Height="94" Width="126">
+                <Image Source="Icons/search_icon.png" Height="80" Width="100" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Filter"/></TextBlock>
+            </StackPanel>
+        </Button>
+        <TextBox HorizontalAlignment="Left" Text="SampleTo" TextAlignment="Center"  Margin="333,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="42"/>
+        <Label Content="From:" HorizontalAlignment="Left" Margin="166,14,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content="To:" HorizontalAlignment="Left" Margin="384,14,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content="Date:" HorizontalAlignment="Left" Margin="62,14,0,0" VerticalAlignment="Top" Grid.Column="1" FontSize="18"/>
+
+    </Grid>
+</Window>
