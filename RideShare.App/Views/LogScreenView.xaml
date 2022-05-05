@@ -10,20 +10,20 @@
         <Label x:Name="Title_Label" Content="RIDE SHARE" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="56" Width="428" AutomationProperties.Name="Title" FontSize="36" FontFamily="Goudy Stout"/>
         <Button x:Name="ConfirmButton"  HorizontalAlignment="Left" Margin="539,221,0,0" VerticalAlignment="Top" Height="74" Width="90">
             <StackPanel Orientation="Vertical">
-                <Image Source="Icons/tick_icon.png" Height="50" />
+                <Image Source="/Icons/tick_icon.png" Height="50" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Log In
                 </TextBlock>
             </StackPanel>
         </Button>
         <Button x:Name="NewUser" HorizontalAlignment="Left" Margin="673,329,0,0" VerticalAlignment="Top" Height="80" Width="102" VerticalContentAlignment="Bottom">
             <StackPanel Orientation="Vertical">
-                <Image Source="Icons/add_icon.png" Height="50" />
+                <Image Source="/Icons/add_icon.png" Height="50" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Add User
                 </TextBlock>
             </StackPanel>
         </Button>
 
-        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="152,187,291,98"  >
+        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="152,187,291,98"  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="300">
@@ -32,7 +32,7 @@
                             <ColumnDefinition Width="Auto"/>
 
                         </Grid.ColumnDefinitions>
-                        <Image Width="50" Source="Icons/user_icon.png"/>
+                        <Image Width="50" Source="/Icons/user_icon.png"/>
                         <Label Grid.Column="1" Content="Name" Margin="0,12,0,12" />
 
 

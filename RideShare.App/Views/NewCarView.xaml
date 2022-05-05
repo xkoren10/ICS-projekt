@@ -10,17 +10,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="504,13,0,0" VerticalAlignment="Top" Width="158" Source="Icons/car_icon.png"/>
+        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="504,13,0,0" VerticalAlignment="Top" Width="158" Source="/Icons/car_icon.png"/>
         <Button x:Name="ChangePictureButton" Content="Upload Car Picture" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="54" Width="150" Margin="508,0,0,0"/>
         <Button x:Name="SaveChanges" HorizontalAlignment="Left" Margin="635,328,0,0" VerticalAlignment="Top" Height="98" Width="129">
             <StackPanel x:Name="SaveButton" Orientation="Vertical" Height="94" Width="126">
-                <Image Source="Icons/save_icon.png" Height="80" Width="100" />
+                <Image Source="/Icons/save_icon.png" Height="80" Width="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Save"/></TextBlock>
             </StackPanel>
         </Button>
         <Button x:Name="DiscardChanges"  HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Height="109" Width="129">
             <StackPanel Orientation="Vertical" Height="94" Width="126">
-                <Image Source="Icons/remove_icon.png" Height="80" Width="100" />
+                <Image Source="/Icons/remove_icon.png" Height="80" Width="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Cancel"/></TextBlock>
             </StackPanel>
         </Button>       

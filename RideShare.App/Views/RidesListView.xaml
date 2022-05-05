@@ -41,7 +41,7 @@
         <DatePicker HorizontalAlignment="Left" Margin="25,48,0,0" VerticalAlignment="Top" Height="42" Width="126" Grid.Column="1"/>
         <Button HorizontalAlignment="Left" Margin="165,14,0,0" VerticalAlignment="Top" Grid.Column="1">
             <StackPanel Orientation="Vertical" Height="94" Width="126">
-                <Image Source="Icons/search_icon.png" Height="80" Width="100" />
+                <Image Source="/Icons/search_icon.png" Height="80" Width="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Filter"/></TextBlock>
             </StackPanel>
         </Button>

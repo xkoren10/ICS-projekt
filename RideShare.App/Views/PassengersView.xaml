@@ -9,7 +9,7 @@
     <Grid>
         <Button HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Height="75" Width="95">
             <StackPanel Orientation="Vertical" Height="77" Width="97">
-                <Image Source="Icons/back_icon.png" Height="71" Width="82" />
+                <Image Source="/Icons/back_icon.png" Height="71" Width="82" />
 
             </StackPanel>
         </Button>
@@ -27,7 +27,7 @@
                             <ColumnDefinition Width="Auto" />
 
                         </Grid.ColumnDefinitions>
-                        <Image Width="50" Source="Icons/user_icon.png"/>
+                        <Image Width="50" Source="/Icons/user_icon.png"/>
                         <Label Grid.Column="1" Content="SampleName " Margin="0,23,0,12" />
                         <Label Grid.Column="2" Content="SampleSurname " Margin="0,23,0,12" />
                         <Label Grid.Column="3" Content="SampleContact " Margin="0,23,0,12" />

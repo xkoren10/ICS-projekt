@@ -26,7 +26,7 @@
                     <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Edit"/></TextBlock>
                 </StackPanel>
             </Button>
-            <Image Source="Icons/user_icon.png" x:Name="ImageProfile" HorizontalAlignment="Left" Height="179" Margin="552,103,0,0" VerticalAlignment="Top" Width="169"/>
+            <Image Source="/Icons/user_icon.png" x:Name="ImageProfile" HorizontalAlignment="Left" Height="179" Margin="552,103,0,0" VerticalAlignment="Top" Width="169"/>
             <Grid/>
         </Grid>
 
