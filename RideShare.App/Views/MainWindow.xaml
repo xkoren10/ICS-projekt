@@ -3,37 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RideShare.App"
+        xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
+        xmlns:views="clr-namespace:RideShare.App.Views"
         mc:Ignorable="d"
-        Title="Main Window" Height="450" Width="800">
+        Title="Main Area" Height="450" Width="800" ResizeMode="NoResize">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:LogScreenViewModel}">
+            <views:LogScreenView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:ProfileViewModel}">
+            <views:ProfileView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:MainAreaViewModel}">
+            <views:MainArea />
+        </DataTemplate>
+    </Window.Resources>
     <Grid x:Name="grid1">
-        <Button x:Name="ButtonFind" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
-            <StackPanel Orientation="Vertical">
-                <Image Source="/Icons/search_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Find a ride
-                </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonProfile" HorizontalAlignment="Left" Margin="66,229,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-            <Image Source="/Icons/user_icon.png" Height="100" />
-            <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Profile
-            </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonCreate" HorizontalAlignment="Left" Margin="444,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="/Icons/add_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Create
-                </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ButtonRides"  HorizontalAlignment="Left" Margin="444,229,0,0" VerticalAlignment="Top" Height="153" Width="284" RenderTransformOrigin="0.5,0.545" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom">
-            <StackPanel Orientation="Vertical">
-                <Image Source="/Icons/list_icon.png" Height="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" Text=" Rides" TextAlignment="Center"/>
-            </StackPanel>
-        </Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="287*"/>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="82*"/>
+        </Grid.ColumnDefinitions>
+        <ItemsControl ItemsSource="{Binding ActiveWindow}" Grid.ColumnSpan="3"/>
 
     </Grid>
 </Window>

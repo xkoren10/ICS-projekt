@@ -1,21 +1,21 @@
-﻿<Window x:Class="RideShare.App.Views.LogScreenView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RideShare.App"
-        mc:Ignorable="d"
-        Title="Log Screen" Height="450" Width="800">
+﻿<local:UserControlBase  x:Class="RideShare.App.Views.LogScreenView"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
+                        xmlns:local="clr-namespace:RideShare.App.Views"
+                        mc:Ignorable="d">
     <Grid x:Name="grid1">
         <Label x:Name="Title_Label" Content="RIDE SHARE" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="56" Width="428" AutomationProperties.Name="Title" FontSize="36" FontFamily="Goudy Stout"/>
-        <Button x:Name="ConfirmButton"  HorizontalAlignment="Left" Margin="539,221,0,0" VerticalAlignment="Top" Height="74" Width="90">
+        <Button x:Name="ConfirmButton" Command="{Binding LoginCommand}" HorizontalAlignment="Left" Margin="539,221,0,0" VerticalAlignment="Top" Height="74" Width="90">
             <StackPanel Orientation="Vertical">
                 <Image Source="/Icons/tick_icon.png" Height="50" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Log In
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="NewUser" HorizontalAlignment="Left" Margin="673,329,0,0" VerticalAlignment="Top" Height="80" Width="102" VerticalContentAlignment="Bottom">
+        <Button x:Name="NewUser" Command="{Binding NewUserCommand}" HorizontalAlignment="Left" Margin="673,329,0,0" VerticalAlignment="Top" Height="80" Width="102" VerticalContentAlignment="Bottom">
             <StackPanel Orientation="Vertical">
                 <Image Source="/Icons/add_icon.png" Height="50" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Add User
@@ -47,4 +47,4 @@
 
 
     </Grid>
-</Window>
+</local:UserControlBase>
