@@ -21,14 +21,21 @@ namespace RideShare.App.ViewModels
             _userFacade = userFacade;
             _mediator = mediator;
             EditUserProfile = new RelayCommand(UserEdit);
+            BackToMainCommand = new RelayCommand(BackToMainExecute);
+
         }
 
         public UserDetailModel? Model { get; set; }
         public ICommand EditUserProfile { get; }
 
+        public ICommand BackToMainCommand { get; }
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
         private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
+
+        private void BackToMainExecute() => _mediator.Send(new OpenMessage<UserWrapper> { });
+
+
 
         public async Task LoadAsync(Guid id)
         {

@@ -11,41 +11,31 @@ using RideShare.App.Wrappers;
 namespace RideShare.App.ViewModels
 {
 
-    public class MainAreaViewModel : ViewModelBase, IMainAreaViewModel
+    public class NewRideViewModel : ViewModelBase, INewRideViewModel
     {
         private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
 
-        public MainAreaViewModel(UserFacade userFacade, IMediator mediator)
+        public NewRideViewModel(UserFacade userFacade, IMediator mediator)
         {
             _userFacade = userFacade;
             _mediator = mediator;
-
-            OpenProfile = new RelayCommand<UserDetailModel>(UserProfile);
-            OpenNewRide = new RelayCommand<UserDetailModel>(NewRide);
+            //SaveNewRide = new RelayCommand(SaveRide);
+            CancelNewRide = new RelayCommand(CancelRide);
 
         }
 
         public UserDetailModel? Model { get; set; }
-        public ICommand OpenProfile { get; }
-        public ICommand OpenNewRide { get; }
+        //public ICommand SaveNewRide { get; }
 
+        public ICommand CancelNewRide { get; }
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
-        private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
-        private void NewRide(UserDetailModel? userModel) => _mediator.Send(new SelectedMessage<UserWrapper> { });
+       
 
-        private void UserProfile(UserDetailModel? userModel)
-        {  
-            if (userModel is not null)
-            {
-               // _mediator.Send(new SelectedMessage<UserWrapper> { Id = userModel.Id });
-            }
-            //later send user id ^^
-            _mediator.Send(new SelectedMessage<UserWrapper> { });
-        }
+        private void CancelRide() => _mediator.Send(new OpenMessage<UserWrapper> { });
 
-        private void NewUser() => _mediator.Send(new NewMessage<UserWrapper>());
+
 
         public async Task LoadAsync(Guid id)
         {
@@ -55,7 +45,7 @@ namespace RideShare.App.ViewModels
             }
             Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
         }
-
+        
         public async Task SaveAsync()
         {
             if (Model == null)

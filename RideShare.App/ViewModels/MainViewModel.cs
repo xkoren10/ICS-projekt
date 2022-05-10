@@ -20,6 +20,7 @@ namespace RideShare.App.ViewModels
         private readonly IFactory<IProfileViewModel> _profileViewModelFactory;
         private readonly IFactory<ILogScreenViewModel> _logScreenViewModelFactory;
         private readonly IFactory<IMainAreaViewModel> _mainAreaViewModelFactory;
+        //private readonly IFactory<INewRideViewModel> _newRideViewModelFactory;
 
         public MainViewModel(
             IProfileViewModel profileViewModel,
@@ -27,13 +28,14 @@ namespace RideShare.App.ViewModels
             IFactory<IProfileViewModel> profileDetailViewModelFactory,
             IFactory<ILogScreenViewModel> logScreenDetailViewModelFactory,
             IFactory<IMainAreaViewModel> mainAreaDetailViewModelFactory
+            //IFactory<INewRideViewModel> newRideViewModelFactory               tu mi to zhadzuje idk how it works
             )
         {
             _mediator = mediator;
             _profileViewModelFactory = profileDetailViewModelFactory;
             _logScreenViewModelFactory = logScreenDetailViewModelFactory;
             _mainAreaViewModelFactory = mainAreaDetailViewModelFactory;
-
+            //_newRideViewModelFactory = newRideViewModelFactory;
             ProfileViewModel = profileViewModel;
 
 
@@ -43,7 +45,8 @@ namespace RideShare.App.ViewModels
             mediator.Register<NewMessage<UserWrapper>>(NewUser);
             //  mainArea
             mediator.Register<SelectedMessage<UserWrapper>>(UserProfile);
-
+            mediator.Register<OpenMessage<UserWrapper>>(BackToMainPage);
+            mediator.Register<SelectedMessage<UserWrapper>>(CancelRide);
             //init startup window
             LoginOpen();
         }
@@ -62,6 +65,25 @@ namespace RideShare.App.ViewModels
         public Guid ActiveUser { get; set; }
         //private void UserLogin(SelectedMessage<UserWrapper> message)
         private void UserLogin(OpenMessage<UserWrapper> message)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var mainAreaDetailViewModel = _mainAreaViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(mainAreaDetailViewModel);
+        }
+
+        private void CancelRide(SelectedMessage<UserWrapper> _)
+        {
+
+
+           /* var newRideViewModel = _newRideViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(newRideViewModel);*/
+        }
+
+        private void BackToMainPage(OpenMessage<UserWrapper> message)
         {
 
             //ActiveUser = (Guid)message.Id;

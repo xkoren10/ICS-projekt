@@ -5,7 +5,8 @@
                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                         xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
                         xmlns:local="clr-namespace:RideShare.App.Views"
-                        mc:Ignorable="d">
+                        mc:Ignorable="d"
+                        Background="White">
     <Grid x:Name="grid1">
         <Label x:Name="Title_Label" Content="RIDE SHARE" HorizontalAlignment="Center" Margin="0,77,0,0" VerticalAlignment="Top" Height="56" Width="428" AutomationProperties.Name="Title" FontSize="36" FontFamily="Goudy Stout"/>
         <Button x:Name="ConfirmButton" Command="{Binding LoginCommand}" HorizontalAlignment="Left" Margin="539,221,0,0" VerticalAlignment="Top" Height="74" Width="90">

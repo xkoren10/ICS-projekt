@@ -17,8 +17,22 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="Icons\add_icon.png" />
+		<Resource Include="Icons\back_icon.png" />
+		<Resource Include="Icons\car_icon.png" />
+		<Resource Include="Icons\edit_icon.png" />
+		<Resource Include="Icons\list_icon.png" />
+		<Resource Include="Icons\remove_icon.png" />
+		<Resource Include="Icons\save_icon.png" />
+		<Resource Include="Icons\search_icon.png" />
+		<Resource Include="Icons\tick_icon.png" />
+		<Resource Include="Icons\user_icon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\RideShare.BL\RideShare.BL.csproj" />
 		<ProjectReference Include="..\RideShare.DAL\RideShare.DAL.csproj" />
+		
 	</ItemGroup>
 	
 	<ItemGroup>

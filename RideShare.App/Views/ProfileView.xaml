@@ -7,7 +7,7 @@
                           xmlns:local="clr-namespace:RideShare.App.Views"
                           mc:Ignorable="d" 
                           d:DesignHeight="450" d:DesignWidth="800"
-                          d:DataContext="{d:DesignInstance viewModels:ProfileViewModel}">   
+                          d:DataContext="{d:DesignInstance viewModels:ProfileViewModel}">
 
     <Grid>
         <Grid x:Name="GridProfile" Background="White">
@@ -19,16 +19,23 @@
             <TextBox x:Name="TextSurname" Text="" HorizontalAlignment="Left" Height="35" Margin="92,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" RenderTransformOrigin="0.5,0.641" FontSize="16" ForceCursor="True" IsEnabled="False" Grid.ColumnSpan="2"/>
             <TextBox x:Name="TextContact" Text="" HorizontalAlignment="Left" Height="32" Margin="92,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" AcceptsReturn="True" FontSize="16" IsEnabled="False" Grid.ColumnSpan="2"/>
 
-            <Button x:Name="ButtonCar" HorizontalAlignment="Left" Height="80" Margin="92,344,0,0" VerticalAlignment="Top" Width="103" Grid.ColumnSpan="2">
+            <Button x:Name="ButtonCar" HorizontalAlignment="Left" Height="80" Margin="132,304,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2">
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icons/car_icon.png" Height="57" />
                     <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="My cars"/></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="ButtonEdit"  Command="{Binding EditUserProfile}" HorizontalAlignment="Left" Height="80" Margin="443,344,0,0" VerticalAlignment="Top" Width="103" Grid.Column="1">
+            <Button x:Name="ButtonEdit"  Command="{Binding EditUserProfile}" HorizontalAlignment="Left" Height="80" Margin="424,304,0,0" VerticalAlignment="Top" Width="103" Grid.Column="1">
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icons/edit_icon.png" Height="57" />
                     <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Edit"/></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="ButtonBack"  Command="{Binding BackToMainCommand}" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Height="75" Width="95">
+                <StackPanel Orientation="Vertical" Height="77" Width="97">
+                    <Image Source="/Icons/back_icon.png" Height="71" Width="82" />
+
                 </StackPanel>
             </Button>
             <Image Source="/Icons/user_icon.png" x:Name="ImageProfile" HorizontalAlignment="Left" Height="179" Margin="391,103,0,0" VerticalAlignment="Top" Width="169" Grid.Column="1"/>

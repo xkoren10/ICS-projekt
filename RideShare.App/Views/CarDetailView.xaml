@@ -1,12 +1,15 @@
-﻿<Window x:Class="RideShare.App.Views.CarDetailView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RideShare.App.Views"
-        mc:Ignorable="d"
-        Title="Car Detail" Height="450" Width="800">
-    <Grid x:Name="grid1">
+﻿<local:UserControlBase   x:Class="RideShare.App.Views.CarDetailView"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                          xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
+                          xmlns:local="clr-namespace:RideShare.App.Views"
+                          mc:Ignorable="d" 
+                          d:DesignHeight="450" d:DesignWidth="800"
+                          
+                         >
+    <Grid x:Name="CarDetailGrid" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -26,4 +29,4 @@
         <Label x:Name="Seats" Content="Seats:" HorizontalAlignment="Left" Margin="241,303,0,0" VerticalAlignment="Top" Height="32" Width="95" FontSize="18"/>
         <TextBox x:Name="SeatsBox" HorizontalAlignment="Left" Margin="268,341,0,0" TextWrapping="Wrap" Text="SampleSeats" VerticalAlignment="Top" Width="159" Height="30"/>
     </Grid>
-</Window>
+</local:UserControlBase>

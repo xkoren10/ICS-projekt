@@ -21,7 +21,7 @@
             </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ButtonCreate" HorizontalAlignment="Left" Margin="444,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
+        <Button x:Name="ButtonCreate" Command="{Binding OpenNewRide}" HorizontalAlignment="Left" Margin="444,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
             <StackPanel Orientation="Vertical">
                 <Image Source="/Icons/add_icon.png" Height="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Create
