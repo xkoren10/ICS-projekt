@@ -64,6 +64,7 @@ namespace RideShare.App
 
             services.AddSingleton<MainViewModel>();
             //services.AddSingleton<IProfileViewModel, ProfileViewModel>();
+            services.AddFactory<INewRideViewModel, NewRideViewModel>();
             services.AddFactory<ILogScreenViewModel, LogScreenViewModel>();
             services.AddFactory<IProfileViewModel, ProfileViewModel>();
             services.AddFactory<IMainAreaViewModel, MainAreaViewModel>();
