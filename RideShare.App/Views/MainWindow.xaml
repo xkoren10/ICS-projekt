@@ -20,6 +20,9 @@
         <DataTemplate DataType="{x:Type viewModels:NewRideViewModel}">
             <views:NewRideView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:RidesListViewModel}">
+            <views:RidesListView />
+        </DataTemplate>
     </Window.Resources>
     <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>

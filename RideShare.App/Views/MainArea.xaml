@@ -7,7 +7,7 @@
                         xmlns:local="clr-namespace:RideShare.App.Views"
                         mc:Ignorable="d">
     <Grid x:Name="grid1">
-        <Button x:Name="ButtonFind" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
+        <Button x:Name="ButtonFind" Command="{Binding OpenRideList}" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
             <StackPanel Orientation="Vertical">
                 <Image Source="/Icons/search_icon.png" Height="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Find a ride

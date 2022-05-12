@@ -21,6 +21,7 @@ namespace RideShare.App.ViewModels
         private readonly IFactory<ILogScreenViewModel> _logScreenViewModelFactory;
         private readonly IFactory<INewRideViewModel> _newRideViewModelFactory;
         private readonly IFactory<IMainAreaViewModel> _mainAreaViewModelFactory;
+        private readonly IFactory<IRidesListViewModel> _rideListViewModelFactory;
 
         public MainViewModel(
             IProfileViewModel profileViewModel,
@@ -29,13 +30,15 @@ namespace RideShare.App.ViewModels
             IFactory<IProfileViewModel> profileDetailViewModelFactory,
             IFactory<ILogScreenViewModel> logScreenDetailViewModelFactory,
             IFactory<INewRideViewModel> newRideViewModelFactory,
-            IFactory<IMainAreaViewModel> mainAreaDetailViewModelFactory            )
+            IFactory<IMainAreaViewModel> mainAreaDetailViewModelFactory,
+            IFactory<IRidesListViewModel> rideListViewModelFactory)
         {
             _mediator = mediator;
             _profileViewModelFactory = profileDetailViewModelFactory;
             _logScreenViewModelFactory = logScreenDetailViewModelFactory;
             _newRideViewModelFactory = newRideViewModelFactory;
             _mainAreaViewModelFactory = mainAreaDetailViewModelFactory;
+            _rideListViewModelFactory = rideListViewModelFactory;
 
             ProfileViewModel = profileViewModel;
             NewRideViewModel = newRideViewModel;
@@ -50,6 +53,8 @@ namespace RideShare.App.ViewModels
             mediator.Register<SelectedMessage<UserWrapper>>(CancelRide);
             // new Ride
             mediator.Register<NewMessage<RideWrapper>>(NewRide);
+            // ride list
+            mediator.Register<OpenMessage<RideWrapper>>(RideList);
             //init startup window
             LoginOpen();
         }
@@ -96,6 +101,17 @@ namespace RideShare.App.ViewModels
             ActiveWindow.Clear();
             ActiveWindow.Add(mainAreaDetailViewModel);
         }
+
+        private void RideList(OpenMessage<RideWrapper> _)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var rideListViewModel = _rideListViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(rideListViewModel);
+        }
+
         private void NewUser(NewMessage<UserWrapper> _)
         {
 
