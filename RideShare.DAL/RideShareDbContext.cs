@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RideShare.DAL.Entities;
+using RideShare.DAL.Seeds;
 
 namespace RideShare.DAL
 {
@@ -57,7 +58,9 @@ namespace RideShare.DAL
 
             if (_seedDemoData)
             {
-                // pass
+                CarSeeds.Seed(modelBuilder);
+                RideSeeds.Seed(modelBuilder);
+                UserSeeds.Seed(modelBuilder);
             }
         }
     }

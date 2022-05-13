@@ -30,12 +30,13 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="65"/>
+                            <ColumnDefinition Width="65"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding Id}" />
-                        <Label Grid.Column="1" Width="80" Content="{Binding StartLocation}" />
-                        <Label Grid.Column="2" Width="150" Content="{Binding Destination}" />
+                        <Label Grid.Column="0" Content="{Binding Id}" />
+                        <Label Grid.Column="1" Content="{Binding StartLocation}" />
+                        <Label Grid.Column="2" Content="{Binding Destination}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -60,7 +61,7 @@
         <Label Content="From:" HorizontalAlignment="Left" Margin="157,14,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="To:" HorizontalAlignment="Left" Margin="303,14,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="End:" HorizontalAlignment="Left" Margin="94,14,0,0" VerticalAlignment="Top" FontSize="18" Grid.Column="1"/>
-        <DatePicker SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="407,48,0,0" VerticalAlignment="Top" Height="42" Width="126" Grid.ColumnSpan="2"/>
+        <DatePicker SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="407,48,0,0" VerticalAlignment="Top" Height="42" Width="126" Grid.ColumnSpan="2" IsDropDownOpen="True"/>
         <Label Content="Beginning:" HorizontalAlignment="Left" Margin="424,14,0,0" VerticalAlignment="Top" FontSize="18" Width="96" Grid.ColumnSpan="2"/>
 
     </Grid>

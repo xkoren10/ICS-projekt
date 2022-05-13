@@ -31,8 +31,8 @@ namespace RideShare.App.ViewModels
 
         public RideDetailModel? Model { get; set; }
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.MinValue;
+        public DateTime EndDate { get; set; } = DateTime.MaxValue;
         public string LocationStart { get; set; }
         public string LocationEnd { get; set; }
         public ICommand FilterCommand { get; }
@@ -53,7 +53,7 @@ namespace RideShare.App.ViewModels
             {
                 //error
             }
-            Rides.Add(new RideListModel
+            /*Rides.Add(new RideListModel
                  (
                      Id: Guid.NewGuid(),
                      StartLocation: "Start",
@@ -61,8 +61,8 @@ namespace RideShare.App.ViewModels
                      StartTime: DateTime.Now,
                      EstEndTime: DateTime.Now.AddHours(1),
                      Occupancy: 1
-                 ));
-            /* if (id == Guid.Empty)
+                 ));*/
+             if (id == Guid.Empty)
              {
                  //error
              }
@@ -72,7 +72,7 @@ namespace RideShare.App.ViewModels
              foreach(var item in rides)
              {
                  Rides.Add(item);
-             }*/
+             }
         }
 
         public async Task SaveAsync()
@@ -95,9 +95,9 @@ namespace RideShare.App.ViewModels
 
             foreach (var item in rides)
             {
-                if ((LocationStart != null || LocationStart != "") && item.StartLocation == LocationStart)
+                if (!(LocationStart == null || LocationStart == "") && item.StartLocation != LocationStart)
                     continue;
-                if ((LocationEnd != null || LocationEnd != "") && item.Destination == LocationEnd)
+                if (!(LocationEnd == null || LocationEnd == "") && item.Destination != LocationEnd)
                     continue;
                 if (item.StartTime < StartDate)
                     continue;
