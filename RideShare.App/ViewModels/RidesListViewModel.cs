@@ -37,10 +37,9 @@ namespace RideShare.App.ViewModels
         public string LocationEnd { get; set; }
         public ICommand FilterCommand { get; }
         public ICommand RideSelectedCommand { get; }
-
         public ICommand BackToMainCommand { get; }
 
-        private void RideSelected(RideListModel? ride) => _mediator.Send(new SelectedMessage<RideWrapper> { Id = ride?.Id });
+        private void RideSelected(RideListModel? ride) => _mediator.Send(new ToRideDetailPageMessage<RideWrapper> { Id = ride?.Id });
         RideWrapper? IDetailViewModel<RideWrapper>.Model => throw new NotImplementedException();
 
         private void BackToMainExecute() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
