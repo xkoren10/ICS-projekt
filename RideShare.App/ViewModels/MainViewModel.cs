@@ -19,25 +19,29 @@ namespace RideShare.App.ViewModels
         private readonly IMediator _mediator;
         private readonly IFactory<IProfileViewModel> _profileViewModelFactory;
         private readonly IFactory<ILogScreenViewModel> _logScreenViewModelFactory;
+        private readonly IFactory<INewRideViewModel> _newRideViewModelFactory;
         private readonly IFactory<IMainAreaViewModel> _mainAreaViewModelFactory;
-        //private readonly IFactory<INewRideViewModel> _newRideViewModelFactory;
+        private readonly IFactory<IRidesListViewModel> _rideListViewModelFactory;
 
         public MainViewModel(
             IProfileViewModel profileViewModel,
+            INewRideViewModel newRideViewModel,
             IMediator mediator,
             IFactory<IProfileViewModel> profileDetailViewModelFactory,
             IFactory<ILogScreenViewModel> logScreenDetailViewModelFactory,
-            IFactory<IMainAreaViewModel> mainAreaDetailViewModelFactory
-            //IFactory<INewRideViewModel> newRideViewModelFactory               tu mi to zhadzuje idk how it works
-            )
+            IFactory<INewRideViewModel> newRideViewModelFactory,
+            IFactory<IMainAreaViewModel> mainAreaDetailViewModelFactory,
+            IFactory<IRidesListViewModel> rideListViewModelFactory)
         {
             _mediator = mediator;
             _profileViewModelFactory = profileDetailViewModelFactory;
             _logScreenViewModelFactory = logScreenDetailViewModelFactory;
+            _newRideViewModelFactory = newRideViewModelFactory;
             _mainAreaViewModelFactory = mainAreaDetailViewModelFactory;
-            //_newRideViewModelFactory = newRideViewModelFactory;
-            ProfileViewModel = profileViewModel;
+            _rideListViewModelFactory = rideListViewModelFactory;
 
+            ProfileViewModel = profileViewModel;
+            NewRideViewModel = newRideViewModel;
 
             //listeners
             //  login
@@ -47,12 +51,17 @@ namespace RideShare.App.ViewModels
             mediator.Register<SelectedMessage<UserWrapper>>(UserProfile);
             mediator.Register<OpenMessage<UserWrapper>>(BackToMainPage);
             mediator.Register<SelectedMessage<UserWrapper>>(CancelRide);
+            // new Ride
+            mediator.Register<NewMessage<RideWrapper>>(NewRide);
+            // ride list
+            mediator.Register<OpenMessage<RideWrapper>>(RideList);
             //init startup window
             LoginOpen();
         }
 
        
         public IProfileViewModel ProfileViewModel { get; }
+        public INewRideViewModel NewRideViewModel { get; }
         //views
         public ObservableCollection<IProfileViewModel> ProfileViewModels { get; } = new ObservableCollection<IProfileViewModel>();
         public ObservableCollection<ILogScreenViewModel> LogScreenViewModels { get; } = new ObservableCollection<ILogScreenViewModel>();
@@ -92,6 +101,17 @@ namespace RideShare.App.ViewModels
             ActiveWindow.Clear();
             ActiveWindow.Add(mainAreaDetailViewModel);
         }
+
+        private void RideList(OpenMessage<RideWrapper> _)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var rideListViewModel = _rideListViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(rideListViewModel);
+        }
+
         private void NewUser(NewMessage<UserWrapper> _)
         {
 
@@ -100,6 +120,16 @@ namespace RideShare.App.ViewModels
             var userDetailViewModel = _profileViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(userDetailViewModel);
+        }
+
+        private void NewRide (NewMessage<RideWrapper> _)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var newRideDetailViewModel = _newRideViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(newRideDetailViewModel);
         }
 
         private void UserProfile(SelectedMessage<UserWrapper> _)
@@ -120,7 +150,9 @@ namespace RideShare.App.ViewModels
         private void LoginOpen()
         {
             var userDetailViewModel = _logScreenViewModelFactory.Create();
+          
             ActiveWindow.Add(userDetailViewModel);
+         
         }
     }
 }

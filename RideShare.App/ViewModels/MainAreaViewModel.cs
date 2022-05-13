@@ -22,18 +22,21 @@ namespace RideShare.App.ViewModels
             _mediator = mediator;
 
             OpenProfile = new RelayCommand<UserDetailModel>(UserProfile);
-            OpenNewRide = new RelayCommand<UserDetailModel>(NewRide);
+            OpenNewRide = new RelayCommand<RideDetailModel>(NewRide);
+            OpenRideList = new RelayCommand<RideDetailModel>(RideList);
 
         }
 
         public UserDetailModel? Model { get; set; }
         public ICommand OpenProfile { get; }
         public ICommand OpenNewRide { get; }
+        public ICommand OpenRideList { get; }
 
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
         private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
-        private void NewRide(UserDetailModel? userModel) => _mediator.Send(new SelectedMessage<UserWrapper> { });
+        private void NewRide(RideDetailModel? rideModel) => _mediator.Send(new NewMessage<RideWrapper> { });
+        private void RideList(RideDetailModel? rideModel) => _mediator.Send(new OpenMessage<RideWrapper> { });
 
         private void UserProfile(UserDetailModel? userModel)
         {  
