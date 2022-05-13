@@ -7,7 +7,7 @@
                           xmlns:local="clr-namespace:RideShare.App.Views"
                           mc:Ignorable="d" 
                           d:DesignHeight="450" d:DesignWidth="800"
-                          
+                          d:DataContext="{d:DesignInstance viewModels:NewUserViewModel}"
                          >
     <Grid x:Name="NewUserGrid" Background="White">
         <Grid.ColumnDefinitions>

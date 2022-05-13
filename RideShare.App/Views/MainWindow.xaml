@@ -26,9 +26,23 @@
         <DataTemplate DataType="{x:Type viewModels:NewUserViewModel}">
             <views:NewUserView />
         </DataTemplate>
-
+        <DataTemplate DataType="{x:Type viewModels:RideDetailViewModel}">
+            <views:RideDetailView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:CarDetailViewModel}">
+            <views:CarDetailView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:CarListViewModel}">
             <views:CarListView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:MyRidesViewModel}">
+            <views:MyRidesView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:NewCarViewModel}">
+            <views:NewCarView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:PassengersViewModel}">
+            <views:PassengersView />
         </DataTemplate>
     </Window.Resources>
     <Grid x:Name="grid1">

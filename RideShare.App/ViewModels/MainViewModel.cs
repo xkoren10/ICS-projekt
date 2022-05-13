@@ -24,7 +24,11 @@ namespace RideShare.App.ViewModels
         private readonly IFactory<IRidesListViewModel> _rideListViewModelFactory;
         private readonly IFactory<INewUserViewModel> _newUserViewModelFactory;
         private readonly IFactory<ICarListViewModel> _carListViewModelFactory;
-
+        private readonly IFactory<IRideDetailViewModel> _rideDetailViewModelFactory;
+        private readonly IFactory<ICarDetailViewModel> _carDetailViewModelFactory;
+        private readonly IFactory<IMyRidesViewModel> _myRidesViewModelFactory;
+        private readonly IFactory<INewCarViewModel> _newCarViewModelFactory;
+        private readonly IFactory<IPassengersViewModel> _passengersViewModelFactory;
         public MainViewModel(
             IProfileViewModel profileViewModel,
             INewRideViewModel newRideViewModel,
@@ -35,7 +39,12 @@ namespace RideShare.App.ViewModels
             IFactory<IMainAreaViewModel> mainAreaDetailViewModelFactory,
             IFactory<INewUserViewModel> newUserViewModelFactory,
             IFactory<IRidesListViewModel> rideListViewModelFactory,
-             IFactory<ICarListViewModel> carListViewModelFactory)
+            IFactory<IRideDetailViewModel> rideDetailViewModelFactory,
+            IFactory<ICarDetailViewModel> carDetailViewModelFactory,
+            IFactory<IMyRidesViewModel> myRidesViewModelFactory,
+            IFactory<INewCarViewModel> newCarViewModelFactory,
+            IFactory<IPassengersViewModel> PassengersViewModelFactory,
+            IFactory<ICarListViewModel> carListViewModelFactory)
         {
             _mediator = mediator;
             _profileViewModelFactory = profileDetailViewModelFactory;
@@ -43,8 +52,13 @@ namespace RideShare.App.ViewModels
             _newRideViewModelFactory = newRideViewModelFactory;
             _mainAreaViewModelFactory = mainAreaDetailViewModelFactory;
             _rideListViewModelFactory = rideListViewModelFactory;
+            _rideDetailViewModelFactory = rideDetailViewModelFactory;
             _newUserViewModelFactory = newUserViewModelFactory;
+            _passengersViewModelFactory = PassengersViewModelFactory;
+            _newCarViewModelFactory = newCarViewModelFactory;
             _carListViewModelFactory = carListViewModelFactory;
+            _carDetailViewModelFactory = carDetailViewModelFactory;
+            _myRidesViewModelFactory = myRidesViewModelFactory;
 
             ProfileViewModel = profileViewModel;
             NewRideViewModel = newRideViewModel;
@@ -60,10 +74,18 @@ namespace RideShare.App.ViewModels
             mediator.Register<ToNewRidePageMessage<RideWrapper>>(NewRide);
             // ride list
             mediator.Register<ToRideListPageMessage<RideWrapper>>(RideList);
+            mediator.Register<ToRideDetailPageMessage<RideWrapper>>(ViewRideDetail);
             // new user
             mediator.Register<BackToLogPageMessage<UserWrapper>>(BackToLoginPage);
             //profile
             mediator.Register<ToCarListPageMessage<CarWrapper>>(ViewCarList);
+            //car list
+            mediator.Register<ToCarDetailPageMessage<CarWrapper>>(ViewCarDetail);
+            mediator.Register<ToNewCarPageMessage<CarWrapper>>(ViewNewCar);
+            //my rides
+            mediator.Register<ToMyRidesPageMessage<RideWrapper>>(ViewMyRides);
+            mediator.Register<ToPassengersPageMessage<UserWrapper>>(ViewPassengers);
+
             //init startup window
             LoginOpen();
         }
@@ -113,6 +135,26 @@ namespace RideShare.App.ViewModels
             ActiveWindow.Add(loginViewModel);
         }
 
+        private void ViewNewCar(ToNewCarPageMessage<CarWrapper> message)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var newCarViewModel = _newCarViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(newCarViewModel);
+        }
+
+        private void ViewPassengers(ToPassengersPageMessage<UserWrapper> message)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var passengersViewModel = _passengersViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(passengersViewModel);
+        }
+
         private void ViewCarList(ToCarListPageMessage<CarWrapper> message)
         {
 
@@ -121,6 +163,36 @@ namespace RideShare.App.ViewModels
             var carListModel = _carListViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(carListModel);
+        }
+
+        private void ViewMyRides(ToMyRidesPageMessage<RideWrapper> message)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var myRidesModel = _myRidesViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(myRidesModel);
+        }
+
+        private void ViewCarDetail(ToCarDetailPageMessage<CarWrapper> message)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var carDetailModel = _carDetailViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(carDetailModel);
+        }
+
+        private void ViewRideDetail(ToRideDetailPageMessage<RideWrapper> message)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var rideDetailModel = _rideDetailViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(rideDetailModel);
         }
 
         private void RideList(ToRideListPageMessage<RideWrapper> message)

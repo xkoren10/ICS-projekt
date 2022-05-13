@@ -7,10 +7,10 @@
                           xmlns:local="clr-namespace:RideShare.App.Views"
                           mc:Ignorable="d" 
                           d:DesignHeight="450" d:DesignWidth="800"
-                          
+                          d:DataContext="{d:DesignInstance viewModels:MyRidesViewModel}"
                          >
     <Grid x:Name="MyRidesGrid" Background="White">
-        <Button x:Name="ButtonBack"  HorizontalAlignment="Left" Height="73" Margin="16,10,0,0" VerticalAlignment="Top" Width="103">
+        <Button x:Name="ButtonBack" Command="{Binding BackToMainCommand}" HorizontalAlignment="Left" Height="73" Margin="16,10,0,0" VerticalAlignment="Top" Width="103">
             <Image Source="/Icons/back_icon.png">
             </Image>
         </Button>

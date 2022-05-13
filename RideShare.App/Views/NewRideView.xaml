@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="512,20,0,0" VerticalAlignment="Top" Width="158" Source="/Icons/car_icon.png" Grid.Column="1"/>
         <Button x:Name="SelectCarButton" Content="Select Car" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="54" Width="150" Margin="516,197,0,0" Grid.Column="1"/>
-        <Button x:Name="SaveChanges" HorizontalAlignment="Left" Margin="577,328,0,0" VerticalAlignment="Top" Height="98" Width="129" Grid.Column="1">
+        <Button x:Name="SaveChanges" HorizontalAlignment="Left" Margin="526,303,0,0" VerticalAlignment="Top" Height="98" Width="130" Grid.Column="1">
             <StackPanel x:Name="SaveButton" Orientation="Vertical" Height="94" Width="126">
                 <Image Source="/Icons/save_icon.png" Height="80" Width="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Save"/></TextBlock>
