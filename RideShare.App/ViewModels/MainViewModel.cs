@@ -75,6 +75,7 @@ namespace RideShare.App.ViewModels
             // ride list
             mediator.Register<ToRideListPageMessage<RideWrapper>>(RideList);
             mediator.Register<ToRideDetailPageMessage<RideWrapper>>(ViewRideDetail);
+           
             // new user
             mediator.Register<BackToLogPageMessage<UserWrapper>>(BackToLoginPage);
             //profile

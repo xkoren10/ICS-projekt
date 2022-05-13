@@ -8,26 +8,16 @@
                           mc:Ignorable="d" 
                           d:DesignHeight="450" d:DesignWidth="800"
                           d:DataContext="{d:DesignInstance viewModels:RideDetailViewModel}">
-                         
+
     <Grid>
         <Grid x:Name="GridRideDetails" Background="White">
             <TextBlock x:Name="TextDriverName" HorizontalAlignment="Left" Height="20" Margin="65,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" FontSize="16"/>
-            <Button x:Name="ButtonDriver" Command="{Binding OpenProfile}" HorizontalAlignment="Left" Margin="295,245,0,0" VerticalAlignment="Top" Height="166" Width="170" FontSize="24" VerticalContentAlignment="Bottom">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="/Icons/user_icon.png" Height="100" />
-                    <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Driver"/></TextBlock>
-                </StackPanel>
-            </Button>
-            <Button x:Name="ButtonCar"  Command="{Binding OpenCarDetail}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="166" Width="158" FontSize="24" VerticalContentAlignment="Bottom" Margin="58,245,0,0">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="/Icons/car_icon.png" Height="100" />
-                    <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Car"/></TextBlock>
-                </StackPanel>
-            </Button>
-            <Label x:Name="LabelFrom" Content="From: " HorizontalAlignment="Left" Margin="295,73,0,0" VerticalAlignment="Top" Height="28" Width="105" FontSize="16"/>
-            <Label x:Name="LabelTo" Content="To: " HorizontalAlignment="Left" Margin="295,165,0,0" VerticalAlignment="Top" Height="28" Width="105" FontSize="16"/>
-            <Label x:Name="LabelTime" Content="Time of Departure: " HorizontalAlignment="Left" Margin="520,73,0,0" VerticalAlignment="Top" Height="40" Width="148" FontSize="16"/>
-            <Label x:Name="LabelSeats" Content="Free seats: " HorizontalAlignment="Left" Margin="552,171,0,0" VerticalAlignment="Top" Height="33" Width="116" FontSize="16"/>
+
+            <Image Source="/Icons/car_icon.png" x:Name="ImageCar" HorizontalAlignment="Left" Height="139" Margin="56,232,0,0" VerticalAlignment="Top" Width="156"/>
+            <Label x:Name="LabelFrom" Content="From: " HorizontalAlignment="Left" Margin="229,46,0,0" VerticalAlignment="Top" Height="28" Width="105" FontSize="16"/>
+            <Label x:Name="LabelTo" Content="To: " HorizontalAlignment="Left" Margin="229,122,0,0" VerticalAlignment="Top" Height="28" Width="105" FontSize="16"/>
+            <Label x:Name="LabelTime" Content="Time of Departure: " HorizontalAlignment="Left" Margin="510,52,0,0" VerticalAlignment="Top" Height="40" Width="148" FontSize="16"/>
+            <Label x:Name="LabelSeats" Content="Free seats: " HorizontalAlignment="Left" Margin="526,114,0,0" VerticalAlignment="Top" Height="33" Width="116" FontSize="16"/>
             <Button x:Name="ButtonAttend" HorizontalAlignment="Left" Height="102" Margin="631,320,0,0" VerticalAlignment="Top" Width="139">
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icons/tick_icon.png" Height="57" />
@@ -41,6 +31,9 @@
 
                 </StackPanel>
             </Button>
+            <Label x:Name="CarName" Content="Type: " HorizontalAlignment="Left" Margin="56,371,0,0" VerticalAlignment="Top" Height="40" Width="104" FontSize="16"/>
+            <Image x:Name="DriverPicture" Source="/Icons/user_icon.png"  HorizontalAlignment="Left" Height="139" Margin="330,227,0,0" VerticalAlignment="Top" Width="156"/>
+            <Label x:Name="DriverName" Content="Name: " HorizontalAlignment="Left" Margin="321,371,0,0" VerticalAlignment="Top" Height="40" Width="104" FontSize="16"/>
         </Grid>
 
     </Grid>
