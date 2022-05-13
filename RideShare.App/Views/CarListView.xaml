@@ -12,7 +12,7 @@
 
     <Grid>
         <Grid x:Name="GridCars" Background="White"/>
-        <Button x:Name="ButtonAdd"  HorizontalAlignment="Left" Height="73" Margin="58,276,0,0" VerticalAlignment="Top" Width="103">
+        <Button x:Name="ButtonAdd" Command="{Binding AddNewCar}"  HorizontalAlignment="Left" Height="73" Margin="58,276,0,0" VerticalAlignment="Top" Width="103">
             <StackPanel>
                 <Image Source="/Icons/add_icon.png" Height="50"/>
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Add Car

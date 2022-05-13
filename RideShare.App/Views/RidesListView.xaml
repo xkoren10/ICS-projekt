@@ -42,9 +42,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="ButtonBack"  Command="{Binding BackToMainCommand}" Height="55" Width="75" Margin="20,40,395,355">
+        <Button x:Name="ButtonBack"  Command="{Binding BackToMainCommand}" Height="55" Width="75" Margin="10,35,405,360" >
             <StackPanel Orientation="Vertical" Height="55" Width="75">
-                <Image Source="/Icons/back_icon.png" Height="55" Width="75" />
+                <Image Source="/Icons/back_icon.png" Height="47" Width="65" />
 
             </StackPanel>
         </Button>

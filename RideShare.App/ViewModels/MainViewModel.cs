@@ -69,7 +69,7 @@ namespace RideShare.App.ViewModels
             //listeners
             //  login
             mediator.Register<OpenMessage<UserWrapper>>(UserLogin);
-            mediator.Register<NewMessage<UserWrapper>>(NewUser);
+            mediator.Register<ToNewUserPageMessage<UserWrapper>>(NewUser);
             //  mainArea
             mediator.Register<ToProfilePageMessage<UserWrapper>>(UserProfile);
             mediator.Register<BackToMainPageMessage<UserWrapper>>(BackToMainPage);
@@ -209,7 +209,7 @@ namespace RideShare.App.ViewModels
             ActiveWindow.Add(rideListViewModel);
         }
 
-        private void NewUser(NewMessage<UserWrapper> _)
+        private void NewUser(ToNewUserPageMessage<UserWrapper> _)
         {
 
             //ActiveUser = (Guid)message.Id;
