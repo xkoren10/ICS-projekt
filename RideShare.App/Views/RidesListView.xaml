@@ -18,8 +18,8 @@
             <ColumnDefinition Width="31*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="RidesListBox"
-             ItemsSource="{Binding Rides}" Grid.ColumnSpan="2" Margin="21,130,21,22">
+        <ListBox  x:Name="RidesListBox"
+             ItemsSource="{Binding Rides}" Grid.ColumnSpan="2" Margin="21,130,21,22" >
             <interactions:Interaction.Triggers>
                 <interactions:EventTrigger EventName="SelectionChanged">
                     <interactions:InvokeCommandAction Command="{Binding RideSelectedCommand}"

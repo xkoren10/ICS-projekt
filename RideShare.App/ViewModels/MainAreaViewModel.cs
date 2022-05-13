@@ -27,7 +27,7 @@ namespace RideShare.App.ViewModels
             OpenMyRides = new RelayCommand<RideDetailModel>(MyRides);
 
         }
-
+        
         public UserDetailModel? Model { get; set; }
         public ICommand OpenProfile { get; }
         public ICommand OpenNewRide { get; }

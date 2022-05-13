@@ -61,17 +61,17 @@ namespace RideShare.App.ViewModels
                      EstEndTime: DateTime.Now.AddHours(1),
                      Occupancy: 1
                  ));*/
-             if (id == Guid.Empty)
-             {
-                 //error
-             }
-             Rides.Clear();
-             var rides = await _rideFacade.GetAsync();
-
-             foreach(var item in rides)
-             {
-                 Rides.Add(item);
-             }
+            if (id == Guid.Empty)
+            {
+                //error
+            }
+            Rides.Clear();
+            var rides = await _rideFacade.GetAsync();
+            
+            foreach(var item in rides)
+            {
+                Rides.Add(item);
+            }
         }
 
         public async Task SaveAsync()

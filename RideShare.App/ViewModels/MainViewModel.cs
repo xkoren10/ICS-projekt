@@ -16,6 +16,7 @@ namespace RideShare.App.ViewModels
     public class MainViewModel : ViewModelBase
     {
         //private readonly IFactory<IProfileViewModel> _profileViewModelFactory;
+        private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
         private readonly IFactory<IProfileViewModel> _profileViewModelFactory;
         private readonly IFactory<ILogScreenViewModel> _logScreenViewModelFactory;
@@ -30,6 +31,7 @@ namespace RideShare.App.ViewModels
         private readonly IFactory<INewCarViewModel> _newCarViewModelFactory;
         private readonly IFactory<IPassengersViewModel> _passengersViewModelFactory;
         public MainViewModel(
+            UserFacade userFacade,
             IProfileViewModel profileViewModel,
             INewRideViewModel newRideViewModel,
             IMediator mediator,
@@ -47,6 +49,7 @@ namespace RideShare.App.ViewModels
             IFactory<ICarListViewModel> carListViewModelFactory)
         {
             _mediator = mediator;
+            _userFacade = userFacade;
             _profileViewModelFactory = profileDetailViewModelFactory;
             _logScreenViewModelFactory = logScreenDetailViewModelFactory;
             _newRideViewModelFactory = newRideViewModelFactory;
@@ -103,12 +106,12 @@ namespace RideShare.App.ViewModels
         public IProfileViewModel? SelectedProfileViewModel { get; set; }
         public ProfileViewModel ProfileModel { get; }
 
-        public Guid ActiveUser { get; set; }
+        public UserDetailModel ActiveUser { get; set; }
         //private void UserLogin(SelectedMessage<UserWrapper> message)
-        private void UserLogin(OpenMessage<UserWrapper> message)
+        private async void UserLogin(OpenMessage<UserWrapper> message)
         {
-
-            //ActiveUser = (Guid)message.Id;
+            
+            ActiveUser = await _userFacade.GetAsync(message.Id);
 
             var mainAreaDetailViewModel = _mainAreaViewModelFactory.Create();
             ActiveWindow.Clear();
@@ -231,7 +234,7 @@ namespace RideShare.App.ViewModels
             
 
             var userDetailViewModel =
-                ProfileViewModels.SingleOrDefault(vm => vm.Model?.Id == ActiveUser);
+                ProfileViewModels.SingleOrDefault(vm => vm.Model?.Id == ActiveUser.Id);
             if (userDetailViewModel == null)
             {
                 //maybe error later, now empty view before data implementation

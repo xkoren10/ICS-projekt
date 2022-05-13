@@ -7,6 +7,7 @@ using RideShare.App.Commands;
 using RideShare.App.Services;
 using RideShare.App.Messages;
 using RideShare.App.Wrappers;
+using System.Collections.ObjectModel;
 
 namespace RideShare.App.ViewModels
 {
@@ -21,27 +22,37 @@ namespace RideShare.App.ViewModels
             _userFacade = userFacade;
             _mediator = mediator;
 
+            UserSelectedCommand = new RelayCommand<UserListModel>(UserSelected);
             LoginCommand = new RelayCommand<UserDetailModel>(UserLogin);
             
             NewUserCommand = new RelayCommand(NewUser);
+            LoadAsync(Guid.NewGuid());
         }
 
-        public UserDetailModel? Model { get; set; }
+        public ObservableCollection<UserListModel> Users { get; set; } = new();
+        public UserListModel? Model { get; set; }
         public ICommand LoginCommand { get; }
         public ICommand NewUserCommand { get; }
+        public ICommand UserSelectedCommand { get; }
 
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
-
+        
         private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
 
+        private void UserSelected(UserListModel? user)
+        {
+            Model = user;
+        }
+
         private void UserLogin(UserDetailModel? userModel)
-        {  
-            if (userModel is not null)
+        {
+            
+            if (Model is not null)
             {
-                _mediator.Send(new OpenMessage<UserWrapper> { Id = userModel.Id });
+                _mediator.Send(new OpenMessage<UserWrapper> { Id = Model.Id });
             }
             //tmp
-            _mediator.Send(new OpenMessage<UserWrapper> { });
+            //_mediator.Send(new OpenMessage<UserWrapper> { });
         }
         
         private void NewUser() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());
@@ -52,7 +63,13 @@ namespace RideShare.App.ViewModels
             {
                 //error
             }
-            Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+            Users.Clear();
+            var rides = await _userFacade.GetAsync();
+
+            foreach (var item in rides)
+            {
+                Users.Add(item);
+            }
         }
 
         public async Task SaveAsync()
@@ -62,7 +79,7 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            Model = await _userFacade.SaveAsync(Model);
+            //Model = await _userFacade.SaveAsync(Model);
         }
 
         Task IDetailViewModel<UserWrapper>.DeleteAsync()
