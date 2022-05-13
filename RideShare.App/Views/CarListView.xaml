@@ -12,20 +12,20 @@
 
     <Grid>
         <Grid x:Name="GridCars" Background="White"/>
-        <Button x:Name="ButtonAdd"  HorizontalAlignment="Left" Height="73" Margin="58,342,0,0" VerticalAlignment="Top" Width="103">
+        <Button x:Name="ButtonAdd"  HorizontalAlignment="Left" Height="73" Margin="58,276,0,0" VerticalAlignment="Top" Width="103">
             <StackPanel>
                 <Image Source="/Icons/add_icon.png" Height="50"/>
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Add Car
-            </TextBlock>
+                </TextBlock>
             </StackPanel>
 
         </Button>
-        <Button x:Name="ButtonBack"  HorizontalAlignment="Left" Height="73" Margin="58,50,0,0" VerticalAlignment="Top" Width="103">
+        <Button x:Name="ButtonBack" Command="{Binding BackToProfile}" HorizontalAlignment="Left" Height="73" Margin="58,50,0,0" VerticalAlignment="Top" Width="103">
             <Image Source="/Icons/back_icon.png">
             </Image>
         </Button>
 
-        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=10}" Width="571" Margin="206,53,23,19"  >
+        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=10}" Width="571" Margin="189,16,40,56"  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="538">

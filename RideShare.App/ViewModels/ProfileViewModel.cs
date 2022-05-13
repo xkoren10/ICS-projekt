@@ -22,6 +22,7 @@ namespace RideShare.App.ViewModels
             _mediator = mediator;
             EditUserProfile = new RelayCommand(UserEdit);
             BackToMainCommand = new RelayCommand(BackToMainExecute);
+            ViewCarListCommand = new RelayCommand(ViewCarList);
 
         }
 
@@ -29,11 +30,13 @@ namespace RideShare.App.ViewModels
         public ICommand EditUserProfile { get; }
 
         public ICommand BackToMainCommand { get; }
+        public ICommand ViewCarListCommand { get; }
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
-        private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
+        private void UserEdit() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());
 
-        private void BackToMainExecute() => _mediator.Send(new OpenMessage<UserWrapper> { });
+        private void BackToMainExecute() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
+        private void ViewCarList() => _mediator.Send(new ToCarListPageMessage<CarWrapper> { });
 
 
 

@@ -17,4 +17,5 @@ namespace RideShare.App.Messages
         public Guid? TargetId { get; init; }
         public T? Model { get; init; }
     }
+
 }

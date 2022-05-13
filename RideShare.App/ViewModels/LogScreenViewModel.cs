@@ -44,7 +44,7 @@ namespace RideShare.App.ViewModels
             _mediator.Send(new OpenMessage<UserWrapper> { });
         }
         
-        private void NewUser() => _mediator.Send(new NewMessage<UserWrapper>());
+        private void NewUser() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());
 
         public async Task LoadAsync(Guid id)
         {

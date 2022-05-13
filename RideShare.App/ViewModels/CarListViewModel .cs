@@ -11,30 +11,30 @@ using RideShare.App.Wrappers;
 namespace RideShare.App.ViewModels
 {
 
-    public class RidesListViewModel : ViewModelBase, IRidesListViewModel
+    public class CarListViewModel : ViewModelBase, ICarListViewModel
     {
-        private readonly RideFacade _rideFacade;
+        private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
 
-        public RidesListViewModel(RideFacade rideFacade, IMediator mediator)
+        public CarListViewModel(CarFacade carFacade, IMediator mediator)
         {
-            _rideFacade = rideFacade;
+            _carFacade = carFacade;
             _mediator = mediator;
             // doot doot search/filter
-            BackToMainCommand = new RelayCommand(BackToMainExecute);
+            BackToProfile = new RelayCommand(BackToProfileExecute);
 
         }
 
-        public RideDetailModel? Model { get; set; }
+        public CarDetailModel? Model { get; set; }
         public ICommand EditUserProfile { get; }
 
-        public ICommand BackToMainCommand { get; }
-        RideWrapper? IDetailViewModel<RideWrapper>.Model => throw new NotImplementedException();
+        public ICommand BackToProfile { get; }
+        CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
-        private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
+        private void UserEdit() => _mediator.Send(new NewMessage<CarWrapper>());
 
-        private void BackToMainExecute() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
-
+        private void BackToProfileExecute() => _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
+        
 
 
         public async Task LoadAsync(Guid id)
@@ -43,7 +43,7 @@ namespace RideShare.App.ViewModels
             {
                 //error
             }
-            Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
+            Model = await _carFacade.GetAsync(id) ?? CarDetailModel.Empty;
         }
 
         public async Task SaveAsync()
@@ -53,15 +53,15 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            Model = await _rideFacade.SaveAsync(Model);
+            Model = await _carFacade.SaveAsync(Model);
         }
 
-        Task IDetailViewModel<RideWrapper>.DeleteAsync()
+        Task IDetailViewModel<CarWrapper>.DeleteAsync()
         {
             throw new NotImplementedException();
         }
 
-        Task IDetailViewModel<RideWrapper>.SaveAsync()
+        Task IDetailViewModel<CarWrapper>.SaveAsync()
         {
             throw new NotImplementedException();
         }

@@ -33,7 +33,7 @@ namespace RideShare.App.ViewModels
 
        
 
-        private void CancelRide() => _mediator.Send(new OpenMessage<UserWrapper> { });
+        private void CancelRide() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
 
 
 

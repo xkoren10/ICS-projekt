@@ -19,7 +19,7 @@
             <TextBox x:Name="TextSurname" Text="" HorizontalAlignment="Left" Height="35" Margin="92,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" RenderTransformOrigin="0.5,0.641" FontSize="16" ForceCursor="True" IsEnabled="False" Grid.ColumnSpan="2"/>
             <TextBox x:Name="TextContact" Text="" HorizontalAlignment="Left" Height="32" Margin="92,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" AcceptsReturn="True" FontSize="16" IsEnabled="False" Grid.ColumnSpan="2"/>
 
-            <Button x:Name="ButtonCar" HorizontalAlignment="Left" Height="80" Margin="132,304,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2">
+            <Button x:Name="ButtonCar" Command="{Binding ViewCarListCommand}" HorizontalAlignment="Left" Height="80" Margin="132,304,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2">
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icons/car_icon.png" Height="57" />
                     <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="My cars"/></TextBlock>

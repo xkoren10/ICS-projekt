@@ -35,8 +35,8 @@ namespace RideShare.App.ViewModels
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
         private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
-        private void NewRide(RideDetailModel? rideModel) => _mediator.Send(new NewMessage<RideWrapper> { });
-        private void RideList(RideDetailModel? rideModel) => _mediator.Send(new OpenMessage<RideWrapper> { });
+        private void NewRide(RideDetailModel? rideModel) => _mediator.Send(new ToNewRidePageMessage<RideWrapper> { });
+        private void RideList(RideDetailModel? rideModel) => _mediator.Send(new ToRideListPageMessage<RideWrapper> { });
 
         private void UserProfile(UserDetailModel? userModel)
         {  
@@ -45,7 +45,7 @@ namespace RideShare.App.ViewModels
                // _mediator.Send(new SelectedMessage<UserWrapper> { Id = userModel.Id });
             }
             //later send user id ^^
-            _mediator.Send(new SelectedMessage<UserWrapper> { });
+            _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
         }
 
         private void NewUser() => _mediator.Send(new NewMessage<UserWrapper>());

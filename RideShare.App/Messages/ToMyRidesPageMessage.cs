@@ -2,7 +2,7 @@
 
 namespace RideShare.App.Messages
 {
-    public record OpenMessage<T> : Message<T>
+    public record ToMyRidesPageMessage<T> : Message<T>
         where T : IModel
     {
     }

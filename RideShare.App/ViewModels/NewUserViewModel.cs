@@ -31,9 +31,9 @@ namespace RideShare.App.ViewModels
         public ICommand BackToLoginCommand { get; }
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
-        private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
+        private void UserEdit() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());
 
-        private void BackToLoginExecute() => _mediator.Send(new OpenMessage<UserWrapper> { });
+        private void BackToLoginExecute() => _mediator.Send(new BackToLogPageMessage<UserWrapper> { });
 
 
 
