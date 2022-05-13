@@ -69,6 +69,7 @@ namespace RideShare.App
             services.AddFactory<IProfileViewModel, ProfileViewModel>();
             services.AddFactory<IMainAreaViewModel, MainAreaViewModel>();
             services.AddFactory<IRidesListViewModel, RidesListViewModel>();
+            services.AddFactory<INewUserViewModel, NewUserViewModel>();
         }
         protected override async void OnStartup(StartupEventArgs e)
         {

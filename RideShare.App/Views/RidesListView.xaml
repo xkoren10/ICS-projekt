@@ -52,6 +52,10 @@
         <Label Content="From:" HorizontalAlignment="Left" Margin="166,14,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="To:" HorizontalAlignment="Left" Margin="384,14,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="62,14,0,0" VerticalAlignment="Top" Grid.Column="1" FontSize="18"/>
-
+        <Button x:Name="ButtonBack"  Command="{Binding BackToMainCommand}" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Height="75" Width="95">
+            <StackPanel Orientation="Vertical" Height="77" Width="97">
+                <Image Source="/Icons/back_icon.png" Height="71" Width="82" />
+            </StackPanel>
+        </Button>
     </Grid>
 </local:UserControlBase>

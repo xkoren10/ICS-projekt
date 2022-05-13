@@ -22,6 +22,7 @@ namespace RideShare.App.ViewModels
         private readonly IFactory<INewRideViewModel> _newRideViewModelFactory;
         private readonly IFactory<IMainAreaViewModel> _mainAreaViewModelFactory;
         private readonly IFactory<IRidesListViewModel> _rideListViewModelFactory;
+        private readonly IFactory<INewUserViewModel> _newUserViewModelFactory;
 
         public MainViewModel(
             IProfileViewModel profileViewModel,
@@ -31,6 +32,7 @@ namespace RideShare.App.ViewModels
             IFactory<ILogScreenViewModel> logScreenDetailViewModelFactory,
             IFactory<INewRideViewModel> newRideViewModelFactory,
             IFactory<IMainAreaViewModel> mainAreaDetailViewModelFactory,
+            IFactory<INewUserViewModel> newUserViewModelFactory,
             IFactory<IRidesListViewModel> rideListViewModelFactory)
         {
             _mediator = mediator;
@@ -39,6 +41,7 @@ namespace RideShare.App.ViewModels
             _newRideViewModelFactory = newRideViewModelFactory;
             _mainAreaViewModelFactory = mainAreaDetailViewModelFactory;
             _rideListViewModelFactory = rideListViewModelFactory;
+            _newUserViewModelFactory = newUserViewModelFactory;
 
             ProfileViewModel = profileViewModel;
             NewRideViewModel = newRideViewModel;
@@ -55,6 +58,8 @@ namespace RideShare.App.ViewModels
             mediator.Register<NewMessage<RideWrapper>>(NewRide);
             // ride list
             mediator.Register<OpenMessage<RideWrapper>>(RideList);
+            // new user
+            mediator.Register<OpenMessage<UserWrapper>>(BackToLoginPage);
             //init startup window
             LoginOpen();
         }
@@ -100,6 +105,16 @@ namespace RideShare.App.ViewModels
             var mainAreaDetailViewModel = _mainAreaViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(mainAreaDetailViewModel);
+        }
+
+        private void BackToLoginPage(OpenMessage<UserWrapper> message)
+        {
+
+            //ActiveUser = (Guid)message.Id;
+
+            var loginViewModel = _logScreenViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(loginViewModel);
         }
 
         private void RideList(OpenMessage<RideWrapper> _)

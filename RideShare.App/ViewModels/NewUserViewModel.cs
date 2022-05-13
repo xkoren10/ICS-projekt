@@ -11,29 +11,29 @@ using RideShare.App.Wrappers;
 namespace RideShare.App.ViewModels
 {
 
-    public class RidesListViewModel : ViewModelBase, IRidesListViewModel
+    public class NewUserViewModel : ViewModelBase, INewUserViewModel
     {
-        private readonly RideFacade _rideFacade;
+        private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
 
-        public RidesListViewModel(RideFacade rideFacade, IMediator mediator)
+        public NewUserViewModel(UserFacade userFacade, IMediator mediator)
         {
-            _rideFacade = rideFacade;
+            _userFacade = userFacade;
             _mediator = mediator;
-            // doot doot search/filter
-            BackToMainCommand = new RelayCommand(BackToMainExecute);
+            EditUserProfile = new RelayCommand(UserEdit);
+            BackToLoginCommand = new RelayCommand(BackToLoginExecute);
 
         }
 
-        public RideDetailModel? Model { get; set; }
+        public UserDetailModel? Model { get; set; }
         public ICommand EditUserProfile { get; }
 
-        public ICommand BackToMainCommand { get; }
-        RideWrapper? IDetailViewModel<RideWrapper>.Model => throw new NotImplementedException();
+        public ICommand BackToLoginCommand { get; }
+        UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
         private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
 
-        private void BackToMainExecute() => _mediator.Send(new OpenMessage<UserWrapper> { });
+        private void BackToLoginExecute() => _mediator.Send(new OpenMessage<UserWrapper> { });
 
 
 
@@ -43,9 +43,9 @@ namespace RideShare.App.ViewModels
             {
                 //error
             }
-            Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
+            Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
         }
-
+        
         public async Task SaveAsync()
         {
             if (Model == null)
@@ -53,15 +53,15 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            Model = await _rideFacade.SaveAsync(Model);
+            Model = await _userFacade.SaveAsync(Model);
         }
 
-        Task IDetailViewModel<RideWrapper>.DeleteAsync()
+        Task IDetailViewModel<UserWrapper>.DeleteAsync()
         {
             throw new NotImplementedException();
         }
 
-        Task IDetailViewModel<RideWrapper>.SaveAsync()
+        Task IDetailViewModel<UserWrapper>.SaveAsync()
         {
             throw new NotImplementedException();
         }

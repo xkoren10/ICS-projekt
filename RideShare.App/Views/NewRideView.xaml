@@ -22,12 +22,6 @@
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Save"/></TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="DiscardChanges"  Command ="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Height="109" Width="129" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Vertical" Height="94" Width="126">
-                <Image Source="/Icons/remove_icon.png" Height="80" Width="100" />
-                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Cancel"/></TextBlock>
-            </StackPanel>
-        </Button>
         <Label x:Name="StartLocation" Content="From:" HorizontalAlignment="Left" Margin="183,33,0,0" VerticalAlignment="Top" Height="33" Width="186" FontSize="18" Grid.Column="1"/>
             <TextBox x:Name="StartBox" HorizontalAlignment="Left" Margin="210,71,0,0" TextWrapping="Wrap" Text="SamplePlace" VerticalAlignment="Top" Width="159" Height="31" Grid.Column="1"/>
         <Label x:Name="Destination" Content="To:" HorizontalAlignment="Left" Margin="183,125,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18" Grid.Column="1"/>
@@ -38,5 +32,10 @@
         <DatePicker x:Name="DepartureDate" HorizontalAlignment="Left" Margin="88,245,0,0" VerticalAlignment="Top" Height="29" Width="154" Grid.Column="1"/>
         <Label x:Name="Arrival" Content="Arrival:" HorizontalAlignment="Left" Margin="342,212,0,0" VerticalAlignment="Top" Height="34" Width="118" FontSize="18" Grid.Column="1"/>
         <DatePicker x:Name="ArrivalDate" HorizontalAlignment="Left" Margin="290,245,0,0" VerticalAlignment="Top" Height="29" Width="170" Grid.Column="1"/>
+        <Button x:Name="ButtonBack"  Command="{Binding CancelNewRide}" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Height="75" Width="95" Panel.ZIndex="10">
+            <StackPanel Orientation="Vertical" Height="77" Width="97">
+                <Image Source="/Icons/back_icon.png" Height="71" Width="82" />
+            </StackPanel>
+        </Button>
     </Grid>
 </local:UserControlBase >

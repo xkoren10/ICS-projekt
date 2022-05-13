@@ -23,6 +23,9 @@
         <DataTemplate DataType="{x:Type viewModels:RidesListViewModel}">
             <views:RidesListView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:NewUserViewModel}">
+            <views:NewUserView />
+        </DataTemplate>
     </Window.Resources>
     <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>
