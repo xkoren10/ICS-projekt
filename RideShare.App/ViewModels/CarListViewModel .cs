@@ -22,16 +22,16 @@ namespace RideShare.App.ViewModels
             _mediator = mediator;
             // doot doot search/filter
             BackToProfile = new RelayCommand(BackToProfileExecute);
-
+            AddNewCar = new RelayCommand(NewCarAdd);
         }
 
         public CarDetailModel? Model { get; set; }
-        public ICommand EditUserProfile { get; }
+        public ICommand AddNewCar { get; }
 
         public ICommand BackToProfile { get; }
         CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
-        private void UserEdit() => _mediator.Send(new NewMessage<CarWrapper>());
+        private void NewCarAdd() => _mediator.Send(new ToNewCarPageMessage<CarWrapper>());
 
         private void BackToProfileExecute() => _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
         

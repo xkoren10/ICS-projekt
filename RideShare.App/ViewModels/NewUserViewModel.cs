@@ -21,14 +21,14 @@ namespace RideShare.App.ViewModels
             _userFacade = userFacade;
             _mediator = mediator;
             EditUserProfile = new RelayCommand(UserEdit);
-            BackToLoginCommand = new RelayCommand(BackToLoginExecute);
+            BackToLogin = new RelayCommand(BackToLoginExecute);
 
         }
 
         public UserDetailModel? Model { get; set; }
         public ICommand EditUserProfile { get; }
 
-        public ICommand BackToLoginCommand { get; }
+        public ICommand BackToLogin { get; }
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
         private void UserEdit() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());

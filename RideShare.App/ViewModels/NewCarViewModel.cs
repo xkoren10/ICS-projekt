@@ -21,13 +21,13 @@ namespace RideShare.App.ViewModels
             _carFacade = carFacade;
             _mediator = mediator;
 
-            BackToCarListPage = new RelayCommand<CarDetailModel>(ToCarList);
+            BackToCarListCommand = new RelayCommand<CarDetailModel>(ToCarList);
 
 
         }
 
         public CarDetailModel? Model { get; set; }
-        public ICommand BackToCarListPage { get; }
+        public ICommand BackToCarListCommand { get; }
 
         CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
