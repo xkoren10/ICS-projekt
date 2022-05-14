@@ -7,6 +7,7 @@ using RideShare.App.Commands;
 using RideShare.App.Services;
 using RideShare.App.Messages;
 using RideShare.App.Wrappers;
+using Microsoft.Win32;
 
 namespace RideShare.App.ViewModels
 {
@@ -22,20 +23,44 @@ namespace RideShare.App.ViewModels
             _mediator = mediator;
             EditUserProfile = new RelayCommand(UserEdit);
             BackToLogin = new RelayCommand(BackToLoginExecute);
-
+            AddUser = new RelayCommand(SaveUser);
+            ChangePicture = new RelayCommand(SetImage);
+            Model.ImagePath = "/Icons/user_icon.png";
         }
 
-        public UserDetailModel? Model { get; set; }
+        public UserDetailModel? Model { get; set; } = UserDetailModel.Empty;
         public ICommand EditUserProfile { get; }
-
+        public ICommand AddUser { get; }
+        public ICommand ChangePicture { get; }
         public ICommand BackToLogin { get; }
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
+
+        private void SaveUser()
+        {
+            SaveAsync();
+        }
 
         private void UserEdit() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());
 
         private void BackToLoginExecute() => _mediator.Send(new BackToLogPageMessage<UserWrapper> { });
 
+        private void SetImage()
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "Document"; // Default file name
+            dialog.DefaultExt = ".jpg"; // Default file extension
+            dialog.Filter = "Text documents (.jpg)|*.jpg"; // Filter files by extension
 
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                Model.ImagePath = dialog.FileName;
+            }
+        }
 
         public async Task LoadAsync(Guid id)
         {
@@ -54,6 +79,7 @@ namespace RideShare.App.ViewModels
             }
 
             Model = await _userFacade.SaveAsync(Model);
+            BackToLoginExecute();
         }
 
         Task IDetailViewModel<UserWrapper>.DeleteAsync()
