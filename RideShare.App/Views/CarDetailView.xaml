@@ -28,5 +28,15 @@
         <TextBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="218,277,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="159" Height="31"/>
         <Label x:Name="Seats" Content="Seats:" HorizontalAlignment="Left" Margin="191,327,0,0" VerticalAlignment="Top" Height="32" Width="95" FontSize="18"/>
         <TextBox x:Name="SeatsBox" HorizontalAlignment="Left" Margin="218,365,0,0" TextWrapping="Wrap" Text="{Binding Seats}" VerticalAlignment="Top" Width="159" Height="30"/>
+        <Button x:Name="Buttondelete"  Command="{Binding DeleteCarCommand}" HorizontalAlignment="Left" Height="94" Margin="10,301,0,0" VerticalAlignment="Top" Width="126">
+            <StackPanel>
+                <Image Source="/Icons/remove_icon.png" Width="70">
+            </Image>
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Delete this car
+                </TextBlock>
+            </StackPanel>
+            
+        </Button>
+
     </Grid>
 </local:UserControlBase>
