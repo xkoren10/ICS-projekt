@@ -27,6 +27,10 @@ namespace RideShare.App.ViewModels
         }
 
         public UserDetailModel? Model { get; set; }
+
+
+        public string Name;
+   
         public ICommand EditUserProfile { get; }
 
         public ICommand BackToMainCommand { get; }
@@ -47,8 +51,17 @@ namespace RideShare.App.ViewModels
                 //error
             }
             Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
-        }
-        
+
+
+            Name = Model.Name;
+
+
+            if(Model.ImagePath == null)
+            {
+                //error
+            }
+          }
+
         public async Task SaveAsync()
         {
             if (Model == null)
