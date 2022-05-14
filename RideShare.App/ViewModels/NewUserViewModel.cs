@@ -65,7 +65,7 @@ namespace RideShare.App.ViewModels
                 _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
         }
 
-        string _imagePath;
+        string _imagePath = "../Icons/user_icon.png";
         public string ImagePath 
         {
             get { return _imagePath; }
@@ -78,7 +78,7 @@ namespace RideShare.App.ViewModels
                 else
                 {
                     //use default pp for incorrect urls
-                    Model.ImagePath = "/Icons/user_icon.png";
+                    Model.ImagePath = "../Icons/user_icon.png";
                 }
 
                 _imagePath = value;
@@ -112,7 +112,10 @@ namespace RideShare.App.ViewModels
             }
 
 
-           
+           if (Model.ImagePath == "" || Model.ImagePath == null)
+            {
+                Model.ImagePath = "../Icons/user_icon.png";
+            }
             Model = await _userFacade.SaveAsync(Model);
             BackToLoginExecute();
         }
