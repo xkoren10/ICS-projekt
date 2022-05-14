@@ -68,6 +68,10 @@ namespace RideShare.App.ViewModels
 
             foreach (var item in rides)
             {
+                if (item.ImagePath ==  null)
+                {
+                    item.ImagePath = "C:/Users/fit/Source/Repos/ICS_projekt/RideShare.App/Icons/user_icon.png";
+                }
                 Users.Add(item);
             }
         }

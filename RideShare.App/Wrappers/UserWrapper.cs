@@ -30,6 +30,11 @@ namespace RideShare.App.Wrappers
             get => GetValue<string>();
             set => SetValue(value);
         }
+        public string? ImagePath
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -45,6 +50,10 @@ namespace RideShare.App.Wrappers
             if (string.IsNullOrWhiteSpace(Contact))
             {
                 yield return new ValidationResult($"{nameof(Contact)} is required", new[] { nameof(Contact) });
+            }
+            if (string.IsNullOrWhiteSpace(ImagePath))
+            {
+                ImagePath = "../Icons/user_icon.png";
             }
         }
 
