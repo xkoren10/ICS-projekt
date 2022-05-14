@@ -7,6 +7,7 @@ namespace RideShare.App.ViewModels
     {
         TDetail? Model { get; }
         Task LoadAsync(Guid id);
+        Task GetActiveUserId(Guid id);
         Task DeleteAsync();
         Task SaveAsync();
     }

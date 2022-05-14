@@ -15,7 +15,7 @@ namespace RideShare.BL.Models
         string Type,
         string ImagePath,
         int Seats
-        ) : ModelBase
+        ) : IModel
     {
         public Guid Id { get; set; } = Id;
         public DateTime RegDate { get; set; } = RegDate;

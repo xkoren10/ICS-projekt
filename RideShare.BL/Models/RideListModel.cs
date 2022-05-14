@@ -15,7 +15,7 @@ namespace RideShare.BL.Models
         DateTime StartTime,
         DateTime EstEndTime,
         int Occupancy
-    ) : ModelBase
+    ) : IModel
     {
         public Guid Id { get; set; } = Id;
         public string StartLocation { get; set; } = StartLocation;
