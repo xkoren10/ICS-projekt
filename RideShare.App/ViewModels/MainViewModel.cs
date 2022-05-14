@@ -134,7 +134,7 @@ namespace RideShare.App.ViewModels
         private void BackToLoginPage(BackToLogPageMessage<UserWrapper> message)
         {
 
-            //ActiveUser = (Guid)message.Id;
+            ActiveUser = UserDetailModel.Empty;
 
             var loginViewModel = _logScreenViewModelFactory.Create();
             ActiveWindow.Clear();
