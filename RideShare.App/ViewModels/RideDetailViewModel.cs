@@ -36,7 +36,6 @@ namespace RideShare.App.ViewModels
         public RideDetailModel? Model { get; set; }
 
         private string start, destination, occupancy;
-        private int seats;
         private DateTime startTime;
 
         public string Start
@@ -54,15 +53,6 @@ namespace RideShare.App.ViewModels
             set
             {
                 destination = value;
-                OnPropertyChanged();
-            }
-        }
-        public int Seats
-        {
-            get => seats;
-            set
-            {
-                seats = value;
                 OnPropertyChanged();
             }
         }
@@ -150,8 +140,7 @@ namespace RideShare.App.ViewModels
             Start = "From: " + Model.StartLocation;
             Destination = "To: " + Model.Destination;
             StartTime = Model.StartTime;
-            Seats = Car_model.Seats;
-            Occupancy = "Free seats: " + (Seats - Model.Occupancy).ToString();
+            Occupancy = "Free seats: " + (Car_model.Seats - Model.Occupancy).ToString();
 
             DriverName = Driver_model.Name;
             DriverImagePath = Driver_model.ImagePath;

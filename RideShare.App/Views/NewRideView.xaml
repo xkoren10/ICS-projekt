@@ -16,22 +16,22 @@
         </Grid.ColumnDefinitions>
         <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="512,20,0,0" VerticalAlignment="Top" Width="158" Source="/Icons/car_icon.png" Grid.Column="1"/>
         <Button x:Name="SelectCarButton" Content="Select Car" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="54" Width="150" Margin="516,197,0,0" Grid.Column="1"/>
-        <Button x:Name="SaveChanges" HorizontalAlignment="Left" Margin="526,303,0,0" VerticalAlignment="Top" Height="98" Width="130" Grid.Column="1">
+        <Button x:Name="SaveChanges" Command="{Binding SaveNewRide}" HorizontalAlignment="Left" Margin="526,303,0,0" VerticalAlignment="Top" Height="98" Width="130" Grid.Column="1">
             <StackPanel x:Name="SaveButton" Orientation="Vertical" Height="94" Width="126">
                 <Image Source="/Icons/save_icon.png" Height="80" Width="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Save"/></TextBlock>
             </StackPanel>
         </Button>
         <Label x:Name="StartLocation" Content="From:" HorizontalAlignment="Left" Margin="183,33,0,0" VerticalAlignment="Top" Height="33" Width="186" FontSize="18" Grid.Column="1"/>
-        <TextBox x:Name="StartBox" HorizontalAlignment="Left" Margin="210,71,0,0" TextWrapping="Wrap" Text="SamplePlace" VerticalAlignment="Top" Width="159" Height="31" Grid.Column="1"/>
+        <TextBox x:Name="StartBox" HorizontalAlignment="Left" Margin="210,71,0,0" TextWrapping="Wrap" Text="{Binding Start, Mode=TwoWay}" VerticalAlignment="Top" Width="159" Height="31" Grid.Column="1"/>
         <Label x:Name="Destination" Content="To:" HorizontalAlignment="Left" Margin="183,125,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18" Grid.Column="1"/>
-        <TextBox x:Name="DestBox" HorizontalAlignment="Left" Margin="210,163,0,0" TextWrapping="Wrap" Text="SamplePlace" VerticalAlignment="Top" Width="159" Height="31" Grid.Column="1"/>
+        <TextBox x:Name="DestBox" HorizontalAlignment="Left" Margin="210,163,0,0" TextWrapping="Wrap" Text="{Binding Destination, Mode=TwoWay}" VerticalAlignment="Top" Width="159" Height="31" Grid.Column="1"/>
         <Label x:Name="Type" Content="Departure:" HorizontalAlignment="Left" Margin="112,212,0,0" VerticalAlignment="Top" Height="34" Width="118" FontSize="18" Grid.Column="1"/>
-        <Label x:Name="Occupancy" Content="Occupancy:" HorizontalAlignment="Left" Margin="183,303,0,0" VerticalAlignment="Top" Height="32" Width="117" FontSize="18" Grid.Column="1"/>
-        <TextBox x:Name="OccupancyBox" HorizontalAlignment="Left" Margin="210,341,0,0" TextWrapping="Wrap" Text="SampleOccupancy" VerticalAlignment="Top" Width="159" Height="30" Grid.Column="1"/>
-        <DatePicker x:Name="DepartureDate" HorizontalAlignment="Left" Margin="88,245,0,0" VerticalAlignment="Top" Height="29" Width="154" Grid.Column="1"/>
+        <Label x:Name="Seats" Content="Free Seats:" HorizontalAlignment="Left" Margin="183,303,0,0" VerticalAlignment="Top" Height="32" Width="117" FontSize="18" Grid.Column="1"/>
+        <TextBox x:Name="OccupancyBox" HorizontalAlignment="Left" Margin="210,341,0,0" TextWrapping="Wrap" Text="{Binding Occupancy, Mode=TwoWay}" VerticalAlignment="Top" Width="159" Height="30" Grid.Column="1"/>
+        <DatePicker x:Name="DepartureDate" SelectedDate="{Binding StartTime, Mode=TwoWay}" HorizontalAlignment="Left" Margin="88,245,0,0" VerticalAlignment="Top" Height="29" Width="154" Grid.Column="1"/>
         <Label x:Name="Arrival" Content="Arrival:" HorizontalAlignment="Left" Margin="342,212,0,0" VerticalAlignment="Top" Height="34" Width="118" FontSize="18" Grid.Column="1"/>
-        <DatePicker x:Name="ArrivalDate" HorizontalAlignment="Left" Margin="290,245,0,0" VerticalAlignment="Top" Height="29" Width="170" Grid.Column="1"/>
+        <DatePicker x:Name="ArrivalDate" SelectedDate="{Binding EndTime, Mode=TwoWay}" HorizontalAlignment="Left" Margin="290,245,0,0" VerticalAlignment="Top" Height="29" Width="170" Grid.Column="1"/>
         <Button x:Name="ButtonBack"  Command="{Binding CancelNewRide}" HorizontalAlignment="Left" Margin="29,24,0,0" VerticalAlignment="Top" Height="75" Width="95" Grid.ColumnSpan="2" >
             <StackPanel Orientation="Vertical" Height="77" Width="97">
                 <Image Source="/Icons/back_icon.png" Height="71" Width="82" />

@@ -245,6 +245,7 @@ namespace RideShare.App.ViewModels
             var newRideDetailViewModel = _newRideViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(newRideDetailViewModel);
+            newRideDetailViewModel.LoadAsync(ActiveUser.Id);
         }
 
         private void UserProfile(ToProfilePageMessage<UserWrapper> _)

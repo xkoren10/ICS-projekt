@@ -134,7 +134,7 @@ namespace RideShare.BL.Tests
                 }
             }
             //doot doot
-            //DeepAssert.Equal(true, testPassenger);
+            DeepAssert.Equal(true, testPassenger);
 
             var updatedPassenger = await _userFacadeSUT.GetAsync(user.Id);
             bool testRide = false;
