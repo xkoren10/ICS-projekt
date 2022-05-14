@@ -25,6 +25,7 @@ namespace RideShare.App.ViewModels
             OpenNewRide = new RelayCommand<RideDetailModel>(NewRide);
             OpenRideList = new RelayCommand<RideDetailModel>(RideList);
             OpenMyRides = new RelayCommand<RideDetailModel>(MyRides);
+            LogoutCommand = new RelayCommand(LogOut);
 
         }
         
@@ -33,14 +34,17 @@ namespace RideShare.App.ViewModels
         public ICommand OpenNewRide { get; }
         public ICommand OpenRideList { get; }
 
+        public ICommand LogoutCommand { get; }
         public ICommand OpenMyRides { get; }
 
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
         private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
+        private void LogOut() => _mediator.Send(new BackToLogPageMessage<UserWrapper>());
         private void NewRide(RideDetailModel? rideModel) => _mediator.Send(new ToNewRidePageMessage<RideWrapper> { });
         private void RideList(RideDetailModel? rideModel) => _mediator.Send(new ToRideListPageMessage<RideWrapper> { });
         private void MyRides(RideDetailModel? rideModel) => _mediator.Send(new ToMyRidesPageMessage<RideWrapper> { });
+
 
         private void UserProfile(UserDetailModel? userModel)
         {  

@@ -5,9 +5,10 @@
                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                         xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
                         xmlns:local="clr-namespace:RideShare.App.Views"
-                        mc:Ignorable="d">
-    <Grid x:Name="grid1">
-        <Button x:Name="ButtonFind" Command="{Binding OpenRideList}" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
+                        mc:Ignorable="d"
+                        d:DataContext="{d:DesignInstance viewModels:MainAreaViewModel}">
+    <Grid x:Name="grid1" Background="White" Height="395" Width="753">
+        <Button x:Name="ButtonFind" Command="{Binding OpenRideList}" HorizontalAlignment="Left" Margin="66,53,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom" ContentStringFormat="">
             <StackPanel Orientation="Vertical">
                 <Image Source="/Icons/search_icon.png" Height="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Find a ride
@@ -16,12 +17,12 @@
         </Button>
         <Button Command="{Binding OpenProfile}" x:Name="ButtonProfile" HorizontalAlignment="Left" Margin="66,229,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
             <StackPanel Orientation="Vertical">
-            <Image Source="/Icons/user_icon.png" Height="100" />
-            <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Profile
-            </TextBlock>
+                <Image Source="/Icons/user_icon.png" Height="100" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Profile
+                </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ButtonCreate" Command="{Binding OpenNewRide}" HorizontalAlignment="Left" Margin="444,26,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
+        <Button x:Name="ButtonCreate" Command="{Binding OpenNewRide}" HorizontalAlignment="Left" Margin="444,53,0,0" VerticalAlignment="Top" Height="153" Width="284" FontSize="24" VerticalContentAlignment="Bottom">
             <StackPanel Orientation="Vertical">
                 <Image Source="/Icons/add_icon.png" Height="100" />
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Create
@@ -34,5 +35,6 @@
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" Text=" Rides" TextAlignment="Center"/>
             </StackPanel>
         </Button>
+        <Button Content="LogOut"  Command="{Binding LogoutCommand}" HorizontalAlignment="Left" Margin="654,17,0,0" VerticalAlignment="Top" Width="68" Height="31"/>
     </Grid>
 </local:UserControlBase>

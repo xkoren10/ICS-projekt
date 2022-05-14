@@ -14,20 +14,23 @@ namespace RideShare.App.ViewModels
     public class CarDetailViewModel : ViewModelBase, ICarDetailViewModel
     {
         private readonly CarFacade _carFacade;
+        private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
 
-        public CarDetailViewModel(CarFacade carFacade, IMediator mediator)
+        public CarDetailViewModel(CarFacade carFacade, UserFacade userFacade, IMediator mediator)
         {
             _carFacade = carFacade;
+            _userFacade = userFacade;
             _mediator = mediator;
 
             BackToCarListPage = new RelayCommand<CarDetailModel>(ToCarList);
-
+            DeleteCarCommand = new RelayCommand(DeleteCar);
 
         }
 
         public CarDetailModel? Model { get; set; }
         public ICommand BackToCarListPage { get; }
+        public ICommand DeleteCarCommand { get; }
 
 
         private string type;
@@ -76,7 +79,15 @@ namespace RideShare.App.ViewModels
         
         private void ToCarList(CarDetailModel? carModel) => _mediator.Send(new ToCarListPageMessage<CarWrapper> { });
         
-
+        private async void DeleteCar()
+        {
+            var owner = await _userFacade.GetAsync(Model.UserId);
+            if (owner.Cars.Remove(Model))
+            {
+                _carFacade.DeleteAsync(Model.Id);
+                ToCarList(Model);
+            }
+        }
 
         public async Task LoadAsync(Guid id)
         {
