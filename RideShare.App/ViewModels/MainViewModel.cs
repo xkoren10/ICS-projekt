@@ -239,9 +239,11 @@ namespace RideShare.App.ViewModels
             {
                 //maybe error later, now empty view before data implementation
                 userDetailViewModel = _profileViewModelFactory.Create();
+                ActiveWindow.Clear();
+                ActiveWindow.Add(userDetailViewModel);
+                userDetailViewModel.LoadAsync(ActiveUser.Id);
             }
-            ActiveWindow.Clear();
-            ActiveWindow.Add(userDetailViewModel);
+            
         }
  
         private void LoginOpen()
