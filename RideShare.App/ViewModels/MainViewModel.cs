@@ -209,10 +209,12 @@ namespace RideShare.App.ViewModels
         {
 
             //ActiveUser = (Guid)message.Id;
-
             var rideDetailModel = _rideDetailViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(rideDetailModel);
+            rideDetailModel.LoadAsync((Guid)message.Id);
+            rideDetailModel.GetActiveUserId((Guid)ActiveUser.Id);
+
         }
 
         private void RideList(ToRideListPageMessage<RideWrapper> message)

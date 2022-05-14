@@ -76,5 +76,10 @@ namespace RideShare.App.ViewModels
         {
             throw new NotImplementedException();
         }
+
+        public Task GetActiveUserId(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

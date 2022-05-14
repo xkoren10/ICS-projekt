@@ -30,13 +30,15 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="250"/>
-                            <ColumnDefinition Width="65"/>
-                            <ColumnDefinition Width="65"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="{Binding Id}" />
-                        <Label Grid.Column="1" Content="{Binding StartLocation}" />
-                        <Label Grid.Column="2" Content="{Binding Destination}" />
+                        <Label Grid.Column="0" Content="{Binding StartTime}" />
+                        <Label Grid.Column="1" Content="{Binding EstEndTime}" />
+                        <Label Grid.Column="2" Content="{Binding StartLocation}" />
+                        <Label Grid.Column="3" Content="{Binding Destination}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

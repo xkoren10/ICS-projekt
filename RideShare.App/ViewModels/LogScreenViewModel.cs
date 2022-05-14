@@ -70,7 +70,7 @@ namespace RideShare.App.ViewModels
             {
                 if (item.ImagePath ==  null)
                 {
-                    item.ImagePath = "C:/Users/fit/Source/Repos/ICS_projekt/RideShare.App/Icons/user_icon.png";
+                    item.ImagePath = "../Icons/user_icon.png";
                 }
                 Users.Add(item);
             }
@@ -92,6 +92,11 @@ namespace RideShare.App.ViewModels
         }
 
         Task IDetailViewModel<UserWrapper>.SaveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task GetActiveUserId(Guid id)
         {
             throw new NotImplementedException();
         }
