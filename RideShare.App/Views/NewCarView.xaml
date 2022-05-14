@@ -14,7 +14,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="504,13,0,0" VerticalAlignment="Top" Width="158" Source="/Icons/car_icon.png"/>
-        <Button x:Name="ChangePictureButton" Content="Upload Car Picture" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="54" Width="150" Margin="508,0,0,0"/>
+        <TextBox Text="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" x:Name="ContactBox_Copy" HorizontalAlignment="Left" Margin="503,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="30"/>
         <Button x:Name="SaveChanges" Command="{Binding SaveNewCarCommand}" HorizontalAlignment="Left" Margin="518,303,0,0" VerticalAlignment="Top" Height="98" Width="130">
             <StackPanel x:Name="SaveButton" Orientation="Vertical" Height="94" Width="126">
                 <Image Source="/Icons/save_icon.png" Height="80" Width="100" />
@@ -36,5 +36,6 @@
 
             </StackPanel>
         </Button>
+        <Label x:Name="CarPicLabel" Content="Upload Car Picture:" HorizontalAlignment="Left" Margin="527,0,0,0" VerticalAlignment="Center"/>
     </Grid>
 </local:UserControlBase>

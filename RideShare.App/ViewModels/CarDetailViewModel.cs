@@ -82,11 +82,12 @@ namespace RideShare.App.ViewModels
         private async void DeleteCar()
         {
             var owner = await _userFacade.GetAsync(Model.UserId);
-            if (owner.Cars.Remove(Model))
-            {
-                _carFacade.DeleteAsync(Model.Id);
-                ToCarList(Model);
-            }
+
+
+
+            await _carFacade.DeleteAsync(Model.Id);
+            ToCarList(Model);
+            
         }
 
         public async Task LoadAsync(Guid id)

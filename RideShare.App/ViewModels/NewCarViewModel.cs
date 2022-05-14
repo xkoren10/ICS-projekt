@@ -34,6 +34,27 @@ namespace RideShare.App.ViewModels
         public ICommand BackToCarListCommand { get; }
         public ICommand SaveNewCarCommand { get; }
 
+
+        string _imagePath;
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                if (Uri.IsWellFormedUriString(value, UriKind.Absolute))
+                {
+                    CarModel.ImagePath = value;
+                }
+                else
+                {
+                    //use default pp for incorrect urls
+                    CarModel.ImagePath = "/Icons/car_icon.png";
+                }
+
+                _imagePath = value;
+                OnPropertyChanged();
+            }
+        }
         CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
         

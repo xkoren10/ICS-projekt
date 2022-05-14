@@ -18,7 +18,7 @@ namespace RideShare.BL.Models
         Guid? UserId
         ) : IModel
     {
-        public Guid Id { get; } = Id;
+        public Guid Id { get; set; } = Id;
         public DateTime RegDate { get; set; } = RegDate;
         public string Brand { get; set; } = Brand;
         public string Type { get; set; } = Type;

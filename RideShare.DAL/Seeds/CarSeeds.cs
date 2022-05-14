@@ -37,7 +37,7 @@ namespace RideShare.DAL.Seeds
             RegDate: DateTime.Parse("8/9/2003", System.Globalization.CultureInfo.InvariantCulture),
             Brand: "Volkswagen",
             Type: "Passat 1.9 TDi",
-            ImagePath: null,
+            ImagePath: "https://upload.wikimedia.org/wikipedia/commons/3/31/VW_Passat_Variant_2.0_TDI_BlueMotion_Technology_Trendline_%28B7%29_%E2%80%93_Frontansicht_%283%29%2C_13._M%C3%A4rz_2011%2C_W%C3%BClfrath.jpg",
             Seats: 5,
             UserId: UserSeeds.UserEntity2.Id)
         {

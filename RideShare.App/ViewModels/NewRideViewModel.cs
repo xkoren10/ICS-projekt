@@ -133,11 +133,14 @@ namespace RideShare.App.ViewModels
         private async void SaveRide()
         {
             // doot doot car
+            var carr = await _carFacade.GetAsync(SelectedCar.Id);
             
-            await _rideFacade.CreateRide(
-                Model, SelectedCar, Start, Destination, 
+             await _rideFacade.CreateRide(
+                Model, carr, Start, Destination, 
                 StartTime, EndTime, Occupancy
                 );
+
+            await SaveAsync();
             BackToMainExecute();
         }
         
