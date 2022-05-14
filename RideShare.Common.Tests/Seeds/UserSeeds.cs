@@ -53,6 +53,7 @@ namespace RideShare.Common.Tests.Seeds
             modelBuilder.Entity<UserEntity>().HasData(
                 UserEntity1,
                 UserEntity2,
+                UserEntity3,
                 Driver,
                 DriverUpdate,
                 DriverDelete);

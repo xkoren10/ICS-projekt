@@ -167,6 +167,7 @@ namespace RideShare.App.ViewModels
             var carListModel = _carListViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(carListModel);
+            carListModel.LoadAsync(ActiveUser.Id);
         }
 
         private void ViewMyRides(ToMyRidesPageMessage<RideWrapper> message)
@@ -183,10 +184,13 @@ namespace RideShare.App.ViewModels
         {
 
             //ActiveUser = (Guid)message.Id;
-
-            var carDetailModel = _carDetailViewModelFactory.Create();
-            ActiveWindow.Clear();
-            ActiveWindow.Add(carDetailModel);
+            if (message != null)
+            {
+                var carDetailModel = _carDetailViewModelFactory.Create();
+                ActiveWindow.Clear();
+                ActiveWindow.Add(carDetailModel);
+                carDetailModel.LoadAsync((Guid)message.Id);
+            }
         }
 
         private void ViewRideDetail(ToRideDetailPageMessage<RideWrapper> message)

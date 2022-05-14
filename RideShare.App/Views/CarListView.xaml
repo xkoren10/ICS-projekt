@@ -1,7 +1,8 @@
 ﻿<local:UserControlBase   x:Class="RideShare.App.Views.CarListView"
                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:interactions="http://schemas.microsoft.com/xaml/behaviors"
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
                           xmlns:local="clr-namespace:RideShare.App.Views"
@@ -12,7 +13,7 @@
 
     <Grid>
         <Grid x:Name="GridCars" Background="White"/>
-        <Button x:Name="ButtonAdd" Command="{Binding AddNewCar}"  HorizontalAlignment="Left" Height="73" Margin="58,276,0,0" VerticalAlignment="Top" Width="103">
+        <Button x:Name="ButtonAdd" Command="{Binding AddNewCar}"  HorizontalAlignment="Left" Height="73" Margin="670,26,0,0" VerticalAlignment="Top" Width="103">
             <StackPanel>
                 <Image Source="/Icons/add_icon.png" Height="50"/>
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Add Car
@@ -20,34 +21,30 @@
             </StackPanel>
 
         </Button>
-        <Button x:Name="ButtonBack" Command="{Binding BackToProfile}" HorizontalAlignment="Left" Height="73" Margin="58,50,0,0" VerticalAlignment="Top" Width="103">
+        <Button x:Name="ButtonBack" Command="{Binding BackToProfile}" HorizontalAlignment="Left" Height="73" Margin="29,26,0,0" VerticalAlignment="Top" Width="103">
             <Image Source="/Icons/back_icon.png">
             </Image>
         </Button>
 
-        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=10}" Width="571" Margin="189,16,40,56"  >
+        <ListBox x:Name="CarsList" 
+            ItemsSource="{Binding Cars}" Margin="29,118,27,34" >
+            <interactions:Interaction.Triggers>
+                <interactions:EventTrigger EventName="SelectionChanged">
+                    <interactions:InvokeCommandAction Command="{Binding CarSelectedCommand}"
+                                            CommandParameter="{Binding ElementName=CarsList, Path=SelectedItem}" />
+                </interactions:EventTrigger>
+            </interactions:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="538">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
-
-                        <Label Content="Car Name: " Margin="0,12,0,12" />
-                        <Label Grid.Column="1" Content="Brand: " Margin="0,12,0,12" />
-                        <Label Grid.Column="2" Content="Date of registration: " Margin="0,12,0,12" />
-                        <Label Grid.Column="3" Content="Type: " Margin="0,12,0,12" />
-                        <Image Grid.Column="4" Source="/Icons/car_icon.png" Height="50" />
-                        <Button x:Name="DeleteButton" Grid.Column="5"  Margin="59,15,59,15">
-                            <Image Source="/Icons/edit_icon.png" Height="30" />
-                        </Button>
-
-
+                        <Label Grid.Column="0" Content="{Binding Brand}" />
+                        <Label Grid.Column="1" Content="{Binding Type}" />
+                        <Image Grid.Column="3" Source="{Binding ImagePath}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
