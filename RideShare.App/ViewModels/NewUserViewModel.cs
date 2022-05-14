@@ -7,7 +7,7 @@ using RideShare.App.Commands;
 using RideShare.App.Services;
 using RideShare.App.Messages;
 using RideShare.App.Wrappers;
-using Microsoft.Win32;
+using System.ComponentModel;
 
 namespace RideShare.App.ViewModels
 {
@@ -16,7 +16,7 @@ namespace RideShare.App.ViewModels
     {
         private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
-
+        private UserDetailModel? _model = UserDetailModel.Empty;
         public NewUserViewModel(UserFacade userFacade, IMediator mediator)
         {
             _userFacade = userFacade;
@@ -24,15 +24,28 @@ namespace RideShare.App.ViewModels
             EditUserProfile = new RelayCommand(UserEdit);
             BackToLogin = new RelayCommand(BackToLoginExecute);
             AddUser = new RelayCommand(SaveUser);
-            ChangePicture = new RelayCommand(SetImage);
-            Model.ImagePath = "/Icons/user_icon.png";
+            
+            
+            
         }
 
-        public UserDetailModel? Model { get; set; } = UserDetailModel.Empty;
+       
+
+        public UserDetailModel? Model
+        {
+            get => _model;
+            set
+            {
+                _model = value;
+                OnPropertyChanged();
+            }
+        }
+        bool _creating = false;
         public ICommand EditUserProfile { get; }
         public ICommand AddUser { get; }
-        public ICommand ChangePicture { get; }
+       
         public ICommand BackToLogin { get; }
+
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
         private void SaveUser()
@@ -40,36 +53,56 @@ namespace RideShare.App.ViewModels
             SaveAsync();
         }
 
+       
+
         private void UserEdit() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());
 
-        private void BackToLoginExecute() => _mediator.Send(new BackToLogPageMessage<UserWrapper> { });
-
-        private void SetImage()
+        private void BackToLoginExecute()
         {
-            var dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.FileName = "Document"; // Default file name
-            dialog.DefaultExt = ".jpg"; // Default file extension
-            dialog.Filter = "Text documents (.jpg)|*.jpg"; // Filter files by extension
+            if(_creating)
+                _mediator.Send(new BackToLogPageMessage<UserWrapper> { });
+            else
+                _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
+        }
 
-            // Show open file dialog box
-            bool? result = dialog.ShowDialog();
-
-            // Process open file dialog box results
-            if (result == true)
+        string _imagePath;
+        public string ImagePath 
+        {
+            get { return _imagePath; }
+            set
             {
-                // Open document
-                Model.ImagePath = dialog.FileName;
-            }
+                if (Uri.IsWellFormedUriString(value, UriKind.Absolute))
+                {
+                    Model.ImagePath = value;
+                }
+                else
+                {
+                    //use default pp for incorrect urls
+                    Model.ImagePath = "/Icons/user_icon.png";
+                }
+
+                _imagePath = value;
+                OnPropertyChanged();
+            } 
         }
 
         public async Task LoadAsync(Guid id)
         {
             if (id == Guid.Empty)
             {
+                _creating = true;
                 //error
             }
-            Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+            else 
+            {
+                Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+
+                //--
+                ImagePath = Model.ImagePath;
+            }
         }
+        
+        public Guid active { get; set; }
         
         public async Task SaveAsync()
         {
@@ -78,6 +111,8 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
+
+           
             Model = await _userFacade.SaveAsync(Model);
             BackToLoginExecute();
         }

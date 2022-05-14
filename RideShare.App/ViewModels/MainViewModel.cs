@@ -108,7 +108,7 @@ namespace RideShare.App.ViewModels
         public IProfileViewModel? SelectedProfileViewModel { get; set; }
         public ProfileViewModel ProfileModel { get; }
 
-        public UserDetailModel ActiveUser { get; set; }
+        public UserDetailModel ActiveUser { get; set; } = UserDetailModel.Empty;
         //private void UserLogin(SelectedMessage<UserWrapper> message)
         private async void UserLogin(OpenMessage<UserWrapper> message)
         {
@@ -233,6 +233,7 @@ namespace RideShare.App.ViewModels
             var newUserDetailViewModel = _newUserViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(newUserDetailViewModel);
+            newUserDetailViewModel.LoadAsync(ActiveUser.Id);
         }
 
         private void NewRide (ToNewRidePageMessage<RideWrapper> _)
