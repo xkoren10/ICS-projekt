@@ -17,7 +17,7 @@ namespace RideShare.App.Views
     /// <summary>
     /// Interaction logic for PassengersView.xaml
     /// </summary>
-    public partial class PassengersView : Window
+    public partial class PassengersView
     {
         public PassengersView()
         {
