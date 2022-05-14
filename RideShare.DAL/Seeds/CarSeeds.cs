@@ -47,8 +47,8 @@ namespace RideShare.DAL.Seeds
 
 
         //To ensure that no tests reuse these clones for non-idempotent operations
-        public static readonly CarEntity CarEntityUpdate = Car1 with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674"), Rides = Array.Empty<RideEntity>(), User = null, UserId = UserSeeds.DriverUpdate.Id };
-        public static readonly CarEntity CarEntityDelete = Car1 with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279"), User = null, Rides = Array.Empty<RideEntity>(), UserId = UserSeeds.DriverDelete.Id };
+        /*public static readonly CarEntity CarEntityUpdate = Car1 with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674"), Rides = Array.Empty<RideEntity>(), User = null, UserId = UserSeeds.DriverUpdate.Id };
+        public static readonly CarEntity CarEntityDelete = Car1 with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279"), User = null, Rides = Array.Empty<RideEntity>(), UserId = UserSeeds.DriverDelete.Id };*/
 
 
         static CarSeeds()
@@ -62,9 +62,9 @@ namespace RideShare.DAL.Seeds
         {
             modelBuilder.Entity<CarEntity>().HasData(
                 Car1 with { User = null, Rides = Array.Empty<RideEntity>() },
-                Car2 with { User = null, Rides = Array.Empty<RideEntity>() },
+                Car2 with { User = null, Rides = Array.Empty<RideEntity>() }/*,
                 CarEntityUpdate,
-                CarEntityDelete
+                CarEntityDelete*/
             );
             Car1.Rides.Add(RideSeeds.RideEntity);
             Car2.Rides.Add(null);

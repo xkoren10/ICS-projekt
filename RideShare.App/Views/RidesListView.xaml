@@ -61,7 +61,7 @@
         <Label Content="From:" HorizontalAlignment="Left" Margin="157,14,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="To:" HorizontalAlignment="Left" Margin="303,14,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="End:" HorizontalAlignment="Left" Margin="94,14,0,0" VerticalAlignment="Top" FontSize="18" Grid.Column="1"/>
-        <DatePicker SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="407,48,0,0" VerticalAlignment="Top" Height="42" Width="126" Grid.ColumnSpan="2" IsDropDownOpen="True"/>
+        <DatePicker SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="407,48,0,0" VerticalAlignment="Top" Height="42" Width="126" Grid.ColumnSpan="2"/>
         <Label Content="Beginning:" HorizontalAlignment="Left" Margin="424,14,0,0" VerticalAlignment="Top" FontSize="18" Width="96" Grid.ColumnSpan="2"/>
 
     </Grid>

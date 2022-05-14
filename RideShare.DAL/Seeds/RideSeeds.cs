@@ -26,6 +26,15 @@ namespace RideShare.DAL.Seeds
             Occupancy: 0,
             UserId: UserSeeds.UserEntity1.Id,
             CarId: CarSeeds.Car1.Id);
+        public static readonly RideEntity RideEntity2 = new(
+            Id: Guid.Parse(input: "fab2efcd-fefe-443f-baf6-3d96cc2cbf2e"),
+            StartLocation: "Nitra",
+            Destination: "Brno",
+            StartTime: DateTime.Parse("1/4/2022 02:30:00 AM", System.Globalization.CultureInfo.InvariantCulture),
+            EstEndTime: DateTime.Parse("1/4/2022 05:00:00 AM", System.Globalization.CultureInfo.InvariantCulture),
+            Occupancy: 0,
+            UserId: UserSeeds.UserEntity1.Id,
+            CarId: CarSeeds.Car1.Id);
 
         //To ensure that no tests reuse these clones for non-idempotent operations
         public static readonly RideEntity RideEntityWithNoPassengers = RideEntity with { Id = Guid.Parse("98B7F7B6-0F51-43B3-B8C0-B5FCFFF6DC2E"), RideUsers = Array.Empty<RideUserEntity>() };
@@ -55,11 +64,12 @@ namespace RideShare.DAL.Seeds
         {
             modelBuilder.Entity<RideEntity>().HasData(
                 RideEntity with { RideUsers = Array.Empty<RideUserEntity>() },
-                RideEntityWithNoPassengers,
+                RideEntity2 with { RideUsers = Array.Empty<RideUserEntity>() }
+                /*RideEntityWithNoPassengers,
                 RideEntityUpdate,
                 RideEntityDelete,
                 RideWithPassengersUpdate,
-                RideWithPassengersDelete
+                RideWithPassengersDelete*/
             );
         } 
     }

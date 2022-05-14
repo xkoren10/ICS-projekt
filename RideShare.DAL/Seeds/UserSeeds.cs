@@ -22,8 +22,8 @@ namespace RideShare.DAL.Seeds
             ImagePath: null);
 
         //To ensure that no tests reuse these clones for non-idempotent operations
-        public static readonly UserEntity DriverUpdate = Driver with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052") };
-        public static readonly UserEntity DriverDelete = Driver with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619") };
+        /*public static readonly UserEntity DriverUpdate = Driver with { Id = Guid.Parse("143332B9-080E-4953-AEA5-BEF64679B052") };
+        public static readonly UserEntity DriverDelete = Driver with { Id = Guid.Parse("274D0CC9-A948-4818-AADB-A8B4C0506619") };*/
 
         public static UserEntity UserEntity1 = new(
             Id: Guid.Parse(input: "df935095-8709-4040-a2bb-b6f97cb416dc"),
@@ -37,7 +37,7 @@ namespace RideShare.DAL.Seeds
             Name: "Lukasz",
             Surname: "Pycz",
             Contact: "xpyczl00@studfit.vutbr.cz",
-            ImagePath: null);
+            ImagePath: "https://api.sportnet.online/v1/users/5d6578c786dc8b72382fa135/photo/6e2dbc7f-f447-4712-8567-62815a6fba5b");
 
         public static UserEntity UserEntity3 = new(
             Id: Guid.Parse(input: "23b3902d-7d4f-1234-9cf0-112348f56238"),
@@ -53,9 +53,9 @@ namespace RideShare.DAL.Seeds
             modelBuilder.Entity<UserEntity>().HasData(
                 UserEntity1,
                 UserEntity2,
-                Driver,
+                Driver/*,
                 DriverUpdate,
-                DriverDelete);
+                DriverDelete*/);
         }
     }
 }
