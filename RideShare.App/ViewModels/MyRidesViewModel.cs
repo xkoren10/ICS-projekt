@@ -27,16 +27,20 @@ namespace RideShare.App.ViewModels
             _mediator = mediator;
             BackToMainCommand = new RelayCommand(BackToMainExecute);
             RideSelectedCommand = new RelayCommand<RideDetailModel>(RideSelected);
+            RideAsPassengerSelectedCommand = new RelayCommand<RideDetailModel>(RideAsPassengerSelected);
+            LeaveRideCommand = new RelayCommand(LeaveRide);
         }
 
         public UserDetailModel? User { get; set; }
-
+        public RideDetailModel? Ride { get; set; }
         public List<RideDetailModel> MyRidesAsPassengerList { get; set; }= new();
         public ObservableCollection<RideDetailModel> MyRides { get; set; } = new();
         public ObservableCollection<RideDetailModel> MyRidesAsPassenger { get; set; } = new();
 
         public ICommand BackToMainCommand { get; }
         public ICommand RideSelectedCommand { get; }
+        public ICommand RideAsPassengerSelectedCommand { get; }
+        public ICommand LeaveRideCommand { get; }
 
         RideWrapper? IDetailViewModel<RideWrapper>.Model => throw new NotImplementedException();
 
@@ -44,6 +48,28 @@ namespace RideShare.App.ViewModels
         private void BackToMainExecute() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
 
         private void RideSelected(RideDetailModel? ride) => _mediator.Send(new ToPassengersPageMessage<RideWrapper> { Id = ride?.Id });
+
+        private void RideAsPassengerSelected(RideDetailModel? ride)
+        {
+            Ride = ride;
+        }
+
+        private async void LeaveRide()
+        {
+            if (User != null && Ride != null)
+            {
+                RideUserModel rideUser = RideUserModel.Empty;
+                foreach (var ru in User.RideUsers)
+                {
+                    if (ru.RideId == Ride.Id)
+                    {
+                        rideUser = ru;
+                    }
+                }
+                await _rideFacade.DeletePassengerFromRide(rideUser);
+                MyRidesAsPassenger.Remove(Ride);
+            }
+        }
 
         public async Task LoadAsync(Guid id)
         {

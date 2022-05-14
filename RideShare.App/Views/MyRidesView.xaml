@@ -28,17 +28,13 @@
                 <DataTemplate>
                     <Grid Width="538">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="{Binding UserId}" Margin="0,12,0,12" />
-                        <Label Grid.Column="1" Content="{Binding StartTime}" Margin="0,12,0,12" />
-                        <Label Grid.Column="2" Content="{Binding StartLocation}" Margin="0,12,0,12" />
-                        <Label Grid.Column="3" Content="{Binding Destination}" Margin="0,12,0,12" />
+                        <Label Grid.Column="0" Content="{Binding StartTime}" Margin="0,12,0,12" />
+                        <Label Grid.Column="1" Content="{Binding StartLocation}" Margin="0,12,0,12" />
+                        <Label Grid.Column="2" Content="{Binding Destination}" Margin="0,12,0,12" />
 
 
                     </Grid>
@@ -48,21 +44,23 @@
 
         </ListBox>
         <ListBox x:Name="RidesListAsPassenger" ItemsSource="{Binding MyRidesAsPassenger}" Margin="128,269,24,44"  >
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectionChanged">
+                    <b:InvokeCommandAction Command="{Binding RideAsPassengerSelectedCommand}"
+                                           CommandParameter="{Binding ElementName=RidesListAsPassenger, Path=SelectedItem}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="538">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="{Binding UserId}" Margin="0,12,0,12" />
-                        <Label Grid.Column="1" Content="{Binding StartTime}" Margin="0,12,0,12" />
-                        <Label Grid.Column="2" Content="{Binding StartLocation}" Margin="0,12,0,12" />
-                        <Label Grid.Column="3" Content="{Binding Destination}" Margin="0,12,0,12" />
+                        <Label Grid.Column="0" Content="{Binding StartTime}" Margin="0,12,0,12" />
+                        <Label Grid.Column="1" Content="{Binding StartLocation}" Margin="0,12,0,12" />
+                        <Label Grid.Column="2" Content="{Binding Destination}" Margin="0,12,0,12" />
 
 
                     </Grid>
@@ -71,5 +69,11 @@
 
 
         </ListBox>
+        <Label Content="Start Time" HorizontalAlignment="Left" Margin="168,39,0,0" VerticalAlignment="Top" Height="29" Width="94"/>
+        <Label Content="Start Location" HorizontalAlignment="Left" Margin="327,39,0,0" VerticalAlignment="Top" Height="29" Width="94"/>
+        <Label Content="Destination" HorizontalAlignment="Left" Margin="500,39,0,0" VerticalAlignment="Top" Height="29" Width="94"/>
+        <Label Content="My rides:" HorizontalAlignment="Left" Margin="25,100,0,0" VerticalAlignment="Top" Height="29" Width="94"/>
+        <Label Content="Rides I joined:" HorizontalAlignment="Left" Margin="20,279,0,0" VerticalAlignment="Top" Height="29" Width="94"/>
+        <Button Content="Leave ride" Command="{Binding LeaveRideCommand}" HorizontalAlignment="Left" Margin="6,338,0,0" VerticalAlignment="Top" Height="40" Width="113"/>
     </Grid>
 </local:UserControlBase>

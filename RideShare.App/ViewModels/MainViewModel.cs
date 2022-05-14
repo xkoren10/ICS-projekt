@@ -179,16 +179,13 @@ namespace RideShare.App.ViewModels
 
             //ActiveUser = (Guid)message.Id;
 
-            var myRidesViewModel =
-                MyRidesViewModels.SingleOrDefault(vm => vm.Model?.Id == ActiveUser.Id);
-            if (myRidesViewModel == null)
-            {
+            
                 //maybe error later, now empty view before data implementation
-                myRidesViewModel = _myRidesViewModelFactory.Create();
-                ActiveWindow.Clear();
-                ActiveWindow.Add(myRidesViewModel);
-                myRidesViewModel.LoadAsync(ActiveUser.Id);
-            }
+            var myRidesViewModel = _myRidesViewModelFactory.Create();
+            ActiveWindow.Clear();
+            ActiveWindow.Add(myRidesViewModel);
+            myRidesViewModel.LoadAsync(ActiveUser.Id);
+            
 
         }
 

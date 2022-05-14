@@ -46,9 +46,7 @@ namespace RideShare.BL.Facades
 
         public async Task DeleteRide(RideDetailModel ride)
         {
-            if (ride.RideUsers.Count == 0){
-                throw new InvalidOperationException("Empty lol");
-            }
+            
             foreach(RideUserModel rideUser in ride.RideUsers)
             {
                 await _rideUserFacadeSUT.DeleteAsync(rideUser.Id);
