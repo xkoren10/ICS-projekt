@@ -85,10 +85,10 @@ namespace RideShare.App.ViewModels
             mediator.Register<ToCarListPageMessage<CarWrapper>>(ViewCarList);
             //car list
             mediator.Register<ToCarDetailPageMessage<CarWrapper>>(ViewCarDetail);
-            mediator.Register<ToNewCarPageMessage<CarWrapper>>(ViewNewCar);
+            mediator.Register<ToNewCarPageMessage<UserWrapper>>(ViewNewCar);
             //my rides
             mediator.Register<ToMyRidesPageMessage<RideWrapper>>(ViewMyRides);
-            mediator.Register<ToPassengersPageMessage<UserWrapper>>(ViewPassengers);
+            mediator.Register<ToPassengersPageMessage<RideWrapper>>(ViewPassengers);
 
             //init startup window
             LoginOpen();
@@ -97,9 +97,11 @@ namespace RideShare.App.ViewModels
        
         public IProfileViewModel ProfileViewModel { get; }
         public INewRideViewModel NewRideViewModel { get; }
+        public IMyRidesViewModel MyRidesViewModel { get; }
         //views
         public ObservableCollection<IProfileViewModel> ProfileViewModels { get; } = new ObservableCollection<IProfileViewModel>();
         public ObservableCollection<ILogScreenViewModel> LogScreenViewModels { get; } = new ObservableCollection<ILogScreenViewModel>();
+        public ObservableCollection<IMyRidesViewModel> MyRidesViewModels { get; } = new ObservableCollection<IMyRidesViewModel>();
         //active locator
         public ObservableCollection<IDetailViewModel<ViewModelBase>> ActiveWindow { get; set; } = new ObservableCollection<IDetailViewModel<ViewModelBase>>();
 
@@ -139,7 +141,7 @@ namespace RideShare.App.ViewModels
             ActiveWindow.Add(loginViewModel);
         }
 
-        private void ViewNewCar(ToNewCarPageMessage<CarWrapper> message)
+        private void ViewNewCar(ToNewCarPageMessage<UserWrapper> message)
         {
 
             //ActiveUser = (Guid)message.Id;
@@ -147,9 +149,10 @@ namespace RideShare.App.ViewModels
             var newCarViewModel = _newCarViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(newCarViewModel);
+            newCarViewModel.LoadAsync(ActiveUser.Id);
         }
 
-        private void ViewPassengers(ToPassengersPageMessage<UserWrapper> message)
+        private void ViewPassengers(ToPassengersPageMessage<RideWrapper> message)
         {
 
             //ActiveUser = (Guid)message.Id;
@@ -157,6 +160,7 @@ namespace RideShare.App.ViewModels
             var passengersViewModel = _passengersViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(passengersViewModel);
+            passengersViewModel.LoadAsync((Guid)message.Id);
         }
 
         private void ViewCarList(ToCarListPageMessage<CarWrapper> message)
@@ -167,6 +171,7 @@ namespace RideShare.App.ViewModels
             var carListModel = _carListViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(carListModel);
+            carListModel.LoadAsync(ActiveUser.Id);
         }
 
         private void ViewMyRides(ToMyRidesPageMessage<RideWrapper> message)
@@ -174,19 +179,30 @@ namespace RideShare.App.ViewModels
 
             //ActiveUser = (Guid)message.Id;
 
-            var myRidesModel = _myRidesViewModelFactory.Create();
-            ActiveWindow.Clear();
-            ActiveWindow.Add(myRidesModel);
+            var myRidesViewModel =
+                MyRidesViewModels.SingleOrDefault(vm => vm.Model?.Id == ActiveUser.Id);
+            if (myRidesViewModel == null)
+            {
+                //maybe error later, now empty view before data implementation
+                myRidesViewModel = _myRidesViewModelFactory.Create();
+                ActiveWindow.Clear();
+                ActiveWindow.Add(myRidesViewModel);
+                myRidesViewModel.LoadAsync(ActiveUser.Id);
+            }
+
         }
 
         private void ViewCarDetail(ToCarDetailPageMessage<CarWrapper> message)
         {
 
             //ActiveUser = (Guid)message.Id;
-
-            var carDetailModel = _carDetailViewModelFactory.Create();
-            ActiveWindow.Clear();
-            ActiveWindow.Add(carDetailModel);
+            if (message != null)
+            {
+                var carDetailModel = _carDetailViewModelFactory.Create();
+                ActiveWindow.Clear();
+                ActiveWindow.Add(carDetailModel);
+                carDetailModel.LoadAsync((Guid)message.Id);
+            }
         }
 
         private void ViewRideDetail(ToRideDetailPageMessage<RideWrapper> message)

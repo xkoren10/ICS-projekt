@@ -24,7 +24,7 @@ namespace RideShare.DAL.Seeds
             RegDate: DateTime.Parse("5/1/2008", System.Globalization.CultureInfo.InvariantCulture),
             Brand: "Audi",
             Type: "A8 2.0 TDi",
-            ImagePath: null,
+            ImagePath: "https://upload.wikimedia.org/wikipedia/commons/3/31/2018_Audi_A8_50_TDi_Quattro_Automatic_3.0.jpg",
             Seats: 5,
             UserId: UserSeeds.UserEntity1.Id)
         {

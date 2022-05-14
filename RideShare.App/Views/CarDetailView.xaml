@@ -13,20 +13,20 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="172" Margin="557,100,0,0" VerticalAlignment="Top" Width="158" Source="/Icons/car_icon.png"/>
-        <Button x:Name="BackkButton"  Command="{Binding ToCarList}"  HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Height="79" Width="124">
+        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="234" Margin="457,74,0,0" VerticalAlignment="Top" Width="305" Source="{Binding Image}"/>
+        <Button x:Name="BackkButton"  Command="{Binding BackToCarListPage}"  HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Height="79" Width="124">
             <StackPanel Orientation="Vertical" Height="94" Width="126">
                 <Image Source="/Icons/back_icon.png" Height="80" Width="100" />
 
             </StackPanel>
         </Button>
-        <Label x:Name="RegDate" Content="Date of registration:" HorizontalAlignment="Left" Margin="241,33,0,0" VerticalAlignment="Top" Height="33" Width="186" FontSize="18"/>
-        <TextBox x:Name="RegDateBox" HorizontalAlignment="Left" Margin="268,71,0,0" TextWrapping="Wrap" Text="SampleDate" VerticalAlignment="Top" Width="159" Height="31"/>
-        <Label x:Name="Brand" Content="Brand:" HorizontalAlignment="Left" Margin="241,125,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
-        <TextBox x:Name="BrandBox" HorizontalAlignment="Left" Margin="268,163,0,0" TextWrapping="Wrap" Text="SampleBrand" VerticalAlignment="Top" Width="159" Height="31"/>
-        <Label x:Name="Type" Content="Type:" HorizontalAlignment="Left" Margin="241,215,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
-        <TextBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="268,253,0,0" TextWrapping="Wrap" Text="SampleType" VerticalAlignment="Top" Width="159" Height="31"/>
-        <Label x:Name="Seats" Content="Seats:" HorizontalAlignment="Left" Margin="241,303,0,0" VerticalAlignment="Top" Height="32" Width="95" FontSize="18"/>
-        <TextBox x:Name="SeatsBox" HorizontalAlignment="Left" Margin="268,341,0,0" TextWrapping="Wrap" Text="SampleSeats" VerticalAlignment="Top" Width="159" Height="30"/>
+        <Label x:Name="RegDate" Content="Date of registration:" HorizontalAlignment="Left" Margin="191,57,0,0" VerticalAlignment="Top" Height="33" Width="186" FontSize="18"/>
+        <TextBox x:Name="RegDateBox" HorizontalAlignment="Left" Margin="218,95,0,0" TextWrapping="Wrap" Text="{Binding RegDate}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <Label x:Name="Brand" Content="Brand:" HorizontalAlignment="Left" Margin="191,149,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <TextBox x:Name="BrandBox" HorizontalAlignment="Left" Margin="218,187,0,0" TextWrapping="Wrap" Text="{Binding Brand}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <Label x:Name="Type" Content="Type:" HorizontalAlignment="Left" Margin="191,239,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <TextBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="218,277,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <Label x:Name="Seats" Content="Seats:" HorizontalAlignment="Left" Margin="191,327,0,0" VerticalAlignment="Top" Height="32" Width="95" FontSize="18"/>
+        <TextBox x:Name="SeatsBox" HorizontalAlignment="Left" Margin="218,365,0,0" TextWrapping="Wrap" Text="{Binding Seats}" VerticalAlignment="Top" Width="159" Height="30"/>
     </Grid>
 </local:UserControlBase>

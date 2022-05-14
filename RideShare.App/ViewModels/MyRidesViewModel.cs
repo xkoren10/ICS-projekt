@@ -1,7 +1,10 @@
 ﻿using RideShare.BL.Facades;
 using RideShare.BL.Models;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Input;
 using RideShare.App.Commands;
 using RideShare.App.Services;
@@ -13,31 +16,34 @@ namespace RideShare.App.ViewModels
 
     public class MyRidesViewModel : ViewModelBase, IMyRidesViewModel
     {
+        private readonly UserFacade _userFacade;
         private readonly RideFacade _rideFacade;
         private readonly IMediator _mediator;
 
-        public MyRidesViewModel(RideFacade rideFacade, IMediator mediator)
+        public MyRidesViewModel(UserFacade userFacade, RideFacade rideFacade, IMediator mediator)
         {
+            _userFacade = userFacade;
             _rideFacade = rideFacade;
             _mediator = mediator;
-            // doot doot search/filter
             BackToMainCommand = new RelayCommand(BackToMainExecute);
-
+            RideSelectedCommand = new RelayCommand<RideDetailModel>(RideSelected);
         }
 
-        public RideDetailModel? Model { get; set; }
-        public ICommand EditUserProfile { get; }
+        public UserDetailModel? User { get; set; }
+
+        public List<RideDetailModel> MyRidesAsPassengerList { get; set; }= new();
+        public ObservableCollection<RideDetailModel> MyRides { get; set; } = new();
+        public ObservableCollection<RideDetailModel> MyRidesAsPassenger { get; set; } = new();
 
         public ICommand BackToMainCommand { get; }
-        public ICommand FilterRides { get; }
-        public ICommand ToPassengersView { get; }
+        public ICommand RideSelectedCommand { get; }
+
         RideWrapper? IDetailViewModel<RideWrapper>.Model => throw new NotImplementedException();
 
-        private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
 
         private void BackToMainExecute() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
 
-
+        private void RideSelected(RideDetailModel? ride) => _mediator.Send(new ToPassengersPageMessage<RideWrapper> { Id = ride?.Id });
 
         public async Task LoadAsync(Guid id)
         {
@@ -45,17 +51,29 @@ namespace RideShare.App.ViewModels
             {
                 //error
             }
-            Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
+            User = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+
+            foreach (var ride in User.Rides)
+            {
+                MyRides.Add(ride);
+            }
+
+            MyRidesAsPassengerList = await _rideFacade.GetPassengerRides(User);
+
+            foreach (var passRide in MyRidesAsPassengerList)
+            {
+                MyRidesAsPassenger.Add(passRide);
+            }
         }
 
         public async Task SaveAsync()
         {
-            if (Model == null)
+            if (User == null)
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            Model = await _rideFacade.SaveAsync(Model);
+            User = await _userFacade.SaveAsync(User);
         }
 
         Task IDetailViewModel<RideWrapper>.DeleteAsync()

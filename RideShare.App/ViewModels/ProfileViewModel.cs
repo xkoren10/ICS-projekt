@@ -28,9 +28,39 @@ namespace RideShare.App.ViewModels
 
         public UserDetailModel? Model { get; set; }
 
+        private string name;
+        private string surname;
+        private string contact;
+        private string image;
 
-        public string Name;
-   
+        public string Name
+        {
+            get => name;
+            set { name = value; OnPropertyChanged(); }
+
+        }
+
+        public string Surname
+        {
+            get => surname;
+            set { surname = value; OnPropertyChanged(); }
+
+        }
+
+        public string Contact
+        {
+            get => contact;
+            set { contact = value; OnPropertyChanged(); }
+
+        }
+
+        public string Image
+        {
+            get => image;
+            set { image = value; OnPropertyChanged(); }
+
+        }
+
         public ICommand EditUserProfile { get; }
 
         public ICommand BackToMainCommand { get; }
@@ -54,11 +84,17 @@ namespace RideShare.App.ViewModels
 
 
             Name = Model.Name;
+            Surname = Model.Surname;
+            Contact = Model.Contact;
 
 
             if(Model.ImagePath == null)
             {
-                //error
+                Image = "C:/Users/fit/Source/Repos/ICS_projekt/RideShare.App/Icons/user_icon.png";
+            }
+            else
+            {
+                Image = Model.ImagePath;
             }
           }
 

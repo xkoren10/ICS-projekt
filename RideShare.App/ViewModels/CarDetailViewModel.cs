@@ -29,6 +29,48 @@ namespace RideShare.App.ViewModels
         public CarDetailModel? Model { get; set; }
         public ICommand BackToCarListPage { get; }
 
+
+        private string type;
+        private string brand;
+        private string regdate;
+        private int seats;
+        private string image;
+
+        public string Type
+        {
+            get => type;
+            set { type = value; OnPropertyChanged(); }
+
+        }
+
+        public string Brand
+        {
+            get => brand;
+            set { brand = value; OnPropertyChanged(); }
+
+        }
+
+        public string RegDate
+        {
+            get => regdate;
+            set { regdate = value; OnPropertyChanged(); }
+
+        }
+
+        public string Image
+        {
+            get => image;
+            set { image = value; OnPropertyChanged(); }
+
+        }
+
+        public int Seats
+        {
+            get => seats;
+            set { seats = value; OnPropertyChanged(); }
+
+        }
+
         CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
         
@@ -43,6 +85,22 @@ namespace RideShare.App.ViewModels
                 //error
             }
             Model = await _carFacade.GetAsync(id) ?? CarDetailModel.Empty;
+
+            Type = Model.Type;
+            Brand = Model.Brand;
+            RegDate = Model.RegDate.ToString();
+            Seats = Model.Seats;
+
+            if (Model.ImagePath == null)
+            {
+                Image = "../Icons/car_icon.png";
+            }
+            else
+            {
+                Image = Model.ImagePath;
+            }
+
+
         }
 
         public async Task SaveAsync()

@@ -15,9 +15,9 @@
                 <ColumnDefinition Width="161*"/>
                 <ColumnDefinition Width="639*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TextName" Text="{Binding Model.Name}" HorizontalAlignment="Left" Height="33" Margin="92,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontSize="16" Focusable="False" IsEnabled="False" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="TextSurname" Text="{Binding Model.Surname}" HorizontalAlignment="Left" Height="35" Margin="92,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" RenderTransformOrigin="0.5,0.641" FontSize="16" ForceCursor="True" IsEnabled="False" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="TextContact" Text="{Binding Model.Contact}" HorizontalAlignment="Left" Height="32" Margin="92,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" AcceptsReturn="True" FontSize="16" IsEnabled="False" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="TextName" Text="{Binding Name}" HorizontalAlignment="Left" Height="33" Margin="92,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" FontSize="16" Focusable="False" IsEnabled="False" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="TextSurname" Text="{Binding Surname}" HorizontalAlignment="Left" Height="35" Margin="92,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" RenderTransformOrigin="0.5,0.641" FontSize="16" ForceCursor="True" IsEnabled="False" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="TextContact" Text="{Binding Contact}" HorizontalAlignment="Left" Height="32" Margin="92,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" AcceptsReturn="True" FontSize="16" IsEnabled="False" Grid.ColumnSpan="2"/>
 
             <Button x:Name="ButtonCar" Command="{Binding ViewCarListCommand}" HorizontalAlignment="Left" Height="80" Margin="132,304,0,0" VerticalAlignment="Top" Width="104" Grid.ColumnSpan="2">
                 <StackPanel Orientation="Vertical">
@@ -38,7 +38,7 @@
 
                 </StackPanel>
             </Button>
-            <Image Source="{Binding Model.ImagePath}" x:Name="ImageProfile" HorizontalAlignment="Left" Height="179" Margin="391,103,0,0" VerticalAlignment="Top" Width="169" Grid.Column="1"/>
+            <Image Source="{Binding Image}" x:Name="ImageProfile" HorizontalAlignment="Left" Height="179" Margin="391,103,0,0" VerticalAlignment="Top" Width="169" Grid.Column="1"/>
             <Grid/>
         </Grid>
 

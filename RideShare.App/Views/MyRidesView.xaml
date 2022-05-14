@@ -5,6 +5,7 @@
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
                           xmlns:local="clr-namespace:RideShare.App.Views"
+                          xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                           mc:Ignorable="d" 
                           d:DesignHeight="450" d:DesignWidth="800"
                           d:DataContext="{d:DesignInstance viewModels:MyRidesViewModel}"
@@ -16,7 +17,13 @@
         </Button>
 
 
-        <ListBox x:Name="RidesList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="128,88,24,49"  >
+        <ListBox x:Name="RidesList" ItemsSource="{Binding MyRides}" Margin="128,88,24,225"  >
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectionChanged">
+                    <b:InvokeCommandAction Command="{Binding RideSelectedCommand}"
+                                                      CommandParameter="{Binding ElementName=RidesList, Path=SelectedItem}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="538">
@@ -28,12 +35,34 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Width="50" Source="/Icons/user_icon.png"/>
-                        <Label Grid.Column="1" Content="Driver:" Margin="0,12,0,12" />
-                        <Label Grid.Column="2" Content="Date: " Margin="0,12,0,12" />
-                        <Label Grid.Column="3" Content="From->To: " Margin="0,12,0,12" />
-                        <Label Grid.Column="4" Content="Car: " Margin="0,12,0,12" />
-                        <Image Grid.Column="5" Source="/Icons/car_icon.png" Height="50" />
+                        <Label Grid.Column="0" Content="{Binding UserId}" Margin="0,12,0,12" />
+                        <Label Grid.Column="1" Content="{Binding StartTime}" Margin="0,12,0,12" />
+                        <Label Grid.Column="2" Content="{Binding StartLocation}" Margin="0,12,0,12" />
+                        <Label Grid.Column="3" Content="{Binding Destination}" Margin="0,12,0,12" />
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+        </ListBox>
+        <ListBox x:Name="RidesListAsPassenger" ItemsSource="{Binding MyRidesAsPassenger}" Margin="128,269,24,44"  >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="538">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="{Binding UserId}" Margin="0,12,0,12" />
+                        <Label Grid.Column="1" Content="{Binding StartTime}" Margin="0,12,0,12" />
+                        <Label Grid.Column="2" Content="{Binding StartLocation}" Margin="0,12,0,12" />
+                        <Label Grid.Column="3" Content="{Binding Destination}" Margin="0,12,0,12" />
 
 
                     </Grid>
