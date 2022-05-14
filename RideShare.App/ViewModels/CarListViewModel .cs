@@ -43,8 +43,6 @@ namespace RideShare.App.ViewModels
 
         public ICommand AddNewCar { get; }
 
-
-
         public ICommand CarSelectedCommand { get;}
 
         public ICommand BackToProfile { get; }

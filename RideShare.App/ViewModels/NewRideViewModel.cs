@@ -7,6 +7,8 @@ using RideShare.App.Commands;
 using RideShare.App.Services;
 using RideShare.App.Messages;
 using RideShare.App.Wrappers;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RideShare.App.ViewModels
 {
@@ -27,14 +29,20 @@ namespace RideShare.App.ViewModels
             SaveNewRide = new RelayCommand(SaveRide);
             CancelNewRide = new RelayCommand(CancelRide);
             BackToMainCommand = new RelayCommand(BackToMainExecute);
+            CarSelectedCommand = new RelayCommand<CarDetailModel>(CarSelected);
 
         }
 
+        public ObservableCollection<CarDetailModel> CarsList { get; set; } = new();
         public UserDetailModel? Model { get; set; }
         public RideDetailModel? RideModel { get; set; }
         private string start, destination;
         private int occupancy;
         private DateTime startTime, endTime;
+
+        public CarDetailModel SelectedCar { get; set; }
+        public string Brand { get; set; }
+        public string Type { get; set; }
         public string Start
         {
             get => start;
@@ -84,13 +92,22 @@ namespace RideShare.App.ViewModels
 
         public ICommand CancelNewRide { get; }
         public ICommand BackToMainCommand { get; }
+
+        public ICommand CarSelectedCommand { get; }
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
        
 
         private void CancelRide() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
         private void BackToMainExecute() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
-
+        private async void CarSelected(CarDetailModel? selcar)
+        {
+            if (selcar != null)
+            {
+                SelectedCar = selcar;  
+            }
+            
+        }
 
 
         public async Task LoadAsync(Guid id)
@@ -100,14 +117,25 @@ namespace RideShare.App.ViewModels
                 //error
             }
             Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
-            
+
+            CarsList.Clear();
+
+                var owner_carlist = Model.Cars;
+                foreach (var item in owner_carlist)
+                {
+                    if (item != null)
+                    {
+                        CarsList.Add(item);
+                    }
+                
+            }
         }
         private async void SaveRide()
         {
             // doot doot car
-            CarDetailModel car = await _carFacade.GetAsync(Guid.Parse(input: "0d4fa150-ad80-4d46-a511-4c666166ec5e"));
+            
             await _rideFacade.CreateRide(
-                Model, car, Start, Destination, 
+                Model, SelectedCar, Start, Destination, 
                 StartTime, EndTime, Occupancy
                 );
             BackToMainExecute();
