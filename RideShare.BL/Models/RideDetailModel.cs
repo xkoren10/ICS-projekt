@@ -17,7 +17,7 @@ namespace RideShare.BL.Models
         int Occupancy,
         Guid? UserId,
         Guid? CarId
-    ) : ModelBase
+    ) : IModel
     {
         public Guid Id { get; set; } = Id;
         public string StartLocation { get; set; } = StartLocation;

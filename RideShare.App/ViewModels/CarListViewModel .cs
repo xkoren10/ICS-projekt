@@ -27,7 +27,10 @@ namespace RideShare.App.ViewModels
 
             CarSelectedCommand = new RelayCommand<CarDetailModel>(CarSelected);
             BackToProfile = new RelayCommand(BackToProfileExecute);
-            AddNewCar = new RelayCommand(NewCarAdd);
+            AddNewCar = new RelayCommand<UserDetailModel>(NewCarAdd);
+            DeleteCar = new RelayCommand<UserDetailModel>(DeleteCarTask);
+
+            //DeleteCar
         }
 
         public CarDetailModel? Model { get; set; }
@@ -40,12 +43,14 @@ namespace RideShare.App.ViewModels
 
         public ICommand AddNewCar { get; }
 
+        public ICommand DeleteCar { get; }
+
         public ICommand CarSelectedCommand { get;}
 
         public ICommand BackToProfile { get; }
         CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
-        private void NewCarAdd() => _mediator.Send(new ToNewCarPageMessage<CarWrapper>());
+        private void NewCarAdd(UserDetailModel? user) => _mediator.Send(new ToNewCarPageMessage<UserWrapper> { Id = user?.Id });
 
         private void BackToProfileExecute() => _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
 
@@ -87,6 +92,16 @@ namespace RideShare.App.ViewModels
             }
 
             Model = await _carFacade.SaveAsync(Model);
+        }
+
+        private void DeleteCarTask (UserDetailModel? user)
+        {
+            if (Model == null)
+            {
+                throw new InvalidOperationException("Null model cannot be deleted");
+            }
+
+            user.Cars.Remove(Model);
         }
 
         Task IDetailViewModel<CarWrapper>.DeleteAsync()

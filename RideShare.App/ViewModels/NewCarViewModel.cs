@@ -14,27 +14,35 @@ namespace RideShare.App.ViewModels
     public class NewCarViewModel : ViewModelBase, INewCarViewModel
     {
         private readonly CarFacade _carFacade;
+        private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
 
-        public NewCarViewModel(CarFacade carFacade, IMediator mediator)
+        public NewCarViewModel(CarFacade carFacade, UserFacade userFacade, IMediator mediator)
         {
             _carFacade = carFacade;
+            _userFacade = userFacade;
             _mediator = mediator;
 
-            BackToCarListCommand = new RelayCommand<CarDetailModel>(ToCarList);
+            BackToCarListCommand = new RelayCommand(ToCarList);
+            SaveNewCarCommand = new RelayCommand(SaveNewCar);
 
 
         }
 
-        public CarDetailModel? Model { get; set; }
+        public UserDetailModel? Model { get; set; }
+        public CarDetailModel? CarModel { get; set; } = CarDetailModel.Empty;
         public ICommand BackToCarListCommand { get; }
+        public ICommand SaveNewCarCommand { get; }
 
         CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
         
-        private void ToCarList(CarDetailModel? carModel) => _mediator.Send(new ToCarListPageMessage<CarWrapper> { });
-        
+        private void ToCarList() => _mediator.Send(new ToCarListPageMessage<CarWrapper> { });
 
+        private void SaveNewCar()
+        {
+           SaveAsync();
+        }
 
         public async Task LoadAsync(Guid id)
         {
@@ -42,7 +50,7 @@ namespace RideShare.App.ViewModels
             {
                 //error
             }
-            Model = await _carFacade.GetAsync(id) ?? CarDetailModel.Empty;
+            Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
         }
 
         public async Task SaveAsync()
@@ -51,8 +59,11 @@ namespace RideShare.App.ViewModels
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
-
-            Model = await _carFacade.SaveAsync(Model);
+            //CarModel = await _carFacade.SaveAsync(CarModel);
+            
+            Model.Cars.Add(CarModel);
+            Model = await _userFacade.SaveAsync(Model);
+            ToCarList();
         }
 
         Task IDetailViewModel<CarWrapper>.DeleteAsync()

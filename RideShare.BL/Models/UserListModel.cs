@@ -14,7 +14,7 @@ namespace RideShare.BL.Models
         string Surname,
         string? ImagePath,
         string Contact
-    ) : ModelBase
+    ) : IModel
     {
         public Guid Id { get; set; } = Id;
         public string Name { get; set; } = Name;

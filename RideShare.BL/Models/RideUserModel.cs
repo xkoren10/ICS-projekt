@@ -12,7 +12,7 @@ namespace RideShare.BL.Models
         Guid Id,
         Guid? UserId,
         Guid? RideId
-    ) : ModelBase
+    ) : IModel
     {
         public Guid Id { get; set; } = Id;
         public Guid? UserId { get; set; } = UserId;
