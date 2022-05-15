@@ -111,8 +111,12 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-
-           if (Model.ImagePath == "" || Model.ImagePath == null)
+            // really ugly check if everything needed is given
+            if (Model.Contact == "" || Model.Name == "" || Model.Surname == "")
+            {
+                return;
+            }
+            if (Model.ImagePath == "" || Model.ImagePath == null)
             {
                 Model.ImagePath = "../Icons/user_icon.png";
             }

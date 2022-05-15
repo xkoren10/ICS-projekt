@@ -132,6 +132,12 @@ namespace RideShare.App.ViewModels
         }
         private async void SaveRide()
         {
+            // really ugly check if everything needed is given
+            if (Start == "" || Start == null || Destination == "" || Destination == null || Occupancy == 0)
+            {
+                return;
+            }
+
             // doot doot car
             var carr = await _carFacade.GetAsync(SelectedCar.Id);
             
