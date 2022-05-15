@@ -36,23 +36,5 @@ namespace RideShare.BL.Facades
             await _userFacadeSUT.SaveAsync(owner);
             return newCar.Id;
         }
-
-        public async Task EditCar(CarDetailModel car, int seats, string? brand = null, string? type = null, string? imagePath = null)
-        {
-            car.Seats = seats;
-            if (brand != null)
-            {
-                car.Brand = brand;
-            }
-            if (type != null)
-            {
-                car.Type = type;
-            }
-            if (imagePath != null)
-            {
-                car.ImagePath = imagePath;
-            }
-            await SaveAsync(car);
-        }
     }
 }

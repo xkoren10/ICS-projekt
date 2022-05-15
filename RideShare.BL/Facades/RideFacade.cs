@@ -92,7 +92,7 @@ namespace RideShare.BL.Facades
 
             passenger.RideUsers.Add(RideUser);
             ride.RideUsers.Add(RideUser);
-            ride.Occupancy++;
+            //ride.Occupancy++;
             await SaveAsync(ride);
             await _userFacadeSUT.SaveAsync(passenger);
         }
@@ -104,7 +104,7 @@ namespace RideShare.BL.Facades
             ride.RideUsers.Remove(rideUser);
             user.RideUsers.Remove(rideUser);
             await _rideUserFacadeSUT.DeleteAsync(rideUser);
-            ride.Occupancy--;
+            //ride.Occupancy--;
             await SaveAsync(ride);
             await _userFacadeSUT.SaveAsync(user);
         }
@@ -112,17 +112,21 @@ namespace RideShare.BL.Facades
         public async Task<List<RideListModel>> FilterRides(DateTime startTime, DateTime estEndTime, string? startLocation = null, string? destination = null)
         {
             var rides = await GetAsync();
-            if (startLocation != null)
+            List<RideListModel> Rides = new List<RideListModel>();
+            foreach (var item in rides)
             {
-                rides = rides.Where(x => x.StartLocation == startLocation);
+                if (!(startLocation == null || startLocation == "") && item.StartLocation != startLocation)
+                    continue;
+                if (!(destination == null || destination == "") && item.Destination != destination)
+                    continue;
+                if (item.StartTime < startTime)
+                    continue;
+                if (item.EstEndTime > estEndTime)
+                    continue;
+
+                Rides.Add(item);
             }
-            if (destination != null)
-            {
-                rides = rides.Where(x => x.Destination == destination);
-            }
-            rides = rides.Where(x => x.StartTime >= startTime);
-            rides = rides.Where(x => x.EstEndTime <= estEndTime);
-            return rides.ToList();
+            return Rides;
             
         }
 

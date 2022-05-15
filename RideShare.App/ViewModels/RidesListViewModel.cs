@@ -31,8 +31,8 @@ namespace RideShare.App.ViewModels
 
         public RideDetailModel? Model { get; set; }
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
-        public DateTime StartDate { get; set; } = DateTime.Now;
-        public DateTime EndDate { get; set; } = DateTime.Now;
+        public DateTime StartDate { get; set; } = DateTime.MinValue;
+        public DateTime EndDate { get; set; } = DateTime.MaxValue;
         public string LocationStart { get; set; }
         public string LocationEnd { get; set; }
         public ICommand FilterCommand { get; }
@@ -88,21 +88,10 @@ namespace RideShare.App.ViewModels
         {
 
             Rides.Clear();
-            var rides = await _rideFacade.GetAsync();
-
-
+            var rides = await _rideFacade.FilterRides(StartDate, EndDate, LocationStart, LocationEnd);
 
             foreach (var item in rides)
             {
-                if (!(LocationStart == null || LocationStart == "") && item.StartLocation != LocationStart)
-                    continue;
-                if (!(LocationEnd == null || LocationEnd == "") && item.Destination != LocationEnd)
-                    continue;
-                if (item.StartTime < StartDate)
-                    continue;
-                if (item.EstEndTime > EndDate)
-                    continue;
-
                 Rides.Add(item);
             }
 

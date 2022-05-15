@@ -21,13 +21,13 @@
             </StackPanel>
         </Button>
         <Label x:Name="RegDate" Content="Date of registration:" HorizontalAlignment="Left" Margin="191,57,0,0" VerticalAlignment="Top" Height="33" Width="186" FontSize="18"/>
-        <TextBox x:Name="RegDateBox" HorizontalAlignment="Left" Margin="218,95,0,0" TextWrapping="Wrap" Text="{Binding RegDate}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <TextBox x:Name="RegDateBox" HorizontalAlignment="Left" Margin="218,95,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding RegDate}" VerticalAlignment="Top" Width="159" Height="31"/>
         <Label x:Name="Brand" Content="Brand:" HorizontalAlignment="Left" Margin="191,149,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
-        <TextBox x:Name="BrandBox" HorizontalAlignment="Left" Margin="218,187,0,0" TextWrapping="Wrap" Text="{Binding Brand}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <TextBox x:Name="BrandBox" HorizontalAlignment="Left" Margin="218,187,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Brand}" VerticalAlignment="Top" Width="159" Height="31"/>
         <Label x:Name="Type" Content="Type:" HorizontalAlignment="Left" Margin="191,239,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
-        <TextBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="218,277,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <TextBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="218,277,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Type}" VerticalAlignment="Top" Width="159" Height="31"/>
         <Label x:Name="Seats" Content="Seats:" HorizontalAlignment="Left" Margin="191,327,0,0" VerticalAlignment="Top" Height="32" Width="95" FontSize="18"/>
-        <TextBox x:Name="SeatsBox" HorizontalAlignment="Left" Margin="218,365,0,0" TextWrapping="Wrap" Text="{Binding Seats}" VerticalAlignment="Top" Width="159" Height="30"/>
+        <TextBox x:Name="SeatsBox" HorizontalAlignment="Left" Margin="218,365,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Seats}" VerticalAlignment="Top" Width="159" Height="30"/>
         <Button x:Name="Buttondelete"  Command="{Binding DeleteCarCommand}" HorizontalAlignment="Left" Height="94" Margin="10,301,0,0" VerticalAlignment="Top" Width="126">
             <StackPanel>
                 <Image Source="/Icons/remove_icon.png" Width="70">

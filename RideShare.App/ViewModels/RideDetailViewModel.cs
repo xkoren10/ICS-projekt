@@ -78,7 +78,7 @@ namespace RideShare.App.ViewModels
             }
         }
         public CarDetailModel? Car_model { get; set; }
-        private string carModel, carImagePath;
+        private string carModel, carImagePath = "../Icons/car_icon.png";
         public string CarModel
         {
             get => carModel;
@@ -98,7 +98,7 @@ namespace RideShare.App.ViewModels
             }
         }
         public UserDetailModel? Driver_model { get; set; }
-        private string driverName, driverImagePath;
+        private string driverName, driverImagePath = "../Icons/user_icon.png";
         public string DriverName
         {
             get => driverName;
@@ -143,7 +143,7 @@ namespace RideShare.App.ViewModels
             Start = "From: " + Model.StartLocation;
             Destination = "To: " + Model.Destination;
             StartTime = Model.StartTime;
-            Occupancy = "Free seats: " + (Car_model.Seats - Model.Occupancy).ToString();
+            Occupancy = "Free seats: " + (Model.Occupancy - Model.RideUsers.ToArray().Length).ToString();
 
             DriverName = Driver_model.Name;
             DriverImagePath = Driver_model.ImagePath;

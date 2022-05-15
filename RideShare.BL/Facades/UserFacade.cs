@@ -33,30 +33,6 @@ namespace RideShare.BL.Facades
             return newUser.Id;
         }
 
-        public async Task UpdateUser(UserDetailModel user, string? name = null, string? surname = null,
-            string? contact = null, string? imagePath = null)
-        {
-            if (name != null)
-            {
-                user.Name = name;
-            }
-
-            if (surname != null)
-            {
-                user.Surname = surname;
-            }
-            if (contact != null)
-            {
-                user.Contact = contact;
-            }
-            if (imagePath != null)
-            {
-                user.ImagePath = imagePath;
-            }
-
-            await SaveAsync(user);
-        }
-
         //Returns list of passengers for specific ride
         public async Task<List<UserDetailModel>> GetAllPassengers(RideDetailModel ride)
         {

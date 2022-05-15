@@ -23,7 +23,7 @@ namespace RideShare.DAL.Seeds
             Destination: "Lehota",
             StartTime: DateTime.Parse("1/4/2022 02:30:00 AM", System.Globalization.CultureInfo.InvariantCulture),
             EstEndTime: DateTime.Parse("1/4/2022 05:00:00 AM", System.Globalization.CultureInfo.InvariantCulture),
-            Occupancy: 0,
+            Occupancy: 4,
             UserId: UserSeeds.UserEntity1.Id,
             CarId: CarSeeds.Car1.Id);
         public static readonly RideEntity RideEntity2 = new(
@@ -32,7 +32,7 @@ namespace RideShare.DAL.Seeds
             Destination: "Brno",
             StartTime: DateTime.Parse("1/4/2022 02:30:00 AM", System.Globalization.CultureInfo.InvariantCulture),
             EstEndTime: DateTime.Parse("1/4/2022 05:00:00 AM", System.Globalization.CultureInfo.InvariantCulture),
-            Occupancy: 0,
+            Occupancy: 3,
             UserId: UserSeeds.UserEntity1.Id,
             CarId: CarSeeds.Car1.Id);
 
