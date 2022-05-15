@@ -41,7 +41,7 @@ namespace RideShare.App.ViewModels
         public RideDetailModel? RideModel { get; set; }
         private string start, destination;
         private int occupancy;
-        private DateTime startTime, endTime;
+        private DateTime startTime = DateTime.Now, endTime = DateTime.Now;
 
         public CarDetailModel SelectedCar { get; set; }
         public string Brand { get; set; }
