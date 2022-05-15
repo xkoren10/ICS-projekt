@@ -22,7 +22,6 @@ namespace RideShare.App.ViewModels
         {
             _rideFacade = rideFacade;
             _mediator = mediator;
-            // doot doot search/filter
             FilterCommand = new RelayCommand(RunFilter);
             RideSelectedCommand = new RelayCommand<RideListModel>(RideSelected);
             BackToMainCommand = new RelayCommand(BackToMainExecute);
@@ -50,20 +49,7 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
-            }
-            /*Rides.Add(new RideListModel
-                 (
-                     Id: Guid.NewGuid(),
-                     StartLocation: "Start",
-                     Destination: "End",
-                     StartTime: DateTime.Now,
-                     EstEndTime: DateTime.Now.AddHours(1),
-                     Occupancy: 1
-                 ));*/
-            if (id == Guid.Empty)
-            {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();

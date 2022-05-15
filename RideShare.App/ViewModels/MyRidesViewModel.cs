@@ -75,7 +75,7 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             User = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
 

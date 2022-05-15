@@ -88,8 +88,6 @@ namespace RideShare.App.ViewModels
         {
             var owner = await _userFacade.GetAsync(Model.UserId);
 
-
-
             await _carFacade.DeleteAsync(Model.Id);
             ToCarList(Model);
             
@@ -99,7 +97,7 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Model = await _carFacade.GetAsync(id) ?? CarDetailModel.Empty;
 
@@ -126,7 +124,6 @@ namespace RideShare.App.ViewModels
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
-
             Model = await _carFacade.SaveAsync(Model);
         }
 

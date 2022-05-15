@@ -82,7 +82,7 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Ride = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
 

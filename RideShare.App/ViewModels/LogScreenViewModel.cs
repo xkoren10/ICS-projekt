@@ -37,7 +37,6 @@ namespace RideShare.App.ViewModels
 
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
         
-        private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
 
         private void UserSelected(UserListModel? user)
         {
@@ -51,8 +50,7 @@ namespace RideShare.App.ViewModels
             {
                 _mediator.Send(new OpenMessage<UserWrapper> { Id = Model.Id });
             }
-            //tmp
-            //_mediator.Send(new OpenMessage<UserWrapper> { });
+
         }
         
         private void NewUser() => _mediator.Send(new ToNewUserPageMessage<UserWrapper>());
@@ -61,7 +59,7 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Users.Clear();
             var rides = await _userFacade.GetAsync();
@@ -83,7 +81,6 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-           //Model = await _userFacade.SaveAsync(Model);
         }
 
         Task IDetailViewModel<UserWrapper>.DeleteAsync()

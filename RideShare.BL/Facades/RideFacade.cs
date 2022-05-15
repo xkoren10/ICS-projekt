@@ -57,18 +57,10 @@ namespace RideShare.BL.Facades
         //Adds passenger to ride and updates passenger list and ride list of rideusers
         public async Task AddPassengerToRide(RideDetailModel ride, UserDetailModel passenger)
         {
-            var passengers = ride.RideUsers;
-            /*if (Ride.Occupancy == Passengers.Count) //todo vzdy by to hodilo exception
-            {
-                throw new Exception("Ride is full");
-            }*/
-
             if(ride.UserId == passenger.Id)
             {
                 throw new Exception("Can't join own ride.");
             }
-
-
 
             var otherRides = passenger.RideUsers;
             foreach (var otherRideUser in otherRides)
@@ -92,7 +84,6 @@ namespace RideShare.BL.Facades
 
             passenger.RideUsers.Add(RideUser);
             ride.RideUsers.Add(RideUser);
-            //ride.Occupancy++;
             await SaveAsync(ride);
             await _userFacadeSUT.SaveAsync(passenger);
         }
@@ -104,7 +95,6 @@ namespace RideShare.BL.Facades
             ride.RideUsers.Remove(rideUser);
             user.RideUsers.Remove(rideUser);
             await _rideUserFacadeSUT.DeleteAsync(rideUser);
-            //ride.Occupancy--;
             await SaveAsync(ride);
             await _userFacadeSUT.SaveAsync(user);
         }

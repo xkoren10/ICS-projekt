@@ -122,7 +122,6 @@ namespace RideShare.App.ViewModels
         public ICommand AddAsPassanger { get; }
         public ICommand BackToMainCommand { get; }
 
-        // doot doot??
         RideWrapper? IDetailViewModel<RideWrapper>.Model => throw new NotImplementedException();
         private void RideList(RideDetailModel? rideModel) => _mediator.Send(new ToRideListPageMessage<RideWrapper> { });
         private void BackToMainExecute() => _mediator.Send(new BackToMainPageMessage<UserWrapper> { });
@@ -133,10 +132,9 @@ namespace RideShare.App.ViewModels
             
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
-            //ActiveUser = await _userFacade.GetAsync(Model.);
             Car_model = await _carFacade.GetAsync(Model.CarId) ?? CarDetailModel.Empty;
             Driver_model = await _userFacade.GetAsync(Model.UserId) ?? UserDetailModel.Empty;
 

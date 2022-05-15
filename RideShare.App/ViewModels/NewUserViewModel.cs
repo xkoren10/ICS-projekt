@@ -101,7 +101,6 @@ namespace RideShare.App.ViewModels
             {
                 Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
 
-                //--
                 ImagePath = Model.ImagePath;
             }
         }

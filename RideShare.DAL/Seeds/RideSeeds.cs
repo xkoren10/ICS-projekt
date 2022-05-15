@@ -65,11 +65,6 @@ namespace RideShare.DAL.Seeds
             modelBuilder.Entity<RideEntity>().HasData(
                 RideEntity with { RideUsers = Array.Empty<RideUserEntity>() },
                 RideEntity2 with { RideUsers = Array.Empty<RideUserEntity>() }
-                /*RideEntityWithNoPassengers,
-                RideEntityUpdate,
-                RideEntityDelete,
-                RideWithPassengersUpdate,
-                RideWithPassengersDelete*/
             );
         } 
     }

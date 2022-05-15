@@ -155,7 +155,6 @@ namespace RideShare.App.ViewModels
         private void ViewPassengers(ToPassengersPageMessage<RideWrapper> message)
         {
 
-            //ActiveUser = (Guid)message.Id;
 
             var passengersViewModel = _passengersViewModelFactory.Create();
             ActiveWindow.Clear();
@@ -166,7 +165,6 @@ namespace RideShare.App.ViewModels
         private void ViewCarList(ToCarListPageMessage<CarWrapper> message)
         {
 
-            //ActiveUser = (Guid)message.Id;
 
             var carListModel = _carListViewModelFactory.Create();
             ActiveWindow.Clear();
@@ -177,10 +175,6 @@ namespace RideShare.App.ViewModels
         private void ViewMyRides(ToMyRidesPageMessage<RideWrapper> message)
         {
 
-            //ActiveUser = (Guid)message.Id;
-
-            
-                //maybe error later, now empty view before data implementation
             var myRidesViewModel = _myRidesViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(myRidesViewModel);
@@ -192,7 +186,6 @@ namespace RideShare.App.ViewModels
         private void ViewCarDetail(ToCarDetailPageMessage<CarWrapper> message)
         {
 
-            //ActiveUser = (Guid)message.Id;
             if (message != null)
             {
                 var carDetailModel = _carDetailViewModelFactory.Create();
@@ -205,7 +198,6 @@ namespace RideShare.App.ViewModels
         private void ViewRideDetail(ToRideDetailPageMessage<RideWrapper> message)
         {
 
-            //ActiveUser = (Guid)message.Id;
             var rideDetailModel = _rideDetailViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(rideDetailModel);
@@ -217,8 +209,6 @@ namespace RideShare.App.ViewModels
         private void RideList(ToRideListPageMessage<RideWrapper> message)
         {
 
-            //ActiveUser = (Guid)message.Id;
-
             var rideListViewModel = _rideListViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(rideListViewModel);
@@ -226,8 +216,6 @@ namespace RideShare.App.ViewModels
 
         private void NewUser(ToNewUserPageMessage<UserWrapper> _)
         {
-
-            //ActiveUser = (Guid)message.Id;
 
             var newUserDetailViewModel = _newUserViewModelFactory.Create();
             ActiveWindow.Clear();
@@ -237,8 +225,6 @@ namespace RideShare.App.ViewModels
 
         private void NewRide (ToNewRidePageMessage<RideWrapper> _)
         {
-
-            //ActiveUser = (Guid)message.Id;
 
             var newRideDetailViewModel = _newRideViewModelFactory.Create();
             ActiveWindow.Clear();
@@ -254,7 +240,6 @@ namespace RideShare.App.ViewModels
                 ProfileViewModels.SingleOrDefault(vm => vm.Model?.Id == ActiveUser.Id);
             if (userDetailViewModel == null)
             {
-                //maybe error later, now empty view before data implementation
                 userDetailViewModel = _profileViewModelFactory.Create();
                 ActiveWindow.Clear();
                 ActiveWindow.Add(userDetailViewModel);

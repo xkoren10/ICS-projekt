@@ -133,7 +133,6 @@ namespace RideShare.BL.Tests
                     testPassenger = true;
                 }
             }
-            //doot doot
             DeepAssert.Equal(true, testPassenger);
 
             var updatedPassenger = await _userFacadeSUT.GetAsync(user.Id);
@@ -169,10 +168,7 @@ namespace RideShare.BL.Tests
         {
             
             var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity3.Id);
-            //var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
-            /*var rideId = await _rideFacadeSUT.CreateRide(user, car, "Brno", "Praha",
-                System.Convert.ToDateTime("10/4/2022 12:00"), System.Convert.ToDateTime("10/4/2022 12:00"), 5);
-            */var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
             await _rideFacadeSUT.AddPassengerToRide(ride, user);
 

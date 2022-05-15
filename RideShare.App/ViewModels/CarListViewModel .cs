@@ -28,10 +28,7 @@ namespace RideShare.App.ViewModels
             CarSelectedCommand = new RelayCommand<CarDetailModel>(CarSelected);
             BackToProfile = new RelayCommand(BackToProfileExecute);
             AddNewCar = new RelayCommand<CarDetailModel>(NewCarAdd);
-            
-
-            //DeleteCar
-        }
+                    }
 
         public CarDetailModel? Model { get; set; }
 
@@ -58,7 +55,7 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Model = await _carFacade.GetAsync(id) ?? CarDetailModel.Empty;
 

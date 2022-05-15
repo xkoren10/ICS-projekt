@@ -39,7 +39,6 @@ namespace RideShare.App.ViewModels
 
         UserWrapper? IDetailViewModel<UserWrapper>.Model => throw new NotImplementedException();
 
-        private void UserEdit() => _mediator.Send(new NewMessage<UserWrapper>());
         private void LogOut() => _mediator.Send(new BackToLogPageMessage<UserWrapper>());
         private void NewRide(RideDetailModel? rideModel) => _mediator.Send(new ToNewRidePageMessage<RideWrapper> { });
         private void RideList(RideDetailModel? rideModel) => _mediator.Send(new ToRideListPageMessage<RideWrapper> { });
@@ -48,21 +47,15 @@ namespace RideShare.App.ViewModels
 
         private void UserProfile(UserDetailModel? userModel)
         {  
-            if (userModel is not null)
-            {
-               // _mediator.Send(new SelectedMessage<UserWrapper> { Id = userModel.Id });
-            }
-            //later send user id ^^
+
             _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
         }
-
-        private void NewUser() => _mediator.Send(new NewMessage<UserWrapper>());
 
         public async Task LoadAsync(Guid id)
         {
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
         }

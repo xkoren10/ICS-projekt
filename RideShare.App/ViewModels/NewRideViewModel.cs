@@ -117,7 +117,7 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
+                throw new InvalidOperationException("Null model cannot be loaded");
             }
             Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
 
@@ -145,11 +145,10 @@ namespace RideShare.App.ViewModels
                 return;
             }
 
-            // doot doot car
-            var carr = await _carFacade.GetAsync(SelectedCar.Id);
+            var ActiveCar = await _carFacade.GetAsync(SelectedCar.Id);
             
              await _rideFacade.CreateRide(
-                Model, carr, Start, Destination, 
+                Model, ActiveCar, Start, Destination, 
                 StartTime, EndTime, Occupancy
                 );
 

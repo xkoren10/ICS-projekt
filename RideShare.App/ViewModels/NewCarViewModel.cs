@@ -93,7 +93,6 @@ namespace RideShare.App.ViewModels
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
-            //CarModel = await _carFacade.SaveAsync(CarModel);
 
             // really ugly check if everything needed is given
             if (CarModel.Brand == "" || CarModel.Brand == null || CarModel.Type == "" || CarModel.Seats == 0)
