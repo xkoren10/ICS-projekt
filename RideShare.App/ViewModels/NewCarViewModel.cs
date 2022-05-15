@@ -34,7 +34,13 @@ namespace RideShare.App.ViewModels
         public ICommand BackToCarListCommand { get; }
         public ICommand SaveNewCarCommand { get; }
 
+        DateTime _RegDate = DateTime.Now;
+        public DateTime RegDate
+        {
+            get { return _RegDate; }
+            set { _RegDate = value;  OnPropertyChanged(); }
 
+        }
         string _imagePath = "../Icons/car_icon.png";
         public string ImagePath
         {
@@ -87,6 +93,7 @@ namespace RideShare.App.ViewModels
                 CarModel.ImagePath = "../Icons/car_icon.png";
             }
 
+            CarModel.RegDate = RegDate;
             Model.Cars.Add(CarModel);
             Model = await _userFacade.SaveAsync(Model);
             ToCarList();

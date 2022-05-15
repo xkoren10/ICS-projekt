@@ -31,7 +31,7 @@ namespace RideShare.App.ViewModels
         private string name;
         private string surname;
         private string contact;
-        private string image;
+        private string image = "../Icons/user_icon.png";
 
         public string Name
         {

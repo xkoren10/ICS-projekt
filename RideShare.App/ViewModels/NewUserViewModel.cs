@@ -116,6 +116,8 @@ namespace RideShare.App.ViewModels
             {
                 Model.ImagePath = "../Icons/user_icon.png";
             }
+
+           //var some = UserWrapper.Validate(Model).Any(); somehow
             Model = await _userFacade.SaveAsync(Model);
             BackToLoginExecute();
         }
