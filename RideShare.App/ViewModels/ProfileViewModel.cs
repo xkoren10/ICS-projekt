@@ -90,7 +90,7 @@ namespace RideShare.App.ViewModels
 
             if(Model.ImagePath == null)
             {
-                Image = "C:/Users/fit/Source/Repos/ICS_projekt/RideShare.App/Icons/user_icon.png";
+                Image = "../Icons/user_icon.png";
             }
             else
             {

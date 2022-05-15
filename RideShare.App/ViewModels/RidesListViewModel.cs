@@ -31,8 +31,8 @@ namespace RideShare.App.ViewModels
 
         public RideDetailModel? Model { get; set; }
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
-        public DateTime StartDate { get; set; } = DateTime.MinValue;
-        public DateTime EndDate { get; set; } = DateTime.MaxValue;
+        public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime EndDate { get; set; } = DateTime.Now;
         public string LocationStart { get; set; }
         public string LocationEnd { get; set; }
         public ICommand FilterCommand { get; }
