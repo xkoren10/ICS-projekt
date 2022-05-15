@@ -34,8 +34,14 @@ namespace RideShare.App.ViewModels
         public ICommand BackToCarListCommand { get; }
         public ICommand SaveNewCarCommand { get; }
 
+        DateTime _RegDate = DateTime.Now;
+        public DateTime RegDate
+        {
+            get { return _RegDate; }
+            set { _RegDate = value;  OnPropertyChanged(); }
 
-        string _imagePath;
+        }
+        string _imagePath = "../Icons/car_icon.png";
         public string ImagePath
         {
             get { return _imagePath; }

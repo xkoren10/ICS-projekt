@@ -33,11 +33,11 @@ namespace RideShare.App.ViewModels
         public ICommand DeleteCarCommand { get; }
 
 
-        private string type;
-        private string brand;
+        private string type = "";
+        private string brand = "";
         private string regdate;
-        private int seats;
-        private string image;
+        private int seats = 0;
+        private string image = "../Icons/car_icon.png";
 
         public string Type
         {
