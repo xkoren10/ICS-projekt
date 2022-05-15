@@ -9,6 +9,7 @@ using AutoMapper;
 namespace RideShare.BL.Models
 {
     public record RideDetailModel(
+        Guid Id,
         string StartLocation,
         string Destination,
         DateTime StartTime,
@@ -16,8 +17,9 @@ namespace RideShare.BL.Models
         int Occupancy,
         Guid? UserId,
         Guid? CarId
-    ) : ModelBase
+    ) : IModel
     {
+        public Guid Id { get; set; } = Id;
         public string StartLocation { get; set; } = StartLocation;
         public string Destination { get; set; } = Destination;
         public DateTime StartTime { get; set; } = StartTime;
@@ -25,6 +27,7 @@ namespace RideShare.BL.Models
         public int Occupancy { get; set; } = Occupancy;
         public Guid? UserId { get; set; } = UserId;
         public Guid? CarId { get; set; } = CarId;
+        public List<RideUserModel> RideUsers { get; init; } = new();
         public class MapperProfile : Profile
         {
             public MapperProfile()
@@ -34,7 +37,7 @@ namespace RideShare.BL.Models
             }
         }
 
-        public static RideDetailModel Empty => new(string.Empty, string.Empty, default, default, default, default, default);
+        public static RideDetailModel Empty => new(default, string.Empty, string.Empty, default, default, default, default, default);
 
     }
 }

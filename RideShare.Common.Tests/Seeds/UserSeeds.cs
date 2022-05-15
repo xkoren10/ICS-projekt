@@ -37,7 +37,7 @@ namespace RideShare.Common.Tests.Seeds
             Name: "Lukasz",
             Surname: "Pycz",
             Contact: "xpyczl00@studfit.vutbr.cz",
-            ImagePath: null);
+            ImagePath: "https://www.google.com/search?q=lukasz+pycz&client=firefox-b-d&sxsrf=ALiCzsaRFZClb4yxv3tj_DADfIkGxE7jbg:1652520799768&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjP8YPa1973AhVdwAIHHdKJCMMQ_AUoAXoECAEQAw&biw=1536&bih=778&dpr=1.25#imgrc=mWLKJimJxWa-qM");
 
         public static UserEntity UserEntity3 = new(
             Id: Guid.Parse(input: "23b3902d-7d4f-1234-9cf0-112348f56238"),
@@ -53,6 +53,7 @@ namespace RideShare.Common.Tests.Seeds
             modelBuilder.Entity<UserEntity>().HasData(
                 UserEntity1,
                 UserEntity2,
+                UserEntity3,
                 Driver,
                 DriverUpdate,
                 DriverDelete);

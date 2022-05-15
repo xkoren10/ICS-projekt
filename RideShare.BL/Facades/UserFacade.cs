@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,8 +13,39 @@ namespace RideShare.BL.Facades
 {
     public class UserFacade : CRUDFacade<UserEntity, UserListModel, UserDetailModel>
     {
+       // private readonly RideFacade _rideFacadeSUT;
         public UserFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
         {
+           // _rideFacadeSUT = new RideFacade(unitOfWorkFactory, mapper);
+        }
+
+        public async Task<Guid> CreateUser(string name, string surname, string contact, string? imagePath = null)
+        {
+            var newUser = new UserDetailModel(
+                Id: Guid.NewGuid(), 
+                Name: name,
+                Surname: surname,
+                ImagePath: imagePath,
+                Contact: contact
+                );
+
+            await SaveAsync(newUser);
+            return newUser.Id;
+        }
+
+        //Returns list of passengers for specific ride
+        public async Task<List<UserDetailModel>> GetAllPassengers(RideDetailModel ride)
+        {
+            List<UserDetailModel> passengerList = new List<UserDetailModel>();
+            foreach (var rideUser in ride.RideUsers)
+            {
+                var user = await GetAsync(rideUser.UserId);
+                if (user != null)
+                {
+                    passengerList.Add(user);
+                }
+            }
+            return passengerList;
         }
     }
 }

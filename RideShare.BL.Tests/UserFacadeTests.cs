@@ -7,31 +7,22 @@ using RideShare.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
+using System;
+using System.Collections.Generic;
 
 namespace RideShare.BL.Tests
 {
     public sealed class UserFacadeTests : CRUDFacadeTestsBase
     {
         private readonly UserFacade _userFacadeSUT;
+        private readonly RideFacade _rideFacadeSUT;
 
         public UserFacadeTests(ITestOutputHelper output) : base(output)
         {
             _userFacadeSUT = new UserFacade(UnitOfWorkFactory, Mapper);
+            _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
         }
 
-        [Fact]
-        public async Task Create_WithNonExistingItem_DoesNotThrow()
-        {
-            var model = new UserDetailModel
-            (
-                Name: "Test name",
-                Surname: "Test surname",
-                Contact: "test@test.xyz",
-                ImagePath: null
-            );
-
-            var _ = await _userFacadeSUT.SaveAsync(model);
-        }
 
         [Fact]
         public async Task GetAll_Single_SeededUser()
@@ -40,6 +31,25 @@ namespace RideShare.BL.Tests
             var user = users.Single(i => i.Id == UserSeeds.Driver.Id);
 
             DeepAssert.Equal(Mapper.Map<UserListModel>(UserSeeds.Driver), user);
+        }
+
+        [Fact]
+        public async Task GetFromDb_InsertedUser()
+        {
+            var model = new UserDetailModel
+            (
+                Id: Guid.Parse(input: "06a8a2cf-ea03-4115-a3e4-aa0291fe9c75"),
+                Name: "Test name",
+                Surname: "Test surname",
+                Contact: "test@test.xyz",
+                ImagePath: null
+            );
+            var _ = await _userFacadeSUT.SaveAsync(model);
+            var users = await _userFacadeSUT.GetAsync();
+            var SingleUser = users.Single(i => i.Name == "Test name");
+            var user = await _userFacadeSUT.GetAsync(SingleUser.Id);
+
+            DeepAssert.Equal(Mapper.Map<UserDetailModel>(model), user);
         }
 
         [Fact]
@@ -73,9 +83,10 @@ namespace RideShare.BL.Tests
         public async Task NewUser_InsertOrUpdate_UserAdded()
         {
             var user = new UserDetailModel(
-                Name: "Matej",
-                Surname: "Hložek",
-                Contact: "xhloze02@studfit.vutbr.cz",
+                Id: Guid.Parse(input: "06a8a2cf-ea03-4095-a3ea-aa0291fe9c75"),
+                Name: "Andrej",
+                Surname: "Danko",
+                Contact: "xdanko45@studfit.vutbr.cz",
                 ImagePath: null
             );
 
@@ -101,14 +112,12 @@ namespace RideShare.BL.Tests
         {
             var user = new UserDetailModel
             (
+                Id: UserSeeds.Driver.Id,
                 Name: UserSeeds.Driver.Name,
                 Surname: UserSeeds.Driver.Surname,
                 ImagePath: UserSeeds.Driver.ImagePath,
                 Contact: UserSeeds.Driver.Contact
-            )
-            {
-                Id = UserSeeds.Driver.Id
-            };
+            );
             user.Name += "Updated";
             user.Contact += "i";
 
@@ -117,6 +126,35 @@ namespace RideShare.BL.Tests
             await using var dbxAssert = DbContextFactory.CreateDbContext();
             var userFromDb = await dbxAssert.UserEntities.SingleAsync(i => i.Id == user.Id);
             DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
+        }
+
+        [Fact]
+        public async Task GetAllPassengersTest()
+        {
+            var user1 = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity3.Id);
+            var user2 = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity2.Id);
+            var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+
+            List<UserDetailModel> testList = new List<UserDetailModel>();
+            testList.Add(user1);
+            testList.Add(user2);
+
+            await _rideFacadeSUT.AddPassengerToRide(ride, user1);
+            await _rideFacadeSUT.AddPassengerToRide(ride, user2);
+
+            List<UserDetailModel> result = await _userFacadeSUT.GetAllPassengers(ride);
+
+            DeepAssert.Equal(testList[0].Id, result[0].Id);
+            DeepAssert.Equal(testList[1].Id, result[1].Id);
+        }
+
+        [Fact]
+        public async Task CreateUserTest()
+        {
+            var newUserId = await _userFacadeSUT.CreateUser("Jano", "Vesely", "test_contact");
+            var user = await _userFacadeSUT.GetAsync(newUserId);
+            DeepAssert.Equal(newUserId, user.Id);
+            DeepAssert.Equal("Jano", user.Name);
         }
     }
 }

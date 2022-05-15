@@ -9,13 +9,15 @@ using AutoMapper;
 namespace RideShare.BL.Models
 {
     public record RideListModel(
+        Guid Id,
         string StartLocation,
         string Destination,
         DateTime StartTime,
         DateTime EstEndTime,
         int Occupancy
-    ) : ModelBase
+    ) : IModel
     {
+        public Guid Id { get; set; } = Id;
         public string StartLocation { get; set; } = StartLocation;
         public string Destination { get; set; } = Destination;
         public DateTime StartTime { get; set; } = StartTime;

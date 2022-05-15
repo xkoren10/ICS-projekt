@@ -1,0 +1,48 @@
+﻿<local:UserControlBase   x:Class="RideShare.App.Views.CarDetailView"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                          xmlns:viewModels="clr-namespace:RideShare.App.ViewModels"
+                          xmlns:local="clr-namespace:RideShare.App.Views"
+                          mc:Ignorable="d" 
+                          d:DesignHeight="450" d:DesignWidth="800"
+                          d:DataContext="{d:DesignInstance viewModels:CarDetailViewModel}"
+                         >
+    <Grid x:Name="CarDetailGrid" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="234" Margin="457,74,0,0" VerticalAlignment="Top" Width="305" Source="{Binding Image}"/>
+        <Button x:Name="BackkButton"  Command="{Binding BackToCarListPage}"  HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Height="79" Width="124">
+            <StackPanel Orientation="Vertical" Height="94" Width="126">
+                <Image Source="/Icons/back_icon.png" Height="80" Width="100" />
+
+            </StackPanel>
+        </Button>
+        <Label x:Name="RegDate" Content="Date of registration:" HorizontalAlignment="Left" Margin="191,57,0,0" VerticalAlignment="Top" Height="33" Width="186" FontSize="18"/>
+        <TextBox x:Name="RegDateBox" HorizontalAlignment="Left" Margin="218,95,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding RegDate}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <Label x:Name="Brand" Content="Brand:" HorizontalAlignment="Left" Margin="191,149,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <TextBox x:Name="BrandBox" HorizontalAlignment="Left" Margin="218,187,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Brand}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <Label x:Name="Type" Content="Type:" HorizontalAlignment="Left" Margin="191,239,0,0" VerticalAlignment="Top" Height="33" Width="95" FontSize="18"/>
+        <TextBox x:Name="TypeBox" HorizontalAlignment="Left" Margin="218,277,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Type}" VerticalAlignment="Top" Width="159" Height="31"/>
+        <Label x:Name="Seats" Content="Seats:" HorizontalAlignment="Left" Margin="191,327,0,0" VerticalAlignment="Top" Height="32" Width="95" FontSize="18"/>
+        <TextBox x:Name="SeatsBox" HorizontalAlignment="Left" Margin="218,365,0,0" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Seats}" VerticalAlignment="Top" Width="159" Height="30"/>
+        <Button x:Name="Buttondelete"  Command="{Binding DeleteCarCommand}" HorizontalAlignment="Left" Height="94" Margin="10,301,0,0" VerticalAlignment="Top" Width="126">
+            <StackPanel>
+                <Image Source="/Icons/remove_icon.png" Width="70">
+                </Image>
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Delete this car
+                </TextBlock>
+            </StackPanel>
+
+        </Button>
+        <Button x:Name="ButtonEdit"  Command="{Binding EditCar}" HorizontalAlignment="Left" Height="80" Margin="630,314,0,0" VerticalAlignment="Top" Width="103">
+            <StackPanel Orientation="Vertical">
+                <Image Source="/Icons/edit_icon.png" Height="57" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Edit"/></TextBlock>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</local:UserControlBase>

@@ -8,14 +8,17 @@ using RideShare.DAL.Entities;
 
 namespace RideShare.BL.Models
 {
-    public record CarDetailModel(DateTime RegDate,
+    public record CarDetailModel(
+        Guid Id,
+        DateTime RegDate,
         string Brand,
         string Type,
         string? ImagePath,
         int Seats,
         Guid? UserId
-        ) : ModelBase
+        ) : IModel
     {
+        public Guid Id { get; set; } = Id;
         public DateTime RegDate { get; set; } = RegDate;
         public string Brand { get; set; } = Brand;
         public string Type { get; set; } = Type;
@@ -34,6 +37,6 @@ namespace RideShare.BL.Models
             }
         }
 
-        public static CarDetailModel Empty => new(default, string.Empty, string.Empty, string.Empty, default, default);
+        public static CarDetailModel Empty => new(default, default, string.Empty, string.Empty, string.Empty, default, default);
     }
 }
