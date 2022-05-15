@@ -35,7 +35,7 @@ namespace RideShare.App.ViewModels
         public ICommand SaveNewCarCommand { get; }
 
 
-        string _imagePath;
+        string _imagePath = "../Icons/car_icon.png";
         public string ImagePath
         {
             get { return _imagePath; }
@@ -48,7 +48,7 @@ namespace RideShare.App.ViewModels
                 else
                 {
                     //use default pp for incorrect urls
-                    CarModel.ImagePath = "/Icons/car_icon.png";
+                    CarModel.ImagePath = "../Icons/car_icon.png";
                 }
 
                 _imagePath = value;
@@ -81,7 +81,12 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
             //CarModel = await _carFacade.SaveAsync(CarModel);
-            
+
+            if (CarModel.ImagePath == "" || CarModel.ImagePath == null)
+            {
+                CarModel.ImagePath = "../Icons/car_icon.png";
+            }
+
             Model.Cars.Add(CarModel);
             Model = await _userFacade.SaveAsync(Model);
             ToCarList();
