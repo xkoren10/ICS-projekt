@@ -37,28 +37,7 @@ namespace RideShare.App.Wrappers
             set => SetValue(value);
         }
 
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (string.IsNullOrWhiteSpace(Brand))
-            {
-                yield return new ValidationResult($"{nameof(Brand)} is required", new[] { nameof(Brand) });
-            }
-
-            if (string.IsNullOrWhiteSpace(Type))
-            {
-                yield return new ValidationResult($"{nameof(Type)} is required", new[] { nameof(Type) });
-            }
-
-            if (int.Equals(Seats,0))
-            {
-                yield return new ValidationResult($"{nameof(Seats)} is required", new[] { nameof(Seats) });
-            }
-
-            if (RegDate == DateTime.MinValue)
-            {
-                yield return new ValidationResult($"{nameof(RegDate)} is required", new[] { nameof(RegDate) });
-            }
-        }
+        
 
         public static implicit operator CarWrapper(CarDetailModel detailModel)
             => new(detailModel);

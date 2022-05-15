@@ -108,7 +108,7 @@ namespace RideShare.App.ViewModels
 
             if (CarModel.ImagePath == "" || CarModel.ImagePath == null)
             {
-                CarModel.ImagePath = "../Icons/user_icon.png";
+                CarModel.ImagePath = "../Icons/car_icon.png";
             }
 
             if (_create)

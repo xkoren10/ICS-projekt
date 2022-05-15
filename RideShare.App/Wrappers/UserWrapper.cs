@@ -36,26 +36,7 @@ namespace RideShare.App.Wrappers
             set => SetValue(value);
         }
 
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                yield return new ValidationResult($"{nameof(Name)} is required", new[] {nameof(Name)});
-            }
-
-            if (string.IsNullOrWhiteSpace(Surname))
-            {
-                yield return new ValidationResult($"{nameof(Surname)} is required", new[] {nameof(Surname)});
-            }
-            if (string.IsNullOrWhiteSpace(Contact))
-            {
-                yield return new ValidationResult($"{nameof(Contact)} is required", new[] { nameof(Contact) });
-            }
-            if (string.IsNullOrWhiteSpace(ImagePath))
-            {
-                ImagePath = "../Icons/user_icon.png";
-            }
-        }
+       
 
         public static implicit operator UserWrapper(UserDetailModel detailModel)
             => new(detailModel);

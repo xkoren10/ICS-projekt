@@ -14,7 +14,7 @@ namespace RideShare.App.Wrappers
     /// And the whole WPF and MVVM: Advanced Model Treatment course https://www.pluralsight.com/courses/wpf-mvvm-advanced-model-treatment
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class ModelWrapper<T> : ViewModelBase, IModel, IValidatableObject
+    public abstract class ModelWrapper<T> : ViewModelBase, IModel
         where T : IModel
     {
         protected ModelWrapper(T? model)
@@ -52,29 +52,6 @@ namespace RideShare.App.Wrappers
                 propertyInfo?.SetValue(Model, value);
                 OnPropertyChanged(propertyName);
             }
-        }
-
-        protected void RegisterCollection<TWrapper, TModel>(
-            ObservableCollection<TWrapper> wrapperCollection,
-            ICollection<TModel> modelCollection)
-            where TWrapper : ModelWrapper<TModel>, IModel
-            where TModel : IModel
-        {
-            wrapperCollection.CollectionChanged += (s, e) =>
-            {
-                modelCollection.Clear();
-                foreach (var model in wrapperCollection.Select(i => i.Model))
-                {
-                    modelCollection.Add(model);
-                }
-            };
-        }
-
-        public bool IsValid => !Validate(new ValidationContext(this)).Any();
-
-        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

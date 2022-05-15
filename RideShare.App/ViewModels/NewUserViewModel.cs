@@ -89,6 +89,7 @@ namespace RideShare.App.ViewModels
             } 
         }
 
+        
         public async Task LoadAsync(Guid id)
         {
             if (id == Guid.Empty)
@@ -113,6 +114,8 @@ namespace RideShare.App.ViewModels
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
+
+     
 
             // really ugly check if everything needed is given
             if (Model.Contact == "" || Model.Name == "" || Model.Surname == "")

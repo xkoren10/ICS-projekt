@@ -83,7 +83,7 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            //Model = await _userFacade.SaveAsync(Model);
+           //Model = await _userFacade.SaveAsync(Model);
         }
 
         Task IDetailViewModel<UserWrapper>.DeleteAsync()
