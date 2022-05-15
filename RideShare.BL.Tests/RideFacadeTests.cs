@@ -151,7 +151,7 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task GetPassengerRidesTest()
         {
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity3.Id);
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
             List<RideDetailModel> testList = new List<RideDetailModel>();
@@ -168,7 +168,7 @@ namespace RideShare.BL.Tests
         public async Task DeleteRideTest()
         {
             
-            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity3.Id);
             //var car = await _carFacadeSUT.GetAsync(CarSeeds.Car1.Id);
             /*var rideId = await _rideFacadeSUT.CreateRide(user, car, "Brno", "Praha",
                 System.Convert.ToDateTime("10/4/2022 12:00"), System.Convert.ToDateTime("10/4/2022 12:00"), 5);

@@ -131,7 +131,7 @@ namespace RideShare.BL.Tests
         [Fact]
         public async Task GetAllPassengersTest()
         {
-            var user1 = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
+            var user1 = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity3.Id);
             var user2 = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity2.Id);
             var ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
 
