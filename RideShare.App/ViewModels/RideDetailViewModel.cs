@@ -7,6 +7,7 @@ using RideShare.App.Commands;
 using RideShare.App.Services;
 using RideShare.App.Messages;
 using RideShare.App.Wrappers;
+using RideShare.App.Services.MessageDialog;
 
 namespace RideShare.App.ViewModels
 {
@@ -16,16 +17,18 @@ namespace RideShare.App.ViewModels
         private readonly RideFacade _rideFacade;
         private readonly CarFacade _carFacade;
         private readonly UserFacade _userFacade;
+        private readonly IMessageDialogService _messageDialogService;
         private readonly RideUserFacade _rideUserFacade;
         private readonly IMediator _mediator;
 
-        public RideDetailViewModel(RideFacade rideFacade, CarFacade carFacade, UserFacade userFacade, RideUserFacade rideUserFacade, IMediator mediator)
+        public RideDetailViewModel(RideFacade rideFacade, CarFacade carFacade, UserFacade userFacade, RideUserFacade rideUserFacade, IMessageDialogService messageDialogService, IMediator mediator)
         {
             _rideFacade = rideFacade;
             _carFacade = carFacade;
             _userFacade = userFacade;
             _rideUserFacade = rideUserFacade;
             _mediator = mediator;
+            _messageDialogService = messageDialogService;
 
             BackToRideListCommand = new RelayCommand<RideDetailModel>(RideList);
             AddAsPassanger = new RelayCommand<RideDetailModel>(AddPassanger);
@@ -160,7 +163,17 @@ namespace RideShare.App.ViewModels
         }
         private async void AddPassanger(RideDetailModel? _)
         {
-            await _rideFacade.AddPassengerToRide(Model, ActiveUser);
+            try
+            {
+                await _rideFacade.AddPassengerToRide(Model, ActiveUser);
+            }
+            catch (Exception ex)
+            {
+                var e = _messageDialogService.Show(
+                        "Fail",ex.Message, 
+                        MessageDialogButtonConfiguration.OK,
+                        MessageDialogResult.OK);
+            }
             BackToMainExecute();
         }
 

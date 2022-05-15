@@ -62,12 +62,24 @@ namespace RideShare.BL.Facades
             {
                 throw new Exception("Ride is full");
             }*/
+
+            if(ride.UserId == passenger.Id)
+            {
+                throw new Exception("Can't join own ride.");
+            }
+
+
+
             var otherRides = passenger.RideUsers;
             foreach (var otherRideUser in otherRides)
             {
                 var otherRide = await GetAsync(otherRideUser.RideId);
-                if (otherRide.StartTime >= ride.StartTime)
+                if (!((otherRide.StartTime >= ride.EstEndTime)||(otherRide.EstEndTime <= ride.StartTime)))
                 {
+                
+                        throw new Exception("Can't join multiple rides.");
+                    
+                       
                 }
             }
 
@@ -76,7 +88,7 @@ namespace RideShare.BL.Facades
                 UserId: passenger.Id,
                 RideId: ride.Id);
 
-            await _rideUserFacadeSUT.SaveAsync(RideUser); // todo mozno nefunguje
+            await _rideUserFacadeSUT.SaveAsync(RideUser); 
 
             passenger.RideUsers.Add(RideUser);
             ride.RideUsers.Add(RideUser);

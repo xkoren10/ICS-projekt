@@ -8,6 +8,7 @@ using RideShare.App.Services;
 using RideShare.App.Messages;
 using RideShare.App.Wrappers;
 using System.ComponentModel;
+using RideShare.App.Services.MessageDialog;
 
 namespace RideShare.App.ViewModels
 {
@@ -17,10 +18,12 @@ namespace RideShare.App.ViewModels
         private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
         private UserDetailModel? _model = UserDetailModel.Empty;
-        public NewUserViewModel(UserFacade userFacade, IMediator mediator)
+        private readonly IMessageDialogService _messageDialogService;
+        public NewUserViewModel(UserFacade userFacade, IMessageDialogService messageDialogService, IMediator mediator)
         {
             _userFacade = userFacade;
             _mediator = mediator;
+            _messageDialogService = messageDialogService;
             EditUserProfile = new RelayCommand(UserEdit);
             BackToLogin = new RelayCommand(BackToLoginExecute);
             AddUser = new RelayCommand(SaveUser);
@@ -111,11 +114,21 @@ namespace RideShare.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-
-           if (Model.ImagePath == "" || Model.ImagePath == null)
+            // really ugly check if everything needed is given
+            if (Model.Contact == "" || Model.Name == "" || Model.Surname == "")
+            {
+                var e = _messageDialogService.Show(
+                        "Fail", "Missing input data",
+                        MessageDialogButtonConfiguration.OK,
+                        MessageDialogResult.OK);
+                return;
+            }
+            if (Model.ImagePath == "" || Model.ImagePath == null)
             {
                 Model.ImagePath = "../Icons/user_icon.png";
             }
+
+           //var some = UserWrapper.Validate(Model).Any(); somehow
             Model = await _userFacade.SaveAsync(Model);
             BackToLoginExecute();
         }
