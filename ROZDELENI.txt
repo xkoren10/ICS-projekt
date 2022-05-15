@@ -1,5 +1,5 @@
-xkoren10: 22,5%
-xsychr06: 22,5%
-xkriza08: 22,5%
-xhloze02: 22,5%
-xhross00: 10%
+xkoren10: 25%
+xsychr06: 25%
+xkriza08: 25%
+xhloze02: 25%
+xhross00: 0%
