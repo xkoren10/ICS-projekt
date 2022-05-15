@@ -27,7 +27,7 @@ namespace RideShare.App.ViewModels
 
             CarSelectedCommand = new RelayCommand<CarDetailModel>(CarSelected);
             BackToProfile = new RelayCommand(BackToProfileExecute);
-            AddNewCar = new RelayCommand<UserDetailModel>(NewCarAdd);
+            AddNewCar = new RelayCommand<CarDetailModel>(NewCarAdd);
             
 
             //DeleteCar
@@ -48,7 +48,7 @@ namespace RideShare.App.ViewModels
         public ICommand BackToProfile { get; }
         CarWrapper? IDetailViewModel<CarWrapper>.Model => throw new NotImplementedException();
 
-        private void NewCarAdd(UserDetailModel? user) => _mediator.Send(new ToNewCarPageMessage<UserWrapper> { Id = user?.Id });
+        private void NewCarAdd(CarDetailModel? car) => _mediator.Send(new ToNewCarPageMessage<CarWrapper> { Id = car?.Id });
 
         private void BackToProfileExecute() => _mediator.Send(new ToProfilePageMessage<UserWrapper> { });
 

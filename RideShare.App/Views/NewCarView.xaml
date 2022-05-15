@@ -13,7 +13,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="504,13,0,0" VerticalAlignment="Top" Width="158" Source="/Icons/car_icon.png"/>
+        <Image x:Name="CarPicture" HorizontalAlignment="Left" Height="173" Margin="504,13,0,0" VerticalAlignment="Top" Width="158" Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Text="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" x:Name="ContactBox_Copy" HorizontalAlignment="Left" Margin="503,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="30"/>
         <Button x:Name="SaveChanges" Command="{Binding SaveNewCarCommand}" HorizontalAlignment="Left" Margin="518,303,0,0" VerticalAlignment="Top" Height="98" Width="130">
             <StackPanel x:Name="SaveButton" Orientation="Vertical" Height="94" Width="126">

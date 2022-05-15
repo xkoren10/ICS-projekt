@@ -85,7 +85,7 @@ namespace RideShare.App.ViewModels
             mediator.Register<ToCarListPageMessage<CarWrapper>>(ViewCarList);
             //car list
             mediator.Register<ToCarDetailPageMessage<CarWrapper>>(ViewCarDetail);
-            mediator.Register<ToNewCarPageMessage<UserWrapper>>(ViewNewCar);
+            mediator.Register<ToNewCarPageMessage<CarWrapper>>(ViewNewCar);
             //my rides
             mediator.Register<ToMyRidesPageMessage<RideWrapper>>(ViewMyRides);
             mediator.Register<ToPassengersPageMessage<RideWrapper>>(ViewPassengers);
@@ -141,15 +141,15 @@ namespace RideShare.App.ViewModels
             ActiveWindow.Add(loginViewModel);
         }
 
-        private void ViewNewCar(ToNewCarPageMessage<UserWrapper> message)
+        private void ViewNewCar(ToNewCarPageMessage<CarWrapper> message)
         {
-
-            //ActiveUser = (Guid)message.Id;
+            Guid id = message.Id == null ? Guid.Empty : (Guid)message.Id;
 
             var newCarViewModel = _newCarViewModelFactory.Create();
             ActiveWindow.Clear();
             ActiveWindow.Add(newCarViewModel);
-            newCarViewModel.LoadAsync(ActiveUser.Id);
+            newCarViewModel.LoadAsync(id);
+            newCarViewModel.GetActiveUserId(ActiveUser.Id);
         }
 
         private void ViewPassengers(ToPassengersPageMessage<RideWrapper> message)
