@@ -16,6 +16,7 @@ namespace RideShare.App.ViewModels
         private readonly CarFacade _carFacade;
         private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
+        private CarDetailModel? _model = CarDetailModel.Empty;
 
         public NewCarViewModel(CarFacade carFacade, UserFacade userFacade, IMediator mediator)
         {
@@ -28,29 +29,28 @@ namespace RideShare.App.ViewModels
 
 
         }
-
+        bool _create = false;
         public UserDetailModel? Model { get; set; }
-        public CarDetailModel? CarModel { get; set; } = CarDetailModel.Empty;
+        public CarDetailModel? CarModel 
+        {
+            get => _model;
+            set
+            {
+                _model = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand BackToCarListCommand { get; }
         public ICommand SaveNewCarCommand { get; }
 
 
-        string _imagePath;
+        string _imagePath = "/Icons/car_icon.png";
         public string ImagePath
         {
             get { return _imagePath; }
             set
             {
-                if (Uri.IsWellFormedUriString(value, UriKind.Absolute))
-                {
-                    CarModel.ImagePath = value;
-                }
-                else
-                {
-                    //use default pp for incorrect urls
-                    CarModel.ImagePath = "/Icons/car_icon.png";
-                }
-
+                CarModel.ImagePath = value;
                 _imagePath = value;
                 OnPropertyChanged();
             }
@@ -69,9 +69,14 @@ namespace RideShare.App.ViewModels
         {
             if (id == Guid.Empty)
             {
-                //error
+                _create = true;
+                CarModel = CarDetailModel.Empty;
             }
-            Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+            else
+            {
+                CarModel = await _carFacade.GetAsync(id);
+                ImagePath = CarModel.ImagePath;
+            }
         }
 
         public async Task SaveAsync()
@@ -80,9 +85,21 @@ namespace RideShare.App.ViewModels
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
-            //CarModel = await _carFacade.SaveAsync(CarModel);
-            
-            Model.Cars.Add(CarModel);
+
+            if (CarModel.ImagePath == "" || CarModel.ImagePath == null)
+            {
+                CarModel.ImagePath = "../Icons/user_icon.png";
+            }
+
+            if (_create)
+            {
+                Model.Cars.Add(CarModel);
+            }
+            else
+            {
+                var x = Model.Cars.FindIndex(x => x.Id == CarModel.Id);
+                Model.Cars[x] = CarModel;
+            }
             Model = await _userFacade.SaveAsync(Model);
             ToCarList();
         }
@@ -97,9 +114,9 @@ namespace RideShare.App.ViewModels
             throw new NotImplementedException();
         }
 
-        public Task GetActiveUserId(Guid id)
+        public async Task GetActiveUserId(Guid id)
         {
-            throw new NotImplementedException();
+            Model = await _userFacade.GetAsync(id);
         }
     }
 }

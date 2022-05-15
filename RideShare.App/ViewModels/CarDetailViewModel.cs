@@ -25,10 +25,15 @@ namespace RideShare.App.ViewModels
 
             BackToCarListPage = new RelayCommand<CarDetailModel>(ToCarList);
             DeleteCarCommand = new RelayCommand(DeleteCar);
+            EditCar = new RelayCommand<CarDetailModel>(CarEdit);
 
         }
 
+        private void CarEdit(CarDetailModel? user) => _mediator.Send(new ToNewCarPageMessage<CarWrapper> { Id = Model.Id });
+
+
         public CarDetailModel? Model { get; set; }
+        public ICommand EditCar { get; }
         public ICommand BackToCarListPage { get; }
         public ICommand DeleteCarCommand { get; }
 

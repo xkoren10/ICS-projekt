@@ -31,11 +31,17 @@
         <Button x:Name="Buttondelete"  Command="{Binding DeleteCarCommand}" HorizontalAlignment="Left" Height="94" Margin="10,301,0,0" VerticalAlignment="Top" Width="126">
             <StackPanel>
                 <Image Source="/Icons/remove_icon.png" Width="70">
-            </Image>
+                </Image>
                 <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center">Delete this car
                 </TextBlock>
             </StackPanel>
-            
+
+        </Button>
+        <Button x:Name="ButtonEdit"  Command="{Binding EditCar}" HorizontalAlignment="Left" Height="80" Margin="630,314,0,0" VerticalAlignment="Top" Width="103">
+            <StackPanel Orientation="Vertical">
+                <Image Source="/Icons/edit_icon.png" Height="57" />
+                <TextBlock Margin="5,0" VerticalAlignment="Bottom" TextAlignment="Center"><Run Text="Edit"/></TextBlock>
+            </StackPanel>
         </Button>
 
     </Grid>
