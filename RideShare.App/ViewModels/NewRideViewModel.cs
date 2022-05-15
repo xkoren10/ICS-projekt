@@ -9,6 +9,7 @@ using RideShare.App.Messages;
 using RideShare.App.Wrappers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using RideShare.App.Services.MessageDialog;
 
 namespace RideShare.App.ViewModels
 {
@@ -19,13 +20,15 @@ namespace RideShare.App.ViewModels
         private readonly RideFacade _rideFacade;
         private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
+        private readonly IMessageDialogService _messageDialogService;
 
-        public NewRideViewModel(UserFacade userFacade, RideFacade rideFacade, CarFacade carFacade, IMediator mediator)
+        public NewRideViewModel(UserFacade userFacade, RideFacade rideFacade, CarFacade carFacade, IMessageDialogService messageDialogService, IMediator mediator)
         {
             _userFacade = userFacade;
             _rideFacade = rideFacade;
             _carFacade = carFacade;
             _mediator = mediator;
+            _messageDialogService = messageDialogService;
             SaveNewRide = new RelayCommand(SaveRide);
             CancelNewRide = new RelayCommand(CancelRide);
             BackToMainCommand = new RelayCommand(BackToMainExecute);
@@ -133,8 +136,12 @@ namespace RideShare.App.ViewModels
         private async void SaveRide()
         {
             // really ugly check if everything needed is given
-            if (Start == "" || Start == null || Destination == "" || Destination == null || Occupancy == 0)
+            if (Start == "" || Start == null || Destination == "" || Destination == null || Occupancy == 0 || SelectedCar == null)
             {
+                var e = _messageDialogService.Show(
+                        "Fail", "Missing input data",
+                        MessageDialogButtonConfiguration.OK,
+                        MessageDialogResult.OK);
                 return;
             }
 

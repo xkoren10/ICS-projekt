@@ -7,6 +7,7 @@ using RideShare.App.Commands;
 using RideShare.App.Services;
 using RideShare.App.Messages;
 using RideShare.App.Wrappers;
+using RideShare.App.Services.MessageDialog;
 
 namespace RideShare.App.ViewModels
 {
@@ -16,13 +17,14 @@ namespace RideShare.App.ViewModels
         private readonly CarFacade _carFacade;
         private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
+        private readonly IMessageDialogService _messageDialogService;
 
-        public NewCarViewModel(CarFacade carFacade, UserFacade userFacade, IMediator mediator)
+        public NewCarViewModel(CarFacade carFacade, UserFacade userFacade, IMessageDialogService messageDialogService, IMediator mediator)
         {
             _carFacade = carFacade;
             _userFacade = userFacade;
             _mediator = mediator;
-
+            _messageDialogService = messageDialogService;
             BackToCarListCommand = new RelayCommand(ToCarList);
             SaveNewCarCommand = new RelayCommand(SaveNewCar);
 
@@ -91,6 +93,10 @@ namespace RideShare.App.ViewModels
             // really ugly check if everything needed is given
             if (CarModel.Brand == "" || CarModel.Brand == null || CarModel.Type == "" || CarModel.Seats == 0)
             {
+                var e = _messageDialogService.Show(
+                        "Fail", "Missing input data",
+                        MessageDialogButtonConfiguration.OK,
+                        MessageDialogResult.OK);
                 return;
             }
 
